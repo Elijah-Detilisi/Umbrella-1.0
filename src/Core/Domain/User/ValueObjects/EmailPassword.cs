@@ -3,7 +3,7 @@
 public class EmailPassword : ValueObject
 {
     private string Value { get; }
-    private const int _minimumLength = 8;
+    private const int _minimumPasswordLength = 8;
 
     private EmailPassword(string value)
     {
@@ -17,9 +17,11 @@ public class EmailPassword : ValueObject
             throw new ArgumentException("Password cannot be empty or null.");
         }
 
-        if (password.Length < _minimumLength)
+        if (password.Length < _minimumPasswordLength)
         {
-            throw new ArgumentException("Password must be at least 8 characters long.");
+            throw new ArgumentException(
+                $"Password must be at least {_minimumPasswordLength} characters long."
+            );
         }
 
         return new EmailPassword(password);
@@ -27,7 +29,6 @@ public class EmailPassword : ValueObject
 
     public override string ToString()
     {
-        //return "********"; // Return a masked version of the password for security.
         return Value;
     }
 
