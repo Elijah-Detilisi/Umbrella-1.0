@@ -1,4 +1,4 @@
-﻿namespace Domain.UnitTests.User.ValueObjectTests;
+﻿namespace Domain.UnitTests.UserTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailPasswordTests
