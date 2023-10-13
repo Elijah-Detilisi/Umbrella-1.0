@@ -2,16 +2,20 @@
 
 public class EmailEntity : Entity
 {
-    public List<EmailAddress> Recipients { get; private set; }
-    public EmailSubjectLine Subject { get; private set; }
+    public EmailType Type { get; set; }
+    public EmailStatus EmailStatus { get; set; }
     public EmailBodyText Body { get; private set; }
-
+    public EmailSubjectLine Subject { get; private set; }
+    public List<EmailAddress> Recipients { get; private set; }
+    
     private EmailEntity(
         int id, List<EmailAddress> recipients, EmailSubjectLine subject, EmailBodyText body) : base(id)
     {
         Body = body;
         Subject = subject;
         Recipients = recipients;
+        Type = EmailType.Email;
+        EmailStatus = EmailStatus.UnRead;
     }
 
     public static EmailEntity Create(
