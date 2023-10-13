@@ -1,4 +1,4 @@
-﻿namespace Domain.Email.ValueObjects;
+﻿namespace Domain.Common.ValueObjects;
 
 public class EmailAddress : ValueObject
 {
