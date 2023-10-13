@@ -7,11 +7,11 @@ public class EmailEntityTests
     public void Create_NewEmailEntity_ShouldSetProperties()
     {
         // Arrange
-        List<EmailAddress> recipients = new List<EmailAddress>
-            {
-                EmailAddress.Create("recipient1@example.com"),
-                EmailAddress.Create("recipient2@example.com")
-            };
+        var recipients = new List<EmailAddress>
+        {
+            EmailAddress.Create("recipient1@example.com"),
+            EmailAddress.Create("recipient2@example.com")
+        };
         EmailSubjectLine subject = EmailSubjectLine.Create("Test Subject");
         EmailBodyText body = EmailBodyText.Create("This is the email body.");
 
