@@ -1,4 +1,4 @@
-﻿namespace Domain.Email.Enums;
+﻿namespace Domain.Email.Entities.Enums;
 
 public enum EmailType
 {

@@ -7,7 +7,7 @@ public class EmailEntity : Entity
     public EmailBodyText Body { get; private set; }
     public EmailSubjectLine Subject { get; private set; }
     public List<EmailAddress> Recipients { get; private set; }
-    
+
     private EmailEntity(
         int id, List<EmailAddress> recipients, EmailSubjectLine subject, EmailBodyText body) : base(id)
     {
