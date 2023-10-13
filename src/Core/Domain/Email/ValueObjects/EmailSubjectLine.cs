@@ -15,17 +15,17 @@ public class EmailSubjectLine : ValueObject
     {
         if (string.IsNullOrWhiteSpace(subject))
         {
-            throw new ArgumentException("Subject line cannot be empty or null.");
+            throw new EmptyValueException(nameof(EmailSubjectLine));
         }
 
         if (subject.Length > MaxSubjectLineLength)
         {
-            throw new ArgumentException($"Subject line exceeds the maximum length of {MaxSubjectLineLength} characters.");
+            throw new SubjectLineTooLongException(MaxSubjectLineLength);
         }
 
         if (subject.Contains('\n') || subject.Contains('\r'))
         {
-            throw new ArgumentException("Subject line cannot contain newlines or carriage returns.");
+            throw new InvalidSubjectException();
         }
 
         return new EmailSubjectLine(subject);

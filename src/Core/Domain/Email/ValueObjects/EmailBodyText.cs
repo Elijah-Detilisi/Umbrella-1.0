@@ -14,7 +14,7 @@ public class EmailBodyText : ValueObject
     {
         if (string.IsNullOrWhiteSpace(body))
         {
-            throw new ArgumentException("Email body content cannot be empty or null.");
+            throw new EmptyValueException(nameof(EmailBodyText));
         }
 
         if (body.Length > MaxBodyLength)
