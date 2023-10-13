@@ -1,4 +1,7 @@
-﻿namespace Domain.UnitTests.EmailTests.ValueObjectTests;
+﻿using Domain.Common.Exceptions;
+using Domain.Email.Exceptions;
+
+namespace Domain.UnitTests.EmailTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailSubjectLineTests
@@ -19,24 +22,24 @@ public class EmailSubjectLineTests
 
     [TestCase(null)]
     [TestCase("")]
-    public void Create_EmptyOrNullOrWhiteSpaceSubjectLine_ShouldThrowArgumentException(string invalidSubject)
+    public void Create_EmptyOrNullOrWhiteSpaceSubjectLine_ShouldThrowEmptyValueException(string emptySubject)
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailSubjectLine.Create(invalidSubject));
+        Assert.Throws<EmptyValueException>(() => EmailSubjectLine.Create(emptySubject));
     }
 
     [Test]
-    public void Create_SubjectLineExceedsMaxLength_ShouldThrowArgumentException()
+    public void Create_SubjectLineExceedsMaxLength_ShouldThrowSubjectLineTooLongException()
     {
         // Arrange
         var longSubject = new string('X', 101);
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailSubjectLine.Create(longSubject));
+        Assert.Throws<SubjectLineTooLongException>(() => EmailSubjectLine.Create(longSubject));
     }
 
     [Test]
-    public void Create_SubjectLineWithNewlinesOrCarriageReturns_ShouldThrowArgumentException()
+    public void Create_SubjectLineWithNewlinesOrCarriageReturns_ShouldThrowInvalidSubjectException()
     {
         // Arrange
         string subjectWithNewlines = "Subject with\nnewline";
@@ -44,8 +47,8 @@ public class EmailSubjectLineTests
         string subjectWithBoth = "Subject with\nnewline\rreturn";
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailSubjectLine.Create(subjectWithNewlines));
-        Assert.Throws<ArgumentException>(() => EmailSubjectLine.Create(subjectWithCarriageReturn));
-        Assert.Throws<ArgumentException>(() => EmailSubjectLine.Create(subjectWithBoth));
+        Assert.Throws<InvalidSubjectException>(() => EmailSubjectLine.Create(subjectWithNewlines));
+        Assert.Throws<InvalidSubjectException>(() => EmailSubjectLine.Create(subjectWithCarriageReturn));
+        Assert.Throws<InvalidSubjectException>(() => EmailSubjectLine.Create(subjectWithBoth));
     }
 }

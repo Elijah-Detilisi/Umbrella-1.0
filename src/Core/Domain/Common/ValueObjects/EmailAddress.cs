@@ -13,12 +13,12 @@ public class EmailAddress : ValueObject
     {
         if (string.IsNullOrWhiteSpace(emailAddress))
         {
-            throw new ArgumentException("Email address cannot be empty or null.");
+            throw new EmptyValueException(nameof(EmailAddress));
         }
 
         if (!IsValidEmail(emailAddress))
         {
-            throw new ArgumentException("Invalid email address format.");
+            throw new InvalidEmailAddressException();
         }
 
         return new EmailAddress(emailAddress);

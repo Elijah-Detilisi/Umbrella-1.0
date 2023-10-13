@@ -1,4 +1,7 @@
-﻿namespace Domain.UnitTests.EmailTests.ValueObjectTests;
+﻿using Domain.Common.Exceptions;
+using Domain.Email.Exceptions;
+
+namespace Domain.UnitTests.EmailTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailBodyTextTests
@@ -19,19 +22,19 @@ public class EmailBodyTextTests
 
     [TestCase(null)]
     [TestCase("")]
-    public void Create_EmptyOrNullOrWhiteSpaceEmailBody_ShouldThrowArgumentException(string invalidBody)
+    public void Create_EmptyOrNullOrWhiteSpaceEmailBody_ShouldThrowEmptyValueException(string invalidBody)
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailBodyText.Create(invalidBody));
+        Assert.Throws<EmptyValueException>(() => EmailBodyText.Create(invalidBody));
     }
 
     [Test]
-    public void Create_EmailBodyExceedsMaxLength_ShouldThrowArgumentException()
+    public void Create_EmailBodyExceedsMaxLength_ShouldThrowEmailBodyTooLongException()
     {
         // Arrange
         string longBody = new string('X', 1001);
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailBodyText.Create(longBody));
+        Assert.Throws<EmailBodyTooLongException>(() => EmailBodyText.Create(longBody));
     }
 }

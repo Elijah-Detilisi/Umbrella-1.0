@@ -1,4 +1,6 @@
-﻿namespace Domain.UnitTests.CommonTests.ValueObjectTests;
+﻿using Domain.Common.Exceptions;
+
+namespace Domain.UnitTests.CommonTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailAddressTests
@@ -18,12 +20,19 @@ public class EmailAddressTests
 
     [TestCase(null)]
     [TestCase("")]
-    [TestCase("invalid-email")]
-    [TestCase("missing@dotcom")]
-    public void Create_InvalidEmailAddress_ShouldThrowArgumentException(string invalidEmail)
+    public void Create_EmptyEmailAddress_ShouldThrowEmptyValueException(string invalidEmail)
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailAddress.Create(invalidEmail));
+        Assert.Throws<EmptyValueException>(() => EmailAddress.Create(invalidEmail));
+    }
+
+
+    [TestCase("invalid-email")]
+    [TestCase("missing@dotcom")]
+    public void Create_InvalidEmailAddress_ShouldThrowInvalidEmailAddressException(string invalidEmail)
+    {
+        // Act & Assert
+        Assert.Throws<InvalidEmailAddressException>(() => EmailAddress.Create(invalidEmail));
     }
 
     [Test]

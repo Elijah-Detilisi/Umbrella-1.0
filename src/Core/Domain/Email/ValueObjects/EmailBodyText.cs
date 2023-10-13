@@ -19,7 +19,7 @@ public class EmailBodyText : ValueObject
 
         if (body.Length > MaxBodyLength)
         {
-            throw new ArgumentException($"Email body content exceeds the maximum length of {MaxBodyLength} characters.");
+            throw new EmailBodyTooLongException(MaxBodyLength);
         }
 
         return new EmailBodyText(body);
