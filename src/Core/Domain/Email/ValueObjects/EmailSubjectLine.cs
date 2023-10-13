@@ -1,4 +1,4 @@
-﻿namespace Domain.Common.ValueObjects;
+﻿namespace Domain.Email.ValueObjects;
 
 public class EmailSubjectLine : ValueObject
 {

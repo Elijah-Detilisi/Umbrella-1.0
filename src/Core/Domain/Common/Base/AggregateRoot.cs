@@ -1,9 +1,8 @@
 ﻿namespace Domain.Common.Base;
 
-public class AggregateRoot<T> : Entity<T> 
-    where T : notnull
+public class AggregateRoot : Entity
 {
-    public AggregateRoot(T id) : base(id)
+    public AggregateRoot(int id) : base(id)
     {
     }
 }

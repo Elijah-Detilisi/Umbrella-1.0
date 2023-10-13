@@ -1,4 +1,4 @@
-﻿namespace Domain.Common.ValueObjects;
+﻿namespace Domain.Email.ValueObjects;
 
 public class EmailAddress : ValueObject
 {
@@ -34,10 +34,8 @@ public class EmailAddress : ValueObject
         yield return Value;
     }
 
-    // Email validation using a regular expression.
     private static bool IsValidEmail(string email)
     {
-        // This regular expression is a basic example and may not cover all edge cases.
         string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         return Regex.IsMatch(email, emailPattern);
     }

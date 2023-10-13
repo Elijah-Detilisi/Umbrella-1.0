@@ -1,12 +1,10 @@
-﻿using Domain.Draft;
-
-namespace Domain.UnitTests.DraftTests;
+﻿namespace Domain.UnitTests.EmailTests.EntityTests;
 
 [TestFixture]
-public class DraftAggregateRootTests
+public class EmailEntityTests
 {
     [Test]
-    public void Create_NewDraft_ShouldSetProperties()
+    public void Create_NewEmailEntity_ShouldSetProperties()
     {
         // Arrange
         List<EmailAddress> recipients = new List<EmailAddress>
@@ -18,12 +16,12 @@ public class DraftAggregateRootTests
         EmailBodyText body = EmailBodyText.Create("This is the email body.");
 
         // Act
-        DraftAggregateRoot draft = DraftAggregateRoot.Create(recipients, subject, body);
+        var emailEntity = EmailEntity.Create(recipients, subject, body);
 
         // Assert
-        Assert.That(draft, Is.Not.Null);
-        Assert.That(draft.Recipients, Is.SameAs(recipients));
-        Assert.That(draft.Subject, Is.EqualTo(subject));
-        Assert.That(draft.Body, Is.EqualTo(body));
+        Assert.That(emailEntity, Is.Not.Null);
+        Assert.That(emailEntity.Recipients, Is.SameAs(recipients));
+        Assert.That(emailEntity.Subject, Is.EqualTo(subject));
+        Assert.That(emailEntity.Body, Is.EqualTo(body));
     }
 }
