@@ -1,9 +1,9 @@
 ﻿namespace Domain.Interfaces;
 
-public interface IRepository<TEntity> where TEntity : Entity
+public interface IRepository<T> where T : Entity
 {
-    Task<int> Save(TEntity entity);
-    Task<int> Remove(TEntity entity);
-    Task<TEntity> FindById(Guid id);
-    Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> spec);
+    Task<int> Save(T entity);
+    Task<int> Remove(T entity);
+    Task<T> FindById(Guid id);
+    Task<IEnumerable<T>> Find(Expression<Func<T, bool>> spec);
 }  
