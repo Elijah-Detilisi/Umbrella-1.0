@@ -1,7 +1,8 @@
 ﻿namespace Domain.Interfaces;
 
-internal interface IDatabaseService
+internal interface IDatabaseService : IAsyncDisposable
 {
+    IList<Type> TableNames { get; }
     void CreateTable<T>() where T : new();
     Task<T> SaveEntityAsync<T>(T entity) where T : Entity, new();
 
