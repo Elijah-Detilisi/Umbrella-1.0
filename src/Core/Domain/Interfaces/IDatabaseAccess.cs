@@ -1,6 +1,6 @@
 ﻿namespace Domain.Interfaces;
 
-internal interface IDatabaseService : IAsyncDisposable
+internal interface IDatabaseAccess : IAsyncDisposable
 {
     IList<Type> TableNames { get; }
     void CreateTable<T>() where T : new();
