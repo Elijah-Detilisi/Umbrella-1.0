@@ -1,11 +1,9 @@
-﻿using System.Linq.Expressions;
-
-namespace Domain.Interfaces;
+﻿namespace Domain.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : Entity
 {
-    void Save(TEntity entity);
-    void Remove(TEntity entity);
-    TEntity FindById(Guid id);
-    IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> spec);
-}
+    Task<int> Save(TEntity entity);
+    Task<int> Remove(TEntity entity);
+    Task<TEntity> FindById(Guid id);
+    Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> spec);
+}  
