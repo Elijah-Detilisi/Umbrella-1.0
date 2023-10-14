@@ -1,4 +1,4 @@
-﻿namespace Domain.Email.Repository;
+﻿namespace Domain.Email.Repositories;
 
 internal interface IEmailRepository : IRepository<EmailEntity>
 {
