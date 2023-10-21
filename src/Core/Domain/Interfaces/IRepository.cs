@@ -2,8 +2,11 @@
 
 public interface IRepository<T> where T : Entity
 {
-    Task<int> Save(T entity);
-    Task<int> Remove(T entity);
-    Task<T> FindById(Guid id);
-    Task<IEnumerable<T>> Find(Expression<Func<T, bool>> spec);
+    void Save();
+    Task<int> Add(T entity);
+    Task<int> Update(T entity);
+    Task<int> Delete(T entity);
+    Task<T> GetById(Guid id);
+    Task<IEnumerable<T>> Get(Expression<Func<T, bool>> spec);
+
 }  
