@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Persistence.Database;
+namespace Persistence.Data;
 
 public class AppDbContext : DbContext
 {
