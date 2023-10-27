@@ -1,14 +1,12 @@
 ﻿namespace Domain.Email.ValueObjects;
 
-public class EmailSubjectLine : ValueObject
+public class EmailSubjectLine : ValueObject<string>
 {
-    private const int MaxSubjectLineLength = 100; // Define your maximum length requirement here.
+    public const int MAXSUBJECTLINELENGTH = 100; 
 
-    private string Value { get; }
-
-    private EmailSubjectLine(string value)
+    private EmailSubjectLine(string value) : base(value)
     {
-        Value = value;
+
     }
 
     public static EmailSubjectLine Create(string subject)
@@ -18,9 +16,9 @@ public class EmailSubjectLine : ValueObject
             throw new EmptyValueException(nameof(EmailSubjectLine));
         }
 
-        if (subject.Length > MaxSubjectLineLength)
+        if (subject.Length > MAXSUBJECTLINELENGTH)
         {
-            throw new SubjectLineTooLongException(MaxSubjectLineLength);
+            throw new SubjectLineTooLongException(MAXSUBJECTLINELENGTH);
         }
 
         if (subject.Contains('\n') || subject.Contains('\r'))
