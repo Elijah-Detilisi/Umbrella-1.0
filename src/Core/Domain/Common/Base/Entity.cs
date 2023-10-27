@@ -20,4 +20,9 @@ public abstract class Entity
     {
         return obj is Entity entity && Id.Equals(entity.Id);
     }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
 }
