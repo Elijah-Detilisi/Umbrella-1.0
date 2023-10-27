@@ -1,12 +1,10 @@
 ﻿namespace Domain.Common.ValueObjects;
 
-public class EmailAddress : ValueObject
+public class EmailAddress : ValueObject<string>
 {
-    private string Value { get; }
-
-    private EmailAddress(string value)
+    private EmailAddress(string value) : base(value)
     {
-        Value = value;
+        
     }
 
     public static EmailAddress Create(string emailAddress)
