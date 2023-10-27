@@ -1,27 +1,26 @@
-﻿namespace Domain.User.ValueObjects;
+﻿using Domain.User.Exceptions;
 
-public class EmailPassword : ValueObject
+namespace Domain.User.ValueObjects;
+
+public class EmailPassword : ValueObject<String>
 {
-    private string Value { get; }
-    private const int _minimumPasswordLength = 8;
+    public const int MINIMUMPASSWORDLENGTH = 8;
 
-    private EmailPassword(string value)
+    private EmailPassword(string value):base(value)
     {
-        Value = value;
+        
     }
 
     public static EmailPassword Create(string password)
     {
         if (string.IsNullOrWhiteSpace(password))
         {
-            throw new ArgumentException("Password cannot be empty or null.");
+            throw new EmptyValueException(nameof(EmailAddress));
         }
 
-        if (password.Length < _minimumPasswordLength)
+        if (password.Length < MINIMUMPASSWORDLENGTH)
         {
-            throw new ArgumentException(
-                $"Password must be at least {_minimumPasswordLength} characters long."
-            );
+            throw new PasswordTooShortException(MINIMUMPASSWORDLENGTH);
         }
 
         return new EmailPassword(password);
