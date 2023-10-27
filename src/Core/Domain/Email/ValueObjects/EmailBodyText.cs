@@ -1,13 +1,12 @@
 ﻿namespace Domain.Email.ValueObjects;
 
-public class EmailBodyText : ValueObject
+public class EmailBodyText : ValueObject<String>
 {
-    private const int MaxBodyLength = 1000;
-    private string Value { get; }
-
-    private EmailBodyText(string value)
+    public const int MAXBODYLENGTH = 1000;
+   
+    private EmailBodyText(string value): base(value)
     {
-        Value = value;
+
     }
 
     public static EmailBodyText Create(string body)
@@ -17,9 +16,9 @@ public class EmailBodyText : ValueObject
             throw new EmptyValueException(nameof(EmailBodyText));
         }
 
-        if (body.Length > MaxBodyLength)
+        if (body.Length > MAXBODYLENGTH)
         {
-            throw new EmailBodyTooLongException(MaxBodyLength);
+            throw new EmailBodyTooLongException(MAXBODYLENGTH);
         }
 
         return new EmailBodyText(body);
