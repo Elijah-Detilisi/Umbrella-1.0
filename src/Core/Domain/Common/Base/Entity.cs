@@ -8,7 +8,11 @@ public abstract class Entity
     public DateTime ModifiedAt { get; set; }
     public DateTime CreatedAt { get; protected set; }
     public EntityStatus Status { get; protected set; }
-    
+
+    public Entity()
+    {
+        //Required for Entity framework
+    }
     public Entity(int id)
     {
         Id = id;
@@ -25,4 +29,6 @@ public abstract class Entity
     {
         return Id.GetHashCode();
     }
+
+    
 }
