@@ -43,4 +43,9 @@ public class EntityRepository<TEntity> where TEntity : Entity
 
         return result;
     }
+
+    public List<TEntity> GetAll()
+    {
+        return _context.Set<TEntity>().ToList();
+    }
 }
