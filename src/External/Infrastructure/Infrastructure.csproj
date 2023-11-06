@@ -18,7 +18,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Services\Messaging\" />
+	  <PackageReference Include="MailKit" Version="4.2.0" />
+	  <PackageReference Include="System.Speech" Version="7.0.0" />
 	</ItemGroup>
 
 </Project>
