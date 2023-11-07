@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Speech.Recognition;
+﻿using System.Speech.Recognition;
 using Windows.Globalization;
 using Windows.Media.SpeechRecognition;
 using SpeechRecognizer = Windows.Media.SpeechRecognition.SpeechRecognizer;
@@ -17,7 +16,7 @@ public class MauiSpeechRecognition
     private SpeechRecognitionEngine speechRecognitionEngine;
 
     //Initializations
-    public Task<bool> RequestPermissions()
+    public static Task<bool> RequestPermissions()
     {
         return Task.FromResult(true);
     }
