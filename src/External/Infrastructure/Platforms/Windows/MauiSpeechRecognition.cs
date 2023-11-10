@@ -3,7 +3,6 @@ using Windows.Globalization;
 using Windows.Media.SpeechRecognition;
 using SpeechRecognizer = Windows.Media.SpeechRecognition.SpeechRecognizer;
 
-
 namespace Infrastructure;
 
 /* All the code in this file is only included on Windows.*/
