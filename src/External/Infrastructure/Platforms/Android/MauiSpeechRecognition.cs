@@ -1,7 +1,7 @@
-﻿using Android.Speech;
-using Android.Content;
+﻿using Android.Content;
+using Android.Speech;
 
-namespace Infrastructure.Platforms.Android; //TODO: fix errors
+namespace Infrastructure;
 
 /* All the code in this file is only included on Android.*/
 public class MauiSpeechRecognition
