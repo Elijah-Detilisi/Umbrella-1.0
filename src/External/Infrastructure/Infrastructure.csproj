@@ -23,6 +23,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Platforms\Android\MauiSpeechRecognition.cs">
 	    <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
 	  </Compile>
