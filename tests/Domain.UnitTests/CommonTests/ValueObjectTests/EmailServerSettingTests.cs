@@ -16,9 +16,12 @@ public class EmailServerSettingTests
         var emailServerSetting = EmailServerSetting.Create(portNumber, serverName);
 
         // Assert
-        Assert.IsNotNull(emailServerSetting);
-        Assert.AreEqual(portNumber, emailServerSetting.Value.Item1);
-        Assert.AreEqual(serverName, emailServerSetting.Value.Item2);
+        Assert.That(emailServerSetting, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(emailServerSetting.Value.Item1, Is.EqualTo(portNumber));
+            Assert.That(emailServerSetting.Value.Item2, Is.EqualTo(serverName));
+        });
     }
 
     [Test]
@@ -51,9 +54,7 @@ public class EmailServerSettingTests
         var emailServerSetting2 = EmailServerSetting.Create(587, "smtp.example.com");
 
         // Act & Assert
-        Assert.IsTrue(emailServerSetting1.Equals(emailServerSetting2));
-        //Assert.IsTrue(emailServerSetting1 == emailServerSetting2);
-        //Assert.IsFalse(emailServerSetting1 != emailServerSetting2);
+        Assert.That(emailServerSetting1, Is.EqualTo(emailServerSetting2));
     }
 
     [Test]
@@ -64,8 +65,8 @@ public class EmailServerSettingTests
         var emailServerSetting2 = EmailServerSetting.Create(465, "smtp.example.com");
 
         // Act & Assert
-        Assert.IsFalse(emailServerSetting1.Equals(emailServerSetting2));
-        Assert.IsFalse(emailServerSetting1 == emailServerSetting2);
-        Assert.IsTrue(emailServerSetting1 != emailServerSetting2);
+        Assert.That(emailServerSetting1, Is.Not.EqualTo(emailServerSetting2));
+        Assert.That(emailServerSetting1, Is.Not.EqualTo(emailServerSetting2));
+        Assert.That(emailServerSetting1, Is.Not.EqualTo(emailServerSetting2));
     }
 }
