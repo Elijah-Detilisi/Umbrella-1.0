@@ -2,7 +2,7 @@
 
 public class MauiTextToSpeech
 {
-    public async Task Speak(string text)
+    public static async Task SpeakAsync(string text)
     {
         if (!string.IsNullOrWhiteSpace(text))
         {
