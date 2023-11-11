@@ -22,7 +22,10 @@ public class EmailFetcher
         using (var client = new Pop3Client())
         {
             await client.ConnectAsync(_serverName, _portNumber, true);
-            await client.AuthenticateAsync(_userEntity.EmailAddress.ToString(), _userEntity.EmailPassword.ToString());
+            await client.AuthenticateAsync(
+                _userEntity.EmailAddress.ToString(), 
+                _userEntity.EmailPassword.ToString()
+            );
 
             for (int i = 0; i < client.Count; i++)
             {
