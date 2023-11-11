@@ -1,5 +1,4 @@
 ﻿using Domain.User.Entities;
-using MimeKit;
 
 namespace Infrastructure.Services.Messaging;
 
