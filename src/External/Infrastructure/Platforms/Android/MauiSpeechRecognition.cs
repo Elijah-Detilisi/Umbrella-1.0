@@ -4,7 +4,7 @@ using Android.Speech;
 namespace Infrastructure;
 
 /* All the code in this file is only included on Android.*/
-public class MauiSpeechRecognition
+public class MauiSpeechRecognition : IMauiSpeechRecognition
 {
     //Fields
     private SpeechRecognizer speechRecognizer;

@@ -3,10 +3,10 @@ using Persistence.Data;
 
 namespace Persistence.Repositories;
 
-public class EntityRepository<TEntity> where TEntity : Entity
+public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : Entity
 {
     private readonly AppDbContext _context;
-    
+
     public EntityRepository(AppDbContext appDbContext)
     {
         _context = appDbContext;
@@ -39,7 +39,7 @@ public class EntityRepository<TEntity> where TEntity : Entity
     public async Task<TEntity?> GetById(int id)
     {
         var result = await _context.Set<TEntity>()
-            .SingleOrDefaultAsync(x=> x.Id == id);
+            .SingleOrDefaultAsync(x => x.Id == id);
 
         return result;
     }

@@ -7,7 +7,7 @@ namespace Infrastructure;
 
 /* All the code in this file is only included on Windows.*/
 
-public class MauiSpeechRecognition
+public class MauiSpeechRecognition : IMauiSpeechRecognition
 {
     //Fields
     private string recognitionText;
@@ -38,7 +38,7 @@ public class MauiSpeechRecognition
         await speechRecognizer.CompileConstraintsAsync();
 
         var taskResult = new TaskCompletionSource<string>();
-        
+
         speechRecognizer.ContinuousRecognitionSession.ResultGenerated += (s, e) =>
         {
             recognitionText += e.Result.Text;
@@ -62,7 +62,7 @@ public class MauiSpeechRecognition
         };
 
         await speechRecognizer.ContinuousRecognitionSession.StartAsync();
-        
+
         await using (cancellationToken.Register(async () =>
         {
             await StopRecording();
@@ -82,10 +82,10 @@ public class MauiSpeechRecognition
         {
             recognitionResult?.Report(e.Result.Text);
         };
-        
+
         speechRecognitionEngine.SetInputToDefaultAudioDevice();
         speechRecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
-        
+
         var taskResult = new TaskCompletionSource<string>();
         await using (cancellationToken.Register(() =>
         {

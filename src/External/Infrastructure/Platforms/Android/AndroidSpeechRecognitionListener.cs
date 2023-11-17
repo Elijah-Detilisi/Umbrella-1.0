@@ -5,7 +5,7 @@ using Android.Runtime;
 namespace Infrastructure;
 
 /* All the code in this file is only included on Android.*/
-public class AndroidSpeechRecognitionListener : Java.Lang.Object, IRecognitionListener
+internal class AndroidSpeechRecognitionListener : Java.Lang.Object, IRecognitionListener
 {
     public Action<SpeechRecognizerError> Error { get; set; }
     public Action<string> PartialResults { get; set; }

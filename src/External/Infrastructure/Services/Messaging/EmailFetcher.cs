@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Services.Messaging;
 
-public class EmailFetcher
+public class EmailFetcher : IEmailFetcher
 {
     private readonly int _portNumber;
     private readonly string _serverName;
@@ -23,7 +23,7 @@ public class EmailFetcher
         {
             await client.ConnectAsync(_serverName, _portNumber, true);
             await client.AuthenticateAsync(
-                _userEntity.EmailAddress.ToString(), 
+                _userEntity.EmailAddress.ToString(),
                 _userEntity.EmailPassword.ToString()
             );
 

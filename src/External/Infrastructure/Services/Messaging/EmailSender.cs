@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Services.Messaging;
 
-public class EmailSender
+public class EmailSender : IEmailSender
 {
     private readonly int _portNumber;
     private readonly string _serverName;

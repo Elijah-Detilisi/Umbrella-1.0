@@ -5,7 +5,7 @@ using AVFoundation;
 namespace Infrastructure;
 
 /* All the code in this file is only included on iOS.*/
-public class MauiSpeechRecognition
+public class MauiSpeechRecognition : IMauiSpeechRecognition
 {
     //Fields
     private AVAudioEngine audioEngine;
