@@ -1,7 +1,4 @@
-﻿using Application.Models.Email;
-using Application.Models.User;
-using Domain.Common.ValueObjects;
-using Domain.Email.ValueObjects;
+﻿using Domain.Email.ValueObjects;
 
 namespace Infrastructure.Services.Messaging;
 
