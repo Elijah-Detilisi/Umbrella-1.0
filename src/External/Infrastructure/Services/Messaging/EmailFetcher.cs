@@ -1,4 +1,7 @@
-﻿using Domain.User.Entities;
+﻿using Application.Models.Email;
+using Application.Models.User;
+using Domain.Common.ValueObjects;
+using Domain.Email.ValueObjects;
 
 namespace Infrastructure.Services.Messaging;
 
@@ -6,36 +9,53 @@ public class EmailFetcher : IEmailFetcher
 {
     private readonly int _portNumber;
     private readonly string _serverName;
-    private readonly UserEntity _userEntity;
+    private readonly UserModel _userModel;
 
-    public EmailFetcher(UserEntity userEntity, string serverName, int portNumer)
+    public EmailFetcher(UserModel userModel, string serverName, int portNumer)
     {
         _portNumber = portNumer;
         _serverName = serverName;
-        _userEntity = userEntity;
+        _userModel = userModel;
     }
 
-    public async Task<List<MimeMessage>> GetEmailsAsync()
+    public async Task<List<EmailModel>> GetEmailsAsync()
     {
-        var allMessages = new List<MimeMessage>();
+        var allMessages = new List<EmailModel>();
 
         using (var client = new Pop3Client())
         {
             await client.ConnectAsync(_serverName, _portNumber, true);
             await client.AuthenticateAsync(
-                _userEntity.EmailAddress.ToString(),
-                _userEntity.EmailPassword.ToString()
+                _userModel.EmailAddress.ToString(),
+                _userModel.EmailPassword.ToString()
             );
 
             for (int i = 0; i < client.Count; i++)
             {
                 var mimeMessage = client.GetMessage(i);
-                allMessages.Add(mimeMessage);
+                allMessages.Add(ConvertToEmailModel(mimeMessage));
             }
 
             await client.DisconnectAsync(true);
         }
 
         return allMessages;
+    }
+
+    private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
+    {
+        var messageModel = new EmailModel()
+        {
+            Type = EmailType.Email,
+            EmailStatus = EmailStatus.UnRead,
+            Subject = EmailSubjectLine.Create(mimeMessage.Subject),
+            Body = EmailBodyText.Create(mimeMessage.Body.ToString()),
+            Sender = EmailAddress.Create(mimeMessage.From.FirstOrDefault().Name),
+            Recipients = new List<EmailAddress>() { 
+                EmailAddress.Create(mimeMessage.To.FirstOrDefault().Name) 
+            }
+        };
+
+        return messageModel;
     }
 }
