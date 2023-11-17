@@ -1,6 +1,8 @@
-﻿namespace Infrastructure.Services.Messaging;
+﻿using Application.Models.Email;
+
+namespace Infrastructure.Services.Messaging;
 
 public interface IEmailFetcher
 {
-    //Task<List<MimeMessage>> GetEmailsAsync();
+    Task<List<EmailModel>> GetEmailsAsync();
 }

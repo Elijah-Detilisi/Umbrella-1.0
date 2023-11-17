@@ -1,6 +1,8 @@
-﻿namespace Application.Abstractions.Services.Messaging;
+﻿using Application.Models.Email;
+
+namespace Application.Abstractions.Services.Messaging;
 
 public interface IEmailSender
 {
-    //Task SendEmailAsync(MimeMessage message);
+    Task SendEmailAsync(EmailModel message);
 }
