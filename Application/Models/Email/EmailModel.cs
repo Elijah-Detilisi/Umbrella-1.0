@@ -1,5 +1,4 @@
-﻿using Domain.Email.Entities.Enums;
-using Domain.Email.ValueObjects;
+﻿using Domain.Email.ValueObjects;
 
 namespace Application.Models.Email;
 
