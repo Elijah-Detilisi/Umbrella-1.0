@@ -52,4 +52,11 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Application\Application.csproj" />
+	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\..\External\Infrastructure\Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\External\Persistence\Persistence.csproj" />
+	</ItemGroup>
+
 </Project>
