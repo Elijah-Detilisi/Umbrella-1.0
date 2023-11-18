@@ -1,9 +1,10 @@
-﻿global using MimeKit;
-global using MailKit.Net.Smtp;
-global using MailKit.Net.Pop3;
-global using System.Globalization;
+﻿global using Application.Abstractions.Services.Audio;
 global using Application.Models.Email;
 global using Application.Models.User;
 global using Domain.Common.ValueObjects;
 global using Domain.Email.Entities.Enums;
+global using MailKit.Net.Pop3;
+global using MailKit.Net.Smtp;
+global using MimeKit;
+global using System.Globalization;
 global using Application.Abstractions.Services.Messaging;
