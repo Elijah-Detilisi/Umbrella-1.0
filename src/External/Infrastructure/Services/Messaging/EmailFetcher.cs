@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Services.Messaging;
 
-public class EmailFetcher : IEmailFetcher
+public class EmailFetcher //: IEmailFetcher
 {
     private readonly int _portNumber;
     private readonly string _serverName;
