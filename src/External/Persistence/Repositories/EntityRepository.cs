@@ -1,5 +1,6 @@
-﻿using Domain.Common.Base;
-using Persistence.Data;
+﻿using Persistence.Data;
+using Domain.Common.Base;
+using Application.Abstractions.Repositories;
 
 namespace Persistence.Repositories;
 
