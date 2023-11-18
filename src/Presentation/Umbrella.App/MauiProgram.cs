@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Application.Abstractions.Services.Audio;
+using Infrastructure.Services.Audio;
+using Microsoft.Extensions.Logging;
 
 namespace Umbrella.App
 {
@@ -15,8 +17,12 @@ namespace Umbrella.App
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+
+            builder.Services.AddSingleton<IMauiTextToSpeech, MauiTextToSpeech>();
+            builder.Services.AddSingleton<MainPage>();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -1,11 +1,15 @@
-﻿namespace Umbrella.App
+﻿using Application.Abstractions.Services.Audio;
+
+namespace Umbrella.App
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        private IMauiTextToSpeech _mauiTextToSpeech;
 
-        public MainPage()
+        public MainPage(IMauiTextToSpeech mauiTextToSpeech)
         {
+            _mauiTextToSpeech = mauiTextToSpeech;
             InitializeComponent();
         }
 
@@ -18,6 +22,7 @@
             else
                 CounterBtn.Text = $"Clicked {count} times";
 
+            _mauiTextToSpeech.SpeakAsync("Killing me softly; " + count).GetAwaiter();
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
