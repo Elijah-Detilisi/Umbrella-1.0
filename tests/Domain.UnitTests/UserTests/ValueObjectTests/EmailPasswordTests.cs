@@ -1,4 +1,7 @@
-﻿namespace Domain.UnitTests.UserTests.ValueObjectTests;
+﻿using Domain.Common.Exceptions;
+using Domain.User.Exceptions;
+
+namespace Domain.UnitTests.UserTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailPasswordTests
@@ -16,13 +19,20 @@ public class EmailPasswordTests
         Assert.That(emailPassword.ToString(), Is.EqualTo(validPassword));
     }
 
-    [TestCase(null)]
-    [TestCase("")]
+    [TestCase("123")]
     [TestCase("short")]
-    public void Create_InvalidPassword_ShouldThrowArgumentException(string invalidPassword)
+    public void Create_ShortPassword_ShouldThrow_PasswordTooShortException(string invalidPassword)
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => EmailPassword.Create(invalidPassword));
+        Assert.Throws<PasswordTooShortException>(() => EmailPassword.Create(invalidPassword));
+    }
+
+    [TestCase(null)]
+    [TestCase("")]
+    public void Create_EmptyPassword_ShouldThrowEmptyValueException(string invalidPassword)
+    {
+        // Act & Assert
+        Assert.Throws<EmptyValueException>(() => EmailPassword.Create(invalidPassword));
     }
 
     [Test]
