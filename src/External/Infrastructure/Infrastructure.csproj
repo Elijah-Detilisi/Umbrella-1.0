@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
@@ -24,7 +24,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Application\Application.csproj" />
-	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\..\Core\Application\Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
