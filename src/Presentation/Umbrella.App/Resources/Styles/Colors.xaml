@@ -4,9 +4,34 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="AppBackgroundColor">#F7F5FB</Color>
+    <Color x:Key="DarkAppBackgroundColor">#242C3B</Color>
+
+    <Color x:Key="ButtonColor">#084887</Color>
+    <Color x:Key="DarkButtonColor">#37B6E9</Color>
+
+    <Color x:Key="HeadingTextColor">#010101</Color>
+    <Color x:Key="DarkHeadingTextColor">#FAFAFA</Color>
+    
+    <Color x:Key="LabelTextColor">#909CC2</Color>
+    <Color x:Key="DarkLabelTextColor">#DFD8F7</Color>
+
+    <!-- 60-30-10 color rule-->
+    <Color x:Key="MainColor">#F7F5FB</Color>
+    <Color x:Key="DarkMainColor">#242C3B</Color>
+
+    <Color x:Key="SecondaryColor">#909CC2</Color> 
+    <Color x:Key="DarkSecondaryColor">#DFD8F7</Color>
+
+    <Color x:Key="AccentColor">#084887</Color>
+    <Color x:Key="DarkAccentColor">#37B6E9</Color>
+    <!-- 60-30-10 color rule-->
+    
+    
+    <Color x:Key="Primary">#084887</Color>
+    <Color x:Key="Secondary">#010101</Color>
+    <Color x:Key="Tertiary">#DFD8F7</Color>
+    
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
@@ -17,6 +42,7 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+    
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
