@@ -4,12 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="AppBackgroundColor">#F7F5FB</Color>
-    <Color x:Key="DarkAppBackgroundColor">#242C3B</Color>
-
-    <Color x:Key="ButtonColor">#084887</Color>
-    <Color x:Key="DarkButtonColor">#37B6E9</Color>
-
     <Color x:Key="HeadingTextColor">#010101</Color>
     <Color x:Key="DarkHeadingTextColor">#FAFAFA</Color>
     
@@ -20,17 +14,17 @@
     <Color x:Key="MainColor">#F7F5FB</Color>
     <Color x:Key="DarkMainColor">#242C3B</Color>
 
-    <Color x:Key="SecondaryColor">#909CC2</Color> 
+    <Color x:Key="SecondaryColor">#BFD7ED</Color> 
     <Color x:Key="DarkSecondaryColor">#DFD8F7</Color>
 
     <Color x:Key="AccentColor">#084887</Color>
-    <Color x:Key="DarkAccentColor">#37B6E9</Color>
+    <Color x:Key="DarkAccentColor">#60A3D9</Color>
     <!-- 60-30-10 color rule-->
     
     
     <Color x:Key="Primary">#084887</Color>
     <Color x:Key="Secondary">#010101</Color>
-    <Color x:Key="Tertiary">#DFD8F7</Color>
+    <Color x:Key="Tertiary">#F7F5FB</Color>
     
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
