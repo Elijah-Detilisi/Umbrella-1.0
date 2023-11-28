@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Services.Audio;
+using CommunityToolkit.Maui;
 using Infrastructure.Services.Audio;
 using Microsoft.Extensions.Logging;
 
@@ -11,6 +12,8 @@ namespace Umbrella.App
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                // Initialize the .NET MAUI Community Toolkit by adding the below line of code
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
