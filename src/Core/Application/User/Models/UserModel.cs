@@ -1,6 +1,6 @@
 ﻿using Domain.User.ValueObjects;
 
-namespace Application.Models.User;
+namespace Application.User.Models;
 
 public class UserModel
 {
@@ -8,4 +8,3 @@ public class UserModel
     public EmailPassword EmailPassword { get; set; }
     public string UserName { get; set; } = string.Empty;
 }
-

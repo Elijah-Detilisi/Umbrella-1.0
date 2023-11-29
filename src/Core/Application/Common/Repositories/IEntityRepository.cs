@@ -1,6 +1,6 @@
 ﻿using Domain.Common.Base;
 
-namespace Application.Abstractions.Repositories;
+namespace Application.Common.Repositories;
 
 public interface IEntityRepository<TEntity> where TEntity : Entity
 {
@@ -10,3 +10,4 @@ public interface IEntityRepository<TEntity> where TEntity : Entity
     Task<int> InsertAsync(TEntity entity);
     Task<int> UpdateAsync(TEntity entity);
 }
+

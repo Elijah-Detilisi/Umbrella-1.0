@@ -1,4 +1,4 @@
-﻿using Application.Models.User;
+﻿using Application.User.Models;
 using Domain.User.ValueObjects;
 
 namespace Application.UnitTests.ModelTests.UserTests;

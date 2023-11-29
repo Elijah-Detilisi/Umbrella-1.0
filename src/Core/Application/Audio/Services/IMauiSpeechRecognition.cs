@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Application.Abstractions.Services.Audio;
+namespace Application.Audio.Services;
 
 public interface IMauiSpeechRecognition
 {
