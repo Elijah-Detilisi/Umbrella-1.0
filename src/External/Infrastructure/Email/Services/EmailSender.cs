@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Services.Messaging;
+﻿namespace Infrastructure.Email.Services;
 
 public class EmailSender : IEmailSender
 {
@@ -17,7 +17,7 @@ public class EmailSender : IEmailSender
     {
         using var client = new SmtpClient();
         var mimeMessage = ConvertToMimeMessage(message);
-        
+
         await client.ConnectAsync(_serverName, _portNumber, true);
         await client.AuthenticateAsync(
             _userModel.EmailAddress.ToString(),
@@ -44,11 +44,11 @@ public class EmailSender : IEmailSender
             new MailboxAddress(_userModel.UserName, _userModel.EmailAddress.ToString())
         );
 
-        foreach(var recipient in message.Recipients)
+        foreach (var recipient in message.Recipients)
         {
             mimeMessage.To.Add(new MailboxAddress(recipient.ToString(), recipient.ToString()));
         }
-        
+
 
         return mimeMessage;
     }

@@ -1,6 +1,4 @@
-﻿using Domain.Email.ValueObjects;
-
-namespace Infrastructure.Services.Messaging;
+﻿namespace Infrastructure.Email.Services;
 
 public class EmailFetcher : IEmailFetcher
 {
@@ -48,9 +46,9 @@ public class EmailFetcher : IEmailFetcher
             Subject = EmailSubjectLine.Create(mimeMessage.Subject),
             Body = EmailBodyText.Create(mimeMessage.Body.ToString()),
             Sender = EmailAddress.Create(mimeMessage.From.FirstOrDefault().Name),
-            Recipients = new List<EmailAddress>() { 
-                EmailAddress.Create(mimeMessage.To.FirstOrDefault().Name) 
-            }
+            Recipients = new List<EmailAddress>() {
+            EmailAddress.Create(mimeMessage.To.FirstOrDefault().Name)
+        }
         };
 
         return messageModel;

@@ -1,5 +1,6 @@
-﻿namespace Infrastructure.Services.Audio;
+﻿using Application.Audio.Services;
 
+namespace Infrastructure.Audio.Services;
 public class MauiTextToSpeech : IMauiTextToSpeech
 {
     public async Task SpeakAsync(string text)
