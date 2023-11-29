@@ -1,4 +1,4 @@
-﻿namespace Persistence.Data;
+﻿namespace Persistence.Common.DataContexts;
 
 public class AppDbContext : DbContext
 {
@@ -20,7 +20,7 @@ public class AppDbContext : DbContext
     //Lifecycle
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        
+
         options.UseSqlite();
     }
 
@@ -30,5 +30,4 @@ public class AppDbContext : DbContext
 
         base.OnModelCreating(builder);
     }
-
 }

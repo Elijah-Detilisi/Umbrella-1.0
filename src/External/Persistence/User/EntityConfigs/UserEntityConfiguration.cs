@@ -1,14 +1,14 @@
 ﻿using Domain.User.ValueObjects;
 
-namespace Persistence.Data.Configs.User;
+namespace Persistence.User.EntityConfigs;
 
-public class UserConfigurations : IEntityTypeConfiguration<UserEntity>
+public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
 {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.ToTable(nameof(UserEntity));
         builder.Property(e => e.UserName).IsRequired();
-        builder.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()"); 
+        builder.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
 
         ConfigureValueObjects(builder);
     }

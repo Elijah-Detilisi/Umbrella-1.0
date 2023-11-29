@@ -1,8 +1,8 @@
-﻿using Persistence.Data;
-using Domain.Common.Base;
-using Application.Abstractions.Repositories;
+﻿using Domain.Common.Base;
+using Application.Common.Repositories;
+using Persistence.Common.DataContexts;
 
-namespace Persistence.Repositories;
+namespace Persistence.Common.Repositories;
 
 public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : Entity
 {

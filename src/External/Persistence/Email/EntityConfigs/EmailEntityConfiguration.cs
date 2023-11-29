@@ -1,7 +1,7 @@
-﻿using Domain.Email.ValueObjects;
-using System.Text.Json;
+﻿using System.Text.Json;
+using Domain.Email.ValueObjects;
 
-namespace Persistence.Data.Configs.Email;
+namespace Persistence.Email.EntityConfigs;
 
 public class EmailEntityConfiguration : IEntityTypeConfiguration<EmailEntity>
 {
@@ -39,7 +39,7 @@ public class EmailEntityConfiguration : IEntityTypeConfiguration<EmailEntity>
             .HasConversion(
                 v => JsonSerializer.Serialize(v, jsonOption),
                 v => JsonSerializer.Deserialize<List<EmailAddress>>(v, jsonOption)
-        ); 
+        );
 
 
     }
