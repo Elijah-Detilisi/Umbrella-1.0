@@ -2,17 +2,15 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Umbrella.Maui.Email.EmailListing.Views.EmailListItemView">
-    <Border
-        StrokeThickness="0"
-        StrokeShape="RoundRectangle 30,30,0,0">
+    <Border>
         <Grid 
             Padding="10, 0, 0, 0"
             ColumnDefinitions="Auto, *">
-            <Image 
+            <Image
                 Grid.Column="0"
                 HeightRequest="50"
                 WidthRequest="50"
-                Source="dotnet_bot.png" />
+                Source="envelope_solid.svg" />
             <Grid 
                 Padding="10"
                 Grid.Column="1"
@@ -23,7 +21,7 @@
                         Spacing="5">
                         <Label 
                             Text="Sender name" 
-                            FontSize="16"
+                            FontSize="14"
                             FontAttributes="Bold"/>
                         <Label
                             FontSize="12"
