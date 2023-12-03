@@ -4,7 +4,8 @@
              x:Class="Umbrella.Maui.Email.EmailListing.Views.EmailListItemView">
     <Border>
         <Grid 
-            Padding="10, 0, 0, 0"
+            Padding="10"
+            ColumnSpacing="15"
             ColumnDefinitions="Auto, *">
             <Image
                 Grid.Column="0"
@@ -12,7 +13,6 @@
                 WidthRequest="50"
                 Source="envelope_solid.svg" />
             <Grid 
-                Padding="10"
                 Grid.Column="1"
                 RowDefinitions="Auto, Auto">
                 <Grid 
