@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Umbrella.Maui.Email.EmailListing.Views.EmailListItemView">
+    <Border
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 30,30,0,0">
+        <Grid 
+            Padding="10, 0, 0, 0"
+            ColumnDefinitions="Auto, *">
+            <Image 
+                Grid.Column="0"
+                HeightRequest="50"
+                WidthRequest="50"
+                Source="dotnet_bot.png" />
+            <Grid 
+                Padding="10"
+                Grid.Column="1"
+                RowDefinitions="Auto, Auto">
+                <Grid 
+                    ColumnDefinitions="*, Auto, Auto">
+                    <VerticalStackLayout 
+                        Spacing="5">
+                        <Label 
+                            Text="Sender name" 
+                            FontSize="16"
+                            FontAttributes="Bold"/>
+                        <Label
+                            FontSize="12"
+                            Text="Email Subject" />
+                        <Label
+                            FontSize="11"
+                            Text="Email message snippet" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout 
+                        Grid.Column="1"
+                        Spacing="5">
+                        <Label Text="10:50 PM" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>

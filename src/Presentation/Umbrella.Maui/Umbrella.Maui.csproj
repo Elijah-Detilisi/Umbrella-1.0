@@ -64,10 +64,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Email\EmailDashboard\Pages\EmailDashboardPage.xaml">
+	  <MauiXaml Update="Email\EmailListing\Pages\EmailListingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Email\EmailDashboard\Views\EmailMessageView.xaml">
+	  <MauiXaml Update="Email\EmailListing\Views\EmailListItemView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
