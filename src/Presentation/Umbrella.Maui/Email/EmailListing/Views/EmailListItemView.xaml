@@ -4,9 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Umbrella.Maui.Email.EmailListing.Views.EmailListItemView">
-    <Border>
+    <VerticalStackLayout Padding="10">
+        
         <Grid 
-            Padding="10"
             ColumnSpacing="15"
             ColumnDefinitions="Auto, *">
             <!--Email image-->
@@ -43,5 +43,12 @@
                 </Grid>
             </Grid>
         </Grid>
-    </Border>
+        
+        <!--Separator-->
+        <BoxView   
+            Color="#084887"                     
+            HeightRequest="2" 
+            Margin="0,15,0,0" 
+            HorizontalOptions="Fill" />
+    </VerticalStackLayout>
 </ContentView>
