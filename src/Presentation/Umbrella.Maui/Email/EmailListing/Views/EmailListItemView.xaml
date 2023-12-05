@@ -27,11 +27,11 @@
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Sender.Value}"/>
                         <Label
                             FontSize="12"
-                            MaxLines="2" LineBreakMode="TailTruncation"
+                            MaxLines="1" LineBreakMode="WordWrap"
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Subject.Value}" />
                         <Label
                             FontSize="11"
-                            MaxLines="1" LineBreakMode="TailTruncation"
+                            MaxLines="2" LineBreakMode="TailTruncation"
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Body.Value}" />
                     </VerticalStackLayout>
                     
