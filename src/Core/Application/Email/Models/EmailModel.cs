@@ -1,6 +1,6 @@
 ﻿namespace Application.Email.Models;
 
-public class EmailModel
+public class EmailModel : Model
 {
     public EmailType Type { get; set; }
     public EmailStatus EmailStatus { get; set; }

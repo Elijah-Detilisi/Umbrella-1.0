@@ -2,7 +2,7 @@
 
 namespace Application.User.Models;
 
-public class UserModel
+public class UserModel : Model
 {
     public EmailAddress EmailAddress { get; set; }
     public EmailPassword EmailPassword { get; set; }

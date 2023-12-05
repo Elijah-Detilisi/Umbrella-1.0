@@ -25,7 +25,10 @@ public partial class EmailListItemView : ContentView
         defaultValue: new EmailModel()
         {
             Sender = EmailAddress.Create("default@umbrella.com"),
-            Subject = EmailSubjectLine.Create("Welcome to Umbrella - Your Ultimate Email Companion!")
+            Subject = EmailSubjectLine.Create("Welcome to Umbrella - Your Ultimate Email Companion!"),
+            Body = EmailBodyText.Create("Umbrella, your go-to app for all things email-related! " +
+                "We are thrilled to have you on board and ready to make your daily weather experience more enjoyable and informative."),
+            CreatedAt = DateTime.Now
         }
     );
 }
