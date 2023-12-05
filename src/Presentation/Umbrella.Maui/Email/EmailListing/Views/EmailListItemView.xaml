@@ -9,16 +9,17 @@
             Padding="10"
             ColumnSpacing="15"
             ColumnDefinitions="Auto, *">
+            <!--Email image-->
             <Image
                 Grid.Column="0"
-                HeightRequest="50"
-                WidthRequest="50"
-                Source="envelope_solid.svg" />
+                Source="envelope_solid.svg"
+                HeightRequest="50" WidthRequest="50"/>
             <Grid 
                 Grid.Column="1"
                 RowDefinitions="Auto, Auto">
                 <Grid 
                     ColumnDefinitions="*, Auto, Auto">
+                    <!--Email details-->
                     <VerticalStackLayout 
                         Spacing="5">
                         <Label 
@@ -33,7 +34,8 @@
                             MaxLines="1" LineBreakMode="TailTruncation"
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Body.Value}" />
                     </VerticalStackLayout>
-
+                    
+                    <!--Email time-->
                     <VerticalStackLayout 
                         Grid.Column="1" Spacing="5">
                         <Label Text="{Binding Source={x:Reference this}, Path=EmailMessage.CreatedAt, StringFormat='{}{0:h:mm tt}'}"/>
