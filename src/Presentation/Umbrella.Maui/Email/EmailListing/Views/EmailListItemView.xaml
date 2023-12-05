@@ -35,9 +35,8 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout 
-                        Grid.Column="1"
-                        Spacing="5">
-                        <Label Text="10:50 PM" />
+                        Grid.Column="1" Spacing="5">
+                        <Label Text="{Binding Source={x:Reference this}, Path=EmailMessage.CreatedAt, StringFormat='{}{0:h:mm tt}'}"/>
                     </VerticalStackLayout>
                 </Grid>
             </Grid>
