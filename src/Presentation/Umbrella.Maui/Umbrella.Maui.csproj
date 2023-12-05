@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\RobotoFlex-Regular.ttf" />
 	  <None Remove="Resources\Images\envelope_solid.svg" />
 	</ItemGroup>
 
