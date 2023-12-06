@@ -1,7 +1,3 @@
-using Application.Email.Models;
-using Domain.Common.ValueObjects;
-using Domain.Email.ValueObjects;
-
 namespace Umbrella.Maui.Email.EmailListing.Views;
 
 public partial class EmailListItemView : ContentView
