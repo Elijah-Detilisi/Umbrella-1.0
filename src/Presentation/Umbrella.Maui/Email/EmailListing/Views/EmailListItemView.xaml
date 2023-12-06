@@ -18,21 +18,17 @@
                 Grid.Column="1"
                 RowDefinitions="Auto, Auto">
                 <Grid 
-                    ColumnDefinitions="*, Auto, Auto">
+                    ColumnDefinitions="*, Auto">
                     <!--Email details-->
                     <VerticalStackLayout 
                         Spacing="5">
                         <Label 
-                            FontSize="14" FontAttributes="Bold"
+                            FontSize="16" FontAttributes="Bold"
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Sender.Value}"/>
                         <Label
                             FontSize="12"
                             MaxLines="1" LineBreakMode="WordWrap"
                             Text="{Binding Source={x:Reference this}, Path=EmailMessage.Subject.Value}" />
-                        <Label
-                            FontSize="11"
-                            MaxLines="2" LineBreakMode="TailTruncation"
-                            Text="{Binding Source={x:Reference this}, Path=EmailMessage.Body.Value}" />
                     </VerticalStackLayout>
                     
                     <!--Email time-->
