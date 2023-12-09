@@ -4,3 +4,4 @@ global using Domain.Email.ValueObjects;
 global using Application.Common.Base;
 global using CommunityToolkit.Maui.Markup;
 global using Umbrella.Maui.Common.Base;
+global using Application.Email.ViewModels;

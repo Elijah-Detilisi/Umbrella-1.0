@@ -1,5 +1,4 @@
-﻿using Application.Email.ViewModels;
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Umbrella.Maui.Email.EmailListing.Pages;
 

@@ -1,5 +1,4 @@
-﻿using Application.Email.ViewModels;
-using Umbrella.Maui.Email.Base.Pages;
+﻿using Umbrella.Maui.Email.Base.Pages;
 
 namespace Umbrella.Maui.Email.EmailListing.Pages;
 
