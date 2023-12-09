@@ -6,10 +6,14 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
 
     protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
     {
-        Title = title;
-
         Padding = 0;
+        Title = title;
+        
+        InitializeContent();
+    }
 
+    private void InitializeContent()
+    {
         Content = new Grid
         {
             RowDefinitions = new RowDefinitionCollection
