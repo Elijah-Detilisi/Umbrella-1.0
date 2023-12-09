@@ -28,6 +28,8 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                 //DialogueBox
                 new Frame
                 {
+                    CornerRadius = 40,
+                    Margin = new Thickness(-5, -25, -5, -25),
                     Content = new Grid
                     {
                         Children =
