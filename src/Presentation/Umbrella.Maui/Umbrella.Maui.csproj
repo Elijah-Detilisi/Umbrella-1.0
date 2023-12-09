@@ -82,8 +82,4 @@
 	  </MauiXaml>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Email\EmailListing\Pages\" />
-	</ItemGroup>
-
 </Project>

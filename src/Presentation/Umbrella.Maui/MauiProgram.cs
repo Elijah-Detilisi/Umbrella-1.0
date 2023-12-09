@@ -1,6 +1,7 @@
-﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Markup;
+﻿using Application.Email.ViewModels;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Umbrella.Maui.Email.EmailListing.Pages;
 
 namespace Umbrella.Maui
 {
@@ -23,6 +24,8 @@ namespace Umbrella.Maui
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddTransient<EmailListingPage, EmailListingViewModel>();
 
             return builder.Build();
         }
