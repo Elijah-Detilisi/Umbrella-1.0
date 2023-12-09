@@ -1,21 +1,14 @@
-﻿using CommunityToolkit.Maui.Markup;
-using System.Diagnostics;
+﻿namespace Umbrella.Maui.Email.Base.Pages;
 
-namespace Umbrella.Maui.Email.Base.Pages;
-
-// Content type
-public abstract class EmailPage : ContentPage
+public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : ViewModel
 {
     private enum Row { Content = 0, DialogueBox = 1 }
 
-    protected EmailPage(object? viewModel = null)
+    protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
     {
-        BindingContext = viewModel;
-        
-        if (string.IsNullOrWhiteSpace(Title))
-        {
-            Title = GetType().Name;
-        }
+        Title = title;
+
+        Padding = 0;
 
         Content = new Grid
         {
@@ -48,19 +41,5 @@ public abstract class EmailPage : ContentPage
                 }.Row(Row.DialogueBox),
             }
         };
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        Debug.WriteLine($"OnAppearing: {Title}");
-    }
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-
-        Debug.WriteLine($"OnDisappearing: {Title}");
     }
 }
