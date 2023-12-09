@@ -1,4 +1,4 @@
-﻿using Application.Audio.Services;
+﻿using Application.Common.Services;
 
 namespace Infrastructure.Audio.Services;
 public class MauiTextToSpeech : IMauiTextToSpeech

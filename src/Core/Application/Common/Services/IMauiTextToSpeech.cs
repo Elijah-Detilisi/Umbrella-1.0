@@ -1,4 +1,4 @@
-﻿namespace Application.Audio.Services;
+﻿namespace Application.Common.Services;
 
 public interface IMauiTextToSpeech
 {
