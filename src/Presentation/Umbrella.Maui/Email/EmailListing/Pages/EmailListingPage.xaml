@@ -4,9 +4,13 @@
              x:Class="Umbrella.Maui.Email.EmailListing.Pages.EmailListingPage"
              xmlns:views="clr-namespace:Umbrella.Maui.Email.EmailListing.Views"
              Title="EmailListingPage">
-    <Grid
-        RowDefinitions="5*, 3*">
-        <!--Top-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".8*" />
+            <RowDefinition Height=".3*" />
+        </Grid.RowDefinitions>
+        
+        <!--Content Box-->
         <VerticalStackLayout
             Grid.Row="0">
             <views:EmailListItemView/>
@@ -15,11 +19,19 @@
             <views:EmailListItemView/>
         </VerticalStackLayout>
         
-        <!--Bottom-->
-        <VerticalStackLayout
+        <!--Dialogue box-->
+        <Frame
             Grid.Row="1"
+            CornerRadius="40"
+            Margin="-5,-25,-5,-25"
             BackgroundColor="#084887">
-        </VerticalStackLayout>
+            
+            <Grid>
+                <VerticalStackLayout>
+                    
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
 
     </Grid>
 </ContentPage>
