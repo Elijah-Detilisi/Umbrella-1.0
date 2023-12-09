@@ -3,6 +3,7 @@
 public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : ViewModel
 {
     private enum Row { Content = 0, DialogueBox = 1 }
+    protected abstract ScrollView ContentView { get; }
 
     protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
     {
@@ -24,10 +25,7 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
             Children =
             {
                 //Content
-                new VerticalStackLayout
-                {
-
-                }.Row(Row.Content),
+                ContentView.Row(Row.Content),
 
                 //DialogueBox
                 new Frame
