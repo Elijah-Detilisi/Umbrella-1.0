@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using Microsoft.Maui.Controls.Shapes;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
@@ -26,24 +26,20 @@ public class SpeechBubble : Grid
         Children.Add(new Image
         {
             Source = "user_solid.svg",
-            WidthRequest = 30,
-            HeightRequest = 30,
-            VerticalOptions = LayoutOptions.Center
+            WidthRequest = 30, HeightRequest = 30,
         }.Column(0)
         );
 
         //Message box
-        Children.Add(new Border
+        Children.Add(new Frame
         {
-            BackgroundColor = Colors.AliceBlue,
-            Padding = 10,
             Content = new Label
             {
                 Text = "Hello! This is a speech bubble with an image.",
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.StartAndExpand
             }
-        }.Column(1)
-        );
+        }.DynamicResource(View.StyleProperty, "FrameSpeechBox").Column(1)
+        );;
     }
 }

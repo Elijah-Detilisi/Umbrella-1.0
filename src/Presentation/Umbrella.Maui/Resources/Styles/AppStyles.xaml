@@ -15,4 +15,11 @@
                 Value="{AppThemeBinding Light={StaticResource AppActionColor}, Dark={StaticResource AppActionDarkColor}}"/>
     </Style>
 
+    <Style x:Key="FrameSpeechBox" TargetType="Frame">
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Tertiary}" />
+        
+    </Style>
+
 </ResourceDictionary>

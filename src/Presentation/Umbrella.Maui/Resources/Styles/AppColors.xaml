@@ -21,5 +21,6 @@
     <Color x:Key="Secondary">#909CC2</Color>
     <Color x:Key="SecondaryDarkText">#363E51</Color>
 
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Tertiary">#f0f8ff</Color>
+    
 </ResourceDictionary>

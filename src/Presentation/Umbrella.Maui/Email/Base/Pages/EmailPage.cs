@@ -40,7 +40,6 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                         {
                             new SpeechBubble(),
                             new SpeechBubble(),
-                            new SpeechBubble(),
                         }
                     }
                 }.Row(Row.DialogueBox),
