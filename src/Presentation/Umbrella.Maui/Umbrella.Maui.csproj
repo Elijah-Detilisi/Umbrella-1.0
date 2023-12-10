@@ -88,4 +88,8 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Email\Base\Views\" />
+	</ItemGroup>
+
 </Project>
