@@ -36,8 +36,8 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                     {
                         Content = new VerticalStackLayout()
                         {
-                            new SpeechBubble(),
-                            new SpeechBubble(),
+                            new SpeechBubble(isBotSpeaker: true),
+                            new SpeechBubble(isBotSpeaker: false),
                         }
                     }
                 }.DynamicResource(View.StyleProperty, "FrameDialogueBox").Row(Row.DialogueBox),
