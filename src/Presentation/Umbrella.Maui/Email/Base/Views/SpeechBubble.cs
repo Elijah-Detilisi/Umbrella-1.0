@@ -1,4 +1,6 @@
-﻿namespace Umbrella.Maui.Email.Base.Views;
+﻿using CommunityToolkit.Maui.Views;
+
+namespace Umbrella.Maui.Email.Base.Views;
 
 public class SpeechBubble : Grid
 {
@@ -10,7 +12,7 @@ public class SpeechBubble : Grid
 
     private void InitializeLayout()
     {
-        Padding = new Thickness(20);
+        Padding = new Thickness(10);
         ColumnDefinitions = new ColumnDefinitionCollection
         {
             new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
@@ -23,9 +25,9 @@ public class SpeechBubble : Grid
         //Speaker icon
         Children.Add(new Image
         {
-            Source = "user_image.png",
-            WidthRequest = 50,
-            HeightRequest = 50,
+            Source = "user_solid.svg",
+            WidthRequest = 30,
+            HeightRequest = 30,
             VerticalOptions = LayoutOptions.Center
         }.Column(0)
         );
@@ -34,13 +36,12 @@ public class SpeechBubble : Grid
         Children.Add(new Border
         {
             BackgroundColor = Colors.AliceBlue,
-            Margin = new Thickness(60, 0, 0, 0),
+            Padding = 10,
             Content = new Label
             {
                 Text = "Hello! This is a speech bubble with an image.",
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                Margin = new Thickness(10)
+                HorizontalOptions = LayoutOptions.StartAndExpand
             }
         }.Column(1)
         );

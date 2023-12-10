@@ -1,4 +1,6 @@
-﻿namespace Umbrella.Maui.Email.Base.Pages;
+﻿using Umbrella.Maui.Email.Base.Views;
+
+namespace Umbrella.Maui.Email.Base.Pages;
 
 public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : ViewModel
 {
@@ -32,11 +34,13 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                 {
                     CornerRadius = 40,
                     Margin = new Thickness(-5, -25, -5, -25),
-                    Content = new Grid
+                    Content = new ScrollView
                     {
-                        Children =
+                        Content = new VerticalStackLayout()
                         {
-                            new VerticalStackLayout()
+                            new SpeechBubble(),
+                            new SpeechBubble(),
+                            new SpeechBubble(),
                         }
                     }
                 }.Row(Row.DialogueBox),
