@@ -36,8 +36,6 @@ public class SpeechBubble : Grid
             Content = new Label
             {
                 Text = "Hello! This is a speech bubble with an image.",
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.StartAndExpand
             }
         }.DynamicResource(View.StyleProperty, "FrameSpeechBox").Column(1)
         );;
