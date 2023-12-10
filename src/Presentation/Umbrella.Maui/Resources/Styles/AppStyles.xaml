@@ -10,7 +10,9 @@
                 Value="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource AppBackgroundDarkColor}}" />
     </Style>
 
-    <Style TargetType="Frame">
+    <Style x:Key="FrameDialogueBox" TargetType="Frame">
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="Margin" Value="-5,-25,-5,-25" />
         <Setter Property="BackgroundColor" 
                 Value="{AppThemeBinding Light={StaticResource AppActionColor}, Dark={StaticResource AppActionDarkColor}}"/>
     </Style>
