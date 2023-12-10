@@ -24,4 +24,8 @@
         
     </Style>
 
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource AppTitleColor}, Dark={StaticResource AppTitleDarkColor}}" />
+    </Style>
+
 </ResourceDictionary>
