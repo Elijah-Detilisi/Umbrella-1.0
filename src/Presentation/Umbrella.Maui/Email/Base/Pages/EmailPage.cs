@@ -51,9 +51,9 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                                 }.Row(0),
                                 new ImageButton()
                                 {
-                                    WidthRequest = 50,
-                                    HeightRequest = 50,
-                                    Source = "user_solid.svg"
+                                    WidthRequest = 40,
+                                    HeightRequest = 40,
+                                    Source = "umbrella_solid.svg"
                                 }.Row(1)
                             }
                         }
