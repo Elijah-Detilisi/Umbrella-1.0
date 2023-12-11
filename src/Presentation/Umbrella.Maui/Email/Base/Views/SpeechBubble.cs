@@ -36,6 +36,8 @@ public class SpeechBubble : Grid
             Content = new Label
             {
                 Text = message,
+                MaxLines = 1,
+                LineBreakMode = LineBreakMode.TailTruncation
             }
         }.DynamicResource(View.StyleProperty, "FrameSpeechBox").Column(isBotSpeaker ? 1 : 0)
         );;
