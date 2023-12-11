@@ -34,10 +34,28 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                 {
                     Content = new ScrollView
                     {
-                        Content = new VerticalStackLayout()
+                        Content = new Grid()
                         {
-                            new SpeechBubble(isBotSpeaker: true, message: "Hello world"),
-                            new SpeechBubble(isBotSpeaker: false, message: "What's up?"),
+                            Padding = 10,
+                            RowDefinitions = new RowDefinitionCollection
+                            {
+                                new RowDefinition { Height = new GridLength(0.7, GridUnitType.Star) },
+                                new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
+                            },
+                            Children =
+                            {
+                                new VerticalStackLayout()
+                                {
+                                    new SpeechBubble(isBotSpeaker: true, message: "Hello world"),
+                                    new SpeechBubble(isBotSpeaker: false, message: "What's up?"),
+                                }.Row(0),
+                                new ImageButton()
+                                {
+                                    WidthRequest = 50,
+                                    HeightRequest = 50,
+                                    Source = "user_solid.svg"
+                                }.Row(1)
+                            }
                         }
                     }
                 }.DynamicResource(View.StyleProperty, "FrameDialogueBox").Row(Row.DialogueBox),
