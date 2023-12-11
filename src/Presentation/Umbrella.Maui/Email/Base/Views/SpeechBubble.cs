@@ -2,12 +2,14 @@
 
 public class SpeechBubble : Grid
 {
-    public SpeechBubble(bool isBotSpeaker)
+    //Construction
+    public SpeechBubble(bool isBotSpeaker, string message)
     {
         InitializeLayout(isBotSpeaker);
-        InitializeChildern(isBotSpeaker);
+        InitializeChildern(isBotSpeaker, message);
     }
 
+    //Initialization
     private void InitializeLayout(bool isBotSpeaker)
     {
         Padding = new Thickness(10);
@@ -18,7 +20,7 @@ public class SpeechBubble : Grid
         };
     }
 
-    private void InitializeChildern(bool isBotSpeaker)
+    private void InitializeChildern(bool isBotSpeaker, string message)
     {
         //Speaker icon
         Children.Add(new Image
@@ -33,7 +35,7 @@ public class SpeechBubble : Grid
         {
             Content = new Label
             {
-                Text = "Hello! This is a speech bubble with an image.",
+                Text = message,
             }
         }.DynamicResource(View.StyleProperty, "FrameSpeechBox").Column(isBotSpeaker ? 1 : 0)
         );;
