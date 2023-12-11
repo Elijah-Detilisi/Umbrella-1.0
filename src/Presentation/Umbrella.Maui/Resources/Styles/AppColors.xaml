@@ -6,7 +6,7 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="AppBackgroundColor">#F7F5FB</Color>
+    <Color x:Key="AppBackgroundColor">#F0F8FF</Color>
     <Color x:Key="AppBackgroundDarkColor">#242C3B</Color>
 
     <Color x:Key="AppActionColor">#084887</Color>
@@ -21,6 +21,6 @@
     <Color x:Key="Secondary">#909CC2</Color>
     <Color x:Key="SecondaryDarkText">#363E51</Color>
 
-    <Color x:Key="Tertiary">#f0f8ff</Color>
+    <Color x:Key="Tertiary">#F0F8FF</Color>
     
 </ResourceDictionary>
