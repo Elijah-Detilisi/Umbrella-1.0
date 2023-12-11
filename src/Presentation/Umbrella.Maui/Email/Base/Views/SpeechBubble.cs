@@ -15,7 +15,7 @@ public class SpeechBubble : Grid
         Padding = new Thickness(10);
         ColumnDefinitions = new ColumnDefinitionCollection
         {
-            new ColumnDefinition { Width = new GridLength( isBotSpeaker? 0.2 : 0.8, GridUnitType.Star) },
+            new ColumnDefinition { Width = new GridLength(isBotSpeaker? 0.2 : 0.8, GridUnitType.Star) },
             new ColumnDefinition { Width = new GridLength(isBotSpeaker? 0.8 : 0.2, GridUnitType.Star) }
         };
     }
