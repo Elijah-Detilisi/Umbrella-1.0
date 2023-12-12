@@ -1,4 +1,4 @@
-﻿using Umbrella.Maui.Email.Base.Views;
+﻿using Umbrella.Maui.Email.Base.Controls;
 
 namespace Umbrella.Maui.Email.Base.Pages;
 
@@ -46,8 +46,8 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
                             {
                                 new VerticalStackLayout()
                                 {
-                                    new SpeechBubble(isBotSpeaker: true, message: "Hello world"),
-                                    new SpeechBubble(isBotSpeaker: false, message: "What's up?"),
+                                    new SpeechBubbleControl(isBotSpeaker: true, message: "Hello world"),
+                                    new SpeechBubbleControl(isBotSpeaker: false, message: "What's up?"),
                                 }.Row(0),
                                 new ImageButton()
                                 {

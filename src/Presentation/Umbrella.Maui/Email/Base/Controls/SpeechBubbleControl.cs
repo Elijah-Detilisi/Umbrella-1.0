@@ -1,9 +1,9 @@
-﻿namespace Umbrella.Maui.Email.Base.Views;
+﻿namespace Umbrella.Maui.Email.Base.Controls;
 
-public class SpeechBubble : Grid
+public class SpeechBubbleControl : Grid
 {
     //Construction
-    public SpeechBubble(bool isBotSpeaker, string message)
+    public SpeechBubbleControl(bool isBotSpeaker, string message)
     {
         InitializeLayout(isBotSpeaker);
         InitializeChildern(isBotSpeaker, message);
@@ -26,8 +26,9 @@ public class SpeechBubble : Grid
         Children.Add(new Image
         {
             Source = "user_solid.svg",
-            WidthRequest = 30, HeightRequest = 30,
-        }.Column(isBotSpeaker? 0 : 1)
+            WidthRequest = 30,
+            HeightRequest = 30,
+        }.Column(isBotSpeaker ? 0 : 1)
         );
 
         //Message box
@@ -39,7 +40,7 @@ public class SpeechBubble : Grid
                 MaxLines = 1,
                 LineBreakMode = LineBreakMode.TailTruncation
             }
-        }.DynamicResource(View.StyleProperty, "FrameSpeechBox").Column(isBotSpeaker ? 1 : 0)
-        );;
+        }.DynamicResource(StyleProperty, "FrameSpeechBox").Column(isBotSpeaker ? 1 : 0)
+        ); ;
     }
 }
