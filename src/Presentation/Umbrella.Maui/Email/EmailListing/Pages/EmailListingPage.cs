@@ -9,7 +9,7 @@ public class EmailListingPage : EmailPage<EmailListingViewModel>
     {
     }
 
-    protected override ScrollView ContentView => new ScrollView()
+    protected override ScrollView PageContent => new ScrollView()
     {
         Content = new VerticalStackLayout()
         {

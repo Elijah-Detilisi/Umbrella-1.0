@@ -34,7 +34,7 @@ public class ChatHistoryView : ContentView
         Content = MainFrameContainer;
     }
 
-    //Controls initialization
+    //View component initialization
     private void InitializeActionButton()
     {
         ActionButton.WidthRequest = 40;

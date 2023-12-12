@@ -1,65 +1,47 @@
-﻿using Umbrella.Maui.Email.Base.Controls;
+﻿using Umbrella.Maui.Email.Base.Views;
 
 namespace Umbrella.Maui.Email.Base.Pages;
 
 public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : ViewModel
 {
-    private enum Row { Content = 0, DialogueBox = 1 }
-    protected abstract ScrollView ContentView { get; }
+    //Fields
+    private enum Row { Content = 0, ChatBox = 1 }
 
+    //View components
+    private Grid MainGridLayout { get; }
+    public ChatHistoryView ChatHistory { get; set; }
+    protected abstract ScrollView PageContent { get; }
+
+    //Construction
     protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
     {
-        Padding = 0;
         Title = title;
-        
-        InitializeContent();
+
+        MainGridLayout = new Grid();
+        ChatHistory = new ChatHistoryView();
+
+        InitializeEmailPage();
     }
 
-    private void InitializeContent()
+    //Initialization
+    protected virtual void InitializeEmailPage()
     {
-        Content = new Grid
-        {
-            RowDefinitions = new RowDefinitionCollection
-            {
-                new RowDefinition { Height = new GridLength(0.8, GridUnitType.Star) },
-                new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
-            },
-            Children =
-            {
-                //Content
-                ContentView.Row(Row.Content),
+        InitializeMainGridLayout();
 
-                //DialogueBox
-                new Frame
-                {
-                    Content = new ScrollView
-                    {
-                        Content = new Grid()
-                        {
-                            Padding = 10,
-                            RowDefinitions = new RowDefinitionCollection
-                            {
-                                new RowDefinition { Height = new GridLength(0.7, GridUnitType.Star) },
-                                new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
-                            },
-                            Children =
-                            {
-                                new VerticalStackLayout()
-                                {
-                                    new SpeechBubbleControl(isBotSpeaker: true, message: "Hello world"),
-                                    new SpeechBubbleControl(isBotSpeaker: false, message: "What's up?"),
-                                }.Row(0),
-                                new ImageButton()
-                                {
-                                    WidthRequest = 40,
-                                    HeightRequest = 40,
-                                    Source = "umbrella_solid.svg"
-                                }.Row(1)
-                            }
-                        }
-                    }
-                }.DynamicResource(View.StyleProperty, "FrameDialogueBox").Row(Row.DialogueBox),
-            }
+        Padding = 0;
+        Content = MainGridLayout;
+    }
+
+    //View component initialization
+    private void InitializeMainGridLayout()
+    {
+        MainGridLayout.RowDefinitions = new RowDefinitionCollection
+        {
+            new RowDefinition { Height = new GridLength(0.8, GridUnitType.Star) },
+            new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
         };
+
+        MainGridLayout.Add(PageContent.Row(Row.Content));
+        MainGridLayout.Add(ChatHistory.Row(Row.ChatBox));
     }
 }
