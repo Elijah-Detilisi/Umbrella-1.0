@@ -6,23 +6,56 @@ public class ChatHistoryView : ContentView
     private Grid MainGridLayout;
     private Frame MainFrameContainer;
     private ImageButton ActionButton;
-    private CollectionView ChatHistory;
     private ScrollView ChatHistoryContainer;
-    
-    
+    private CollectionView ChatHistoryCollection;
+
     //Conctruction
     public ChatHistoryView()
     {
         MainGridLayout = new Grid();
         MainFrameContainer = new Frame();
         ActionButton = new ImageButton();
-        ChatHistory = new CollectionView();
         ChatHistoryContainer = new ScrollView();
+        ChatHistoryCollection = new CollectionView();
+
+        InitializeChatHistoryView();
+    }
+
+    //Initialization
+    protected virtual void InitializeChatHistoryView()
+    {
+        InitializeActionButton();
+        InitializeChatHistoryContainer();
+        InitializeChatHistoryCollection();
+
+        InitializeMainGridLayout();
+        InitializeMainFrameContainer();
 
         Content = MainFrameContainer;
     }
 
-    //Initialization
+    //Companent initialization
+    private void InitializeActionButton()
+    {
+        ActionButton.WidthRequest = 40;
+        ActionButton.HeightRequest = 40;
+        ActionButton.Source = "umbrella_solid.svg";
+
+        ActionButton.Row(1); // NB: Must be in bottom row
+    }
+
+    private void InitializeChatHistoryCollection()
+    {
+        ChatHistoryCollection.ItemTemplate(new DataTemplate());
+        ChatHistoryCollection.SelectionMode = SelectionMode.None;
+    }
+
+    private void InitializeChatHistoryContainer()
+    {
+        ChatHistoryContainer.Content = ChatHistoryCollection;
+        ChatHistoryContainer.Row(0); // NB: Must be in top row
+    }
+
     private void InitializeMainGridLayout()
     {
         MainGridLayout.RowDefinitions = new RowDefinitionCollection()
@@ -40,20 +73,4 @@ public class ChatHistoryView : ContentView
         MainFrameContainer.Content = MainGridLayout;
         MainFrameContainer.DynamicResource(View.StyleProperty, "FrameMainChatContainer");
     }
-
-    private void InitializeActionButton()
-    {
-        ActionButton.WidthRequest = 40;
-        ActionButton.HeightRequest = 40;
-        ActionButton.Source = "umbrella_solid.svg";
-
-        ActionButton.Row(1); // NB: Must be in bottom row
-    }
-
-    private void InitializeChatHistoryContainer()
-    {
-        ChatHistoryContainer.Content = ChatHistory;
-        ChatHistoryContainer.Row(0); // NB: Must be in top row
-    }
-
 }
