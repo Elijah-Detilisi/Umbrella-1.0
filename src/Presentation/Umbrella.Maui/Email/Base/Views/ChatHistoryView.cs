@@ -2,12 +2,12 @@
 
 public class ChatHistoryView : ContentView
 {
-    //ViewElements
-    private Grid MainGridLayout;
-    private Frame MainFrameContainer;
-    private ImageButton ActionButton;
-    private ScrollView ChatHistoryContainer;
-    private CollectionView ChatHistoryCollection;
+    //Components
+    private readonly Grid MainGridLayout;
+    private readonly Frame MainFrameContainer;
+    private readonly ImageButton ActionButton;
+    private readonly ScrollView ChatHistoryContainer;
+    private readonly CollectionView ChatHistoryCollection;
 
     //Conctruction
     public ChatHistoryView()
@@ -34,7 +34,7 @@ public class ChatHistoryView : ContentView
         Content = MainFrameContainer;
     }
 
-    //Companent initialization
+    //Component initialization
     private void InitializeActionButton()
     {
         ActionButton.WidthRequest = 40;
