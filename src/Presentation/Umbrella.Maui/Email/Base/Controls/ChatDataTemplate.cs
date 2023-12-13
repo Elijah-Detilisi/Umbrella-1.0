@@ -63,8 +63,8 @@ public class ChatDataTemplate : DataTemplate
         ChatTemplateGrid.Padding = new Thickness(10);
         ChatTemplateGrid.ColumnDefinitions = new ColumnDefinitionCollection
         {
-            //new ColumnDefinition { Width = new GridLength(isBotSpeaker? 0.2 : 0.8, GridUnitType.Star) },
-            //new ColumnDefinition { Width = new GridLength(isBotSpeaker? 0.8 : 0.2, GridUnitType.Star) }
+            new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
+            new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
         };
 
         ChatTemplateGrid.Children.Add(ChatTemplateIcon);
