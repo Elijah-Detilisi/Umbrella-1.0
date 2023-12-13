@@ -1,37 +1,42 @@
-﻿namespace Umbrella.Maui.Email.Base.Views;
+﻿using Umbrella.Maui.Email.Base.Controls;
+
+namespace Umbrella.Maui.Email.Base.Views;
 
 public class ChatHistoryView : ContentView
 {
+    //Fields
+    private enum Row { Top = 0, Bottom = 1 }
+
     //View components
-    private readonly Grid MainGridLayout;
-    private readonly Frame MainFrameContainer;
+    private readonly Grid ChatHistoryGrid;
+    private readonly Frame ChatHistoryFrame;
     private readonly ImageButton ActionButton;
-    private readonly ScrollView ChatHistoryContainer;
+    private readonly ScrollView ChatHistoryScrollView;
     private readonly CollectionView ChatHistoryCollection;
 
     //Conctruction
     public ChatHistoryView()
     {
-        MainGridLayout = new Grid();
-        MainFrameContainer = new Frame();
+        ChatHistoryGrid = new Grid();
+        ChatHistoryFrame = new Frame();
         ActionButton = new ImageButton();
-        ChatHistoryContainer = new ScrollView();
+        ChatHistoryScrollView = new ScrollView();
         ChatHistoryCollection = new CollectionView();
 
-        InitializeChatHistoryView();
+        InitializeView();
     }
 
     //Initialization
-    protected virtual void InitializeChatHistoryView()
+    protected virtual void InitializeView()
     {
         InitializeActionButton();
-        InitializeChatHistoryContainer();
-        InitializeChatHistoryCollection();
+        InitializeChatCollectionView();
+        InitializeChatScrollView();
 
-        InitializeMainGridLayout();
-        InitializeMainFrameContainer();
+        InitializeChatGrid();
+        InitializeChatFrame();
 
-        Content = MainFrameContainer;
+        Content = ChatHistoryFrame;
     }
 
     //View component initialization
@@ -41,36 +46,43 @@ public class ChatHistoryView : ContentView
         ActionButton.HeightRequest = 40;
         ActionButton.Source = "umbrella_solid.svg";
 
-        ActionButton.Row(1); // NB: Must be in bottom row
+        ActionButton.Row(Row.Bottom);
     }
 
-    private void InitializeChatHistoryCollection()
+    private void InitializeChatCollectionView()
     {
-        ChatHistoryCollection.ItemTemplate(new DataTemplate());
+        ChatHistoryCollection.ItemsSource = new List<string>()
+        {
+            "Hello world",
+            "Hello world",
+            "Hello world",
+        };
+
+        ChatHistoryCollection.ItemTemplate(new ChatDataTemplate());
         ChatHistoryCollection.SelectionMode = SelectionMode.None;
     }
 
-    private void InitializeChatHistoryContainer()
+    private void InitializeChatScrollView()
     {
-        ChatHistoryContainer.Content = ChatHistoryCollection;
-        ChatHistoryContainer.Row(0); // NB: Must be in top row
+        ChatHistoryScrollView.Content = ChatHistoryCollection;
+        ChatHistoryScrollView.Row(Row.Top);
     }
 
-    private void InitializeMainGridLayout()
+    private void InitializeChatGrid()
     {
-        MainGridLayout.RowDefinitions = new RowDefinitionCollection()
+        ChatHistoryGrid.RowDefinitions = new RowDefinitionCollection()
         {
             new RowDefinition { Height = new GridLength(0.7, GridUnitType.Star) },
             new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
         };
 
-        MainGridLayout.Add(ActionButton);
-        MainGridLayout.Add(ChatHistoryContainer);
+        ChatHistoryGrid.Add(ActionButton);
+        ChatHistoryGrid.Add(ChatHistoryScrollView);
     }
 
-    private void InitializeMainFrameContainer()
+    private void InitializeChatFrame()
     {
-        MainFrameContainer.Content = MainGridLayout;
-        MainFrameContainer.DynamicResource(View.StyleProperty, "FrameMainChatContainer");
+        ChatHistoryFrame.Content = ChatHistoryGrid;
+        ChatHistoryFrame.DynamicResource(View.StyleProperty, "ChatHistoryFrame");
     }
 }
