@@ -2,19 +2,27 @@
 
 namespace Umbrella.Maui.Common.Base;
 
-//ViewModel-bound Type
+/// <summary>
+/// BasePage ViewModel-bound Type
+/// </summary>
+/// <typeparam name="TViewModel"></typeparam>
 public abstract class BasePage<TViewModel> : BasePage where TViewModel : ViewModel
 {
+    //Construction
     protected BasePage(TViewModel viewModel) : base(viewModel)
     {
     }
 
+    //Properties
     public new TViewModel BindingContext => (TViewModel)base.BindingContext;
 }
 
-//Content Type
+/// <summary>
+/// BasePage Content Type
+/// </summary>
 public abstract class BasePage : ContentPage
 {
+    //Construction
     protected BasePage(object? viewModel = null)
     {
         BindingContext = viewModel;
@@ -26,6 +34,7 @@ public abstract class BasePage : ContentPage
         }
     }
 
+    //Life-cylce
     protected override void OnAppearing()
     {
         base.OnAppearing();
