@@ -4,12 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!--Generic Styles-->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource AppTitleColor}, Dark={StaticResource AppTitleDarkColor}}" />
+    </Style>
+    
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" 
                 Value="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource AppBackgroundDarkColor}}" />
     </Style>
 
+    <!--ChatHistoryView styles-->
     <Style x:Key="FrameMainChatContainer" TargetType="Frame">
         <Setter Property="CornerRadius" Value="40" />
         <Setter Property="Margin" Value="-5,-25,-5,-25" />
@@ -17,15 +23,11 @@
                 Value="{AppThemeBinding Light={StaticResource AppActionColor}, Dark={StaticResource AppActionDarkColor}}"/>
     </Style>
 
-    <Style x:Key="FrameSpeechBox" TargetType="Frame">
+    <!--ChatDataTemplate styles-->
+    <Style x:Key="ChatTemplateFrame" TargetType="Frame">
         <Setter Property="Padding" Value="10" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="BackgroundColor" Value="{StaticResource Tertiary}" />
-        
     </Style>
-
-    <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource AppTitleColor}, Dark={StaticResource AppTitleDarkColor}}" />
-    </Style>
-
+    
 </ResourceDictionary>
