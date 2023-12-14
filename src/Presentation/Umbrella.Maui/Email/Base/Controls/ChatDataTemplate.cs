@@ -47,7 +47,6 @@ public class ChatDataTemplate : DataTemplate
         ChatTemplateText = new()
         {
             MaxLines = 1,
-            Text = "Hello world",
             LineBreakMode = LineBreakMode.TailTruncation
         };
 
