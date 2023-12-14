@@ -1,4 +1,6 @@
-﻿namespace Umbrella.Maui.Email.Base.Controls;
+﻿using Application.Chat.Models;
+
+namespace Umbrella.Maui.Email.Base.Controls;
 
 public class ChatDataTemplate : DataTemplate
 {
@@ -48,6 +50,10 @@ public class ChatDataTemplate : DataTemplate
             Text = "Hello world",
             LineBreakMode = LineBreakMode.TailTruncation
         };
+
+        ChatTemplateText.Bind(Label.TextProperty, 
+            static (ChatMessageModel chat) => chat.Message, mode: BindingMode.OneTime
+        );
     }
 
     private static void InitializeChatIcon()
