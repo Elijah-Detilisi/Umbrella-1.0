@@ -1,4 +1,6 @@
-﻿using Umbrella.Maui.Email.Base.Controls;
+﻿using Application.Chat.Enums;
+using Application.Chat.Models;
+using Umbrella.Maui.Email.Base.Controls;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
@@ -51,11 +53,11 @@ public class ChatHistoryView : ContentView
 
     private void InitializeChatCollectionView()
     {
-        ChatHistoryCollection.ItemsSource = new List<string>()
+        ChatHistoryCollection.ItemsSource = new List<ChatMessageModel>()
         {
-            "Hello world",
-            "Hello world",
-            "Hello world",
+            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
+            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
+            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."}
         };
 
         ChatHistoryCollection.ItemTemplate(new ChatDataTemplate());
