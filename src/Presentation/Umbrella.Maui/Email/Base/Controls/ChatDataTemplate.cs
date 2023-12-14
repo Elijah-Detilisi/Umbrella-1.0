@@ -5,69 +5,68 @@ public class ChatDataTemplate : DataTemplate
     //Fields
     private enum Column { Left = 0, Right = 1 }
 
-    //View components
-    private readonly Grid ChatTemplateGrid;
-    private readonly Label ChatTemplateText;
-    private readonly Image ChatTemplateIcon;
-    private readonly Frame ChatTemplateFrame;
+    //View components 
+    private static Label ChatTemplateText;
+    private static Image ChatTemplateIcon;
+    private static Frame ChatTemplateFrame;
 
-    //Contruction
-    public ChatDataTemplate()
+    //Construction
+    public ChatDataTemplate() : base(CreateTemplateGrid)
     {
-        ChatTemplateGrid = new Grid();
-        ChatTemplateText = new Label();
-        ChatTemplateIcon = new Image();
-        ChatTemplateFrame = new Frame();
-
-        InitializeTemplate();
+        
     }
 
     //Initialization
-    private void InitializeTemplate()
+    private static Grid CreateTemplateGrid()
     {
         InitializeChatText();
         InitializeChatIcon();
         InitializeChatFrame();
-        InitializeChatGrid();
 
-        LoadTemplate = ()=>{ return ChatTemplateGrid; };
+        return new Grid()
+        {
+            Padding = new Thickness(10),
+            ColumnDefinitions = new ColumnDefinitionCollection
+            {
+                new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
+                new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
+            },
+            Children =
+            {
+                ChatTemplateIcon, 
+                ChatTemplateFrame
+            }
+        };
     }
 
     //View component Initialization 
-    private void InitializeChatText()
+    private static void InitializeChatText()
     {
-        ChatTemplateText.MaxLines = 1;
-        ChatTemplateText.Text = "Hello world";
-        ChatTemplateText.LineBreakMode = LineBreakMode.TailTruncation;
+        ChatTemplateText = new()
+        {
+            MaxLines = 1,
+            Text = "Hello world",
+            LineBreakMode = LineBreakMode.TailTruncation
+        };
     }
 
-    private void InitializeChatIcon()
+    private static void InitializeChatIcon()
     {
-        ChatTemplateIcon.WidthRequest = 30;
-        ChatTemplateIcon.HeightRequest = 30;
-        ChatTemplateIcon.Source = "user_solid.svg";
+        ChatTemplateIcon = new()
+        {
+            WidthRequest = 30,
+            HeightRequest = 30,
+            Source = "user_solid.svg"
+        };
 
         ChatTemplateIcon.Column(Column.Left); // NB: Must be in smallest column
     }
 
-    private void InitializeChatFrame()
+    private static void InitializeChatFrame()
     {
-        ChatTemplateFrame.Content = ChatTemplateText;
+        ChatTemplateFrame = new(){ Content = ChatTemplateText };
         ChatTemplateFrame.DynamicResource(View.StyleProperty, "ChatTemplateFrame");
 
         ChatTemplateFrame.Column(Column.Right); // NB: Must be in biggest column
-    }
-
-    private void InitializeChatGrid()
-    {
-        ChatTemplateGrid.Padding = new Thickness(10);
-        ChatTemplateGrid.ColumnDefinitions = new ColumnDefinitionCollection
-        {
-            new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
-            new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
-        };
-
-        ChatTemplateGrid.Children.Add(ChatTemplateIcon);
-        ChatTemplateGrid.Children.Add(ChatTemplateFrame);
     }
 }
