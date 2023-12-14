@@ -1,4 +1,7 @@
-﻿namespace Umbrella.Maui.Email.Base.Controls;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+
+namespace Umbrella.Maui.Email.Base.Controls;
 
 public class ChatDataTemplate : DataTemplate
 {
@@ -9,7 +12,7 @@ public class ChatDataTemplate : DataTemplate
     private static Label ChatTemplateText;
     private static Image ChatTemplateIcon;
     private static Frame ChatTemplateFrame;
-
+    private static Grid ChatTemplateGrid;
     //Construction
     public ChatDataTemplate() : base(CreateTemplateGrid)
     {
@@ -22,21 +25,9 @@ public class ChatDataTemplate : DataTemplate
         InitializeChatText();
         InitializeChatIcon();
         InitializeChatFrame();
-
-        return new Grid()
-        {
-            Padding = new Thickness(10),
-            ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
-                new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
-            },
-            Children =
-            {
-                ChatTemplateIcon, 
-                ChatTemplateFrame
-            }
-        };
+        InitializeChatGrid(); //Should be last to initialize
+        
+        return ChatTemplateGrid;
     }
 
     //View component Initialization 
@@ -71,5 +62,19 @@ public class ChatDataTemplate : DataTemplate
         ChatTemplateFrame.DynamicResource(View.StyleProperty, "ChatTemplateFrame");
 
         ChatTemplateFrame.Column(Column.Right); // NB: Must be in biggest column
+    }
+
+    private static void InitializeChatGrid()
+    {
+        ChatTemplateGrid = new Grid()
+        {
+            Padding = new Thickness(10),
+            Children = { ChatTemplateIcon, ChatTemplateFrame },
+            ColumnDefinitions =
+            [
+                new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
+                new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
+            ]
+        };
     }
 }
