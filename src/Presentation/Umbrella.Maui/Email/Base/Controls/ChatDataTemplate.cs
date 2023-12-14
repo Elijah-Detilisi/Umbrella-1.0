@@ -1,6 +1,4 @@
-﻿using Application.Chat.Models;
-
-namespace Umbrella.Maui.Email.Base.Controls;
+﻿namespace Umbrella.Maui.Email.Base.Controls;
 
 public class ChatDataTemplate : DataTemplate
 {
