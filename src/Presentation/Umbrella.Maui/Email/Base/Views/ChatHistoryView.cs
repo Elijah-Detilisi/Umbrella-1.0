@@ -53,7 +53,7 @@ public class ChatHistoryView : ContentView
     {
         ChatHistoryCollection.ItemsSource = new List<ChatMessageModel>()
         {
-            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
+            new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message."},
             new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
             new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."}
         };
