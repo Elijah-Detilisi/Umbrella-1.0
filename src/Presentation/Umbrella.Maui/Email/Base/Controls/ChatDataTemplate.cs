@@ -43,28 +43,96 @@ public class ChatDataTemplate : DataTemplate
 
     private static void InitializeChatIcon()
     {
+        // Create DataTrigger
+        var humanIconTrigger = new DataTrigger(typeof(Image))
+        {
+            Value = ChatSender.Human,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnProperty,
+                    Value = (int)Column.Left
+                }
+            }
+        };
+        var botIconTrigger = new DataTrigger(typeof(Image))
+        {
+            Value = ChatSender.Bot,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnProperty,
+                    Value = (int)Column.Right 
+                }
+            }
+        };
+
+        //Init
         ChatTemplateIcon = new()
         {
             WidthRequest = 30,
             HeightRequest = 30,
-            Source = "user_solid.svg"
+            Source = "user_solid.svg",
+            Triggers =
+            {
+                humanIconTrigger, botIconTrigger
+            }
         };
-
-        ChatTemplateIcon.Column(Column.Left); // NB: Must be in smallest column
     }
 
     private static void InitializeChatFrame()
     {
-        ChatTemplateFrame = new(){ Content = ChatTemplateText };
+        // Create DataTrigger
+        var humanFrameTrigger = new DataTrigger(typeof(Frame))
+        {
+            Value = ChatSender.Human,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnProperty,
+                    Value = (int)Column.Right // Left column for the Bot
+                }
+            }
+        };
+        var botFrameTrigger = new DataTrigger(typeof(Frame))
+        {
+            Value = ChatSender.Bot,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnProperty,
+                    Value = (int)Column.Left // Left column for the Bot
+                }
+            }
+        };
+
+        //Init
+        ChatTemplateFrame = new() 
+        { 
+            Content = ChatTemplateText,
+            Triggers =
+            {
+                humanFrameTrigger, botFrameTrigger
+            }
+        };
+
         ChatTemplateFrame.DynamicResource(View.StyleProperty, "ChatTemplateFrame");
 
-        ChatTemplateFrame.Column(Column.Right); // NB: Must be in biggest column
+        //ChatTemplateFrame.Column(Column.Right); // NB: Must be in biggest column
     }
 
     private static void InitializeChatGrid()
     {
         // Create DataTrigger
-        var humanSpeakerTrigger = new DataTrigger(typeof(Grid))
+        var humanGridTrigger = new DataTrigger(typeof(Grid))
         {
             Value = ChatSender.Human,
             Binding = new Binding(nameof(ChatMessageModel.Sender)),
@@ -82,7 +150,7 @@ public class ChatDataTemplate : DataTemplate
             }
         };
 
-        var botSpeakerTrigger = new DataTrigger(typeof(Grid))
+        var botGridTrigger = new DataTrigger(typeof(Grid))
         {
             Value = ChatSender.Bot,
             Binding = new Binding(nameof(ChatMessageModel.Sender)),
@@ -107,8 +175,8 @@ public class ChatDataTemplate : DataTemplate
             Children = { ChatTemplateIcon, ChatTemplateFrame },
             Triggers =
             {
-                botSpeakerTrigger,
-                humanSpeakerTrigger
+                botGridTrigger,
+                humanGridTrigger
             }
         };
 
