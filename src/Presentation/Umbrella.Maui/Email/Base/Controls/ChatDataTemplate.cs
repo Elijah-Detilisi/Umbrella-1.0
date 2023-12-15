@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using Microsoft.Maui;
-
-namespace Umbrella.Maui.Email.Base.Controls;
+﻿namespace Umbrella.Maui.Email.Base.Controls;
 
 public class ChatDataTemplate : DataTemplate
 {
@@ -66,15 +63,54 @@ public class ChatDataTemplate : DataTemplate
 
     private static void InitializeChatGrid()
     {
+        // Create DataTrigger
+        var humanSpeakerTrigger = new DataTrigger(typeof(Grid))
+        {
+            Value = ChatSender.Human,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnDefinitionsProperty,
+                    Value = new ColumnDefinitionCollection()
+                    {
+                        new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
+                        new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
+                    }
+                }
+            }
+        };
+
+        var botSpeakerTrigger = new DataTrigger(typeof(Grid))
+        {
+            Value = ChatSender.Bot,
+            Binding = new Binding(nameof(ChatMessageModel.Sender)),
+            Setters =
+            {
+                new Setter()
+                {
+                    Property = Grid.ColumnDefinitionsProperty,
+                    Value = new ColumnDefinitionCollection()
+                    {
+                        new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) },
+                        new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) }
+                    }
+                }
+            }
+        };
+
+        //Init
         ChatTemplateGrid = new Grid()
         {
             Padding = new Thickness(10),
             Children = { ChatTemplateIcon, ChatTemplateFrame },
-            ColumnDefinitions =
-            [
-                new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) },
-                new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) }
-            ]
+            Triggers =
+            {
+                botSpeakerTrigger,
+                humanSpeakerTrigger
+            }
         };
+
     }
 }
