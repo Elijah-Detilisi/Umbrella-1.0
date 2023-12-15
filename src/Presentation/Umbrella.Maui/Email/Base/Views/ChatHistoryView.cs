@@ -55,7 +55,7 @@ public class ChatHistoryView : ContentView
         {
             new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message."},
             new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
-            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."}
+            new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message."}
         };
 
         ChatHistoryCollection.ItemTemplate(new ChatDataTemplate());
