@@ -171,7 +171,7 @@ public class ChatDataTemplate : DataTemplate
         //Init
         ChatTemplateGrid = new Grid()
         {
-            Padding = new Thickness(10),
+            Padding = new Thickness(15),
             Children = { ChatTemplateIcon, ChatTemplateFrame },
             Triggers =
             {
