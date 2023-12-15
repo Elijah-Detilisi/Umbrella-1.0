@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Umbrella.Maui.Email.Base.Controls;
+﻿using Umbrella.Maui.Email.Base.Controls;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
