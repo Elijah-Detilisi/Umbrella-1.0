@@ -8,16 +8,14 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
     private enum Row { Content = 0, ChatBox = 1 }
 
     //View components
-    private Grid MainGridLayout { get; }
-    public ChatHistoryView ChatHistory { get; set; }
+    private Grid? MainGridLayout;
+    public ChatHistoryView ChatHistory;
     protected abstract ScrollView PageContent { get; }
 
     //Construction
     protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
     {
         Title = title;
-
-        MainGridLayout = new Grid();
         ChatHistory = new ChatHistoryView();
 
         InitializeEmailPage();
@@ -35,13 +33,21 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
     //View component initialization
     private void InitializeMainGridLayout()
     {
-        MainGridLayout.RowDefinitions = new RowDefinitionCollection
-        {
-            new RowDefinition { Height = new GridLength(0.8, GridUnitType.Star) },
-            new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
-        };
+        var contentRowSize = 0.72;
+        var chatBoxRowSize = 0.28;
 
-        MainGridLayout.Add(PageContent.Row(Row.Content));
-        MainGridLayout.Add(ChatHistory.Row(Row.ChatBox));
+        MainGridLayout = new Grid
+        {
+            RowDefinitions = new RowDefinitionCollection
+            {
+                new RowDefinition { Height = new GridLength(contentRowSize, GridUnitType.Star) },
+                new RowDefinition { Height = new GridLength(chatBoxRowSize, GridUnitType.Star) }
+            },
+            Children =
+            {
+                PageContent.Row(Row.Content), 
+                ChatHistory.Row(Row.ChatBox),
+            }
+        };
     }
 }
