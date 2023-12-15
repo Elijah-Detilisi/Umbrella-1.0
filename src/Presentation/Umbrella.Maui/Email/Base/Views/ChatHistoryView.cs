@@ -1,4 +1,5 @@
-﻿using Umbrella.Maui.Email.Base.Controls;
+﻿using System.Collections;
+using Umbrella.Maui.Email.Base.Controls;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
@@ -8,21 +9,15 @@ public class ChatHistoryView : ContentView
     private enum Row { Top = 0, Bottom = 1 }
 
     //View components
-    private readonly Grid ChatHistoryGrid;
-    private readonly Frame ChatHistoryFrame;
-    private readonly ImageButton ActionButton;
-    private readonly ScrollView ChatHistoryScrollView;
-    private readonly CollectionView ChatHistoryCollection;
+    private Grid? ChatHistoryGrid;
+    private Frame? ChatHistoryFrame;
+    private ImageButton? ActionButton;
+    private ScrollView? ChatHistoryScrollView;
+    private CollectionView? ChatHistoryCollection;
 
     //Conctruction
     public ChatHistoryView()
     {
-        ChatHistoryGrid = new Grid();
-        ChatHistoryFrame = new Frame();
-        ActionButton = new ImageButton();
-        ChatHistoryScrollView = new ScrollView();
-        ChatHistoryCollection = new CollectionView();
-
         InitializeView();
     }
 
@@ -42,47 +37,67 @@ public class ChatHistoryView : ContentView
     //View component initialization
     private void InitializeActionButton()
     {
-        ActionButton.WidthRequest = 40;
-        ActionButton.HeightRequest = 40;
-        ActionButton.Source = "umbrella_solid.svg";
-
+        ActionButton = new ImageButton
+        {
+            WidthRequest = 40,
+            HeightRequest = 40,
+            Source = "umbrella_solid.svg"
+        };
         ActionButton.Row(Row.Bottom);
     }
 
     private void InitializeChatCollectionView()
     {
-        ChatHistoryCollection.ItemsSource = new List<ChatMessageModel>()
+        ChatHistoryCollection = new CollectionView
         {
-            new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message."},
-            new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message."},
-            new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message."}
+            SelectionMode = SelectionMode.None,
+            ItemTemplate = new ChatDataTemplate(),
+            ItemsSource = new List<ChatMessageModel>()
+            {
+                new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message 1."},
+                new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message 2."},
+                new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message 3."}
+            }
         };
-
-        ChatHistoryCollection.ItemTemplate(new ChatDataTemplate());
-        ChatHistoryCollection.SelectionMode = SelectionMode.None;
     }
 
     private void InitializeChatScrollView()
     {
-        ChatHistoryScrollView.Content = ChatHistoryCollection;
+        ChatHistoryScrollView = new ScrollView
+        {
+            Content = ChatHistoryCollection
+        };
+
         ChatHistoryScrollView.Row(Row.Top);
     }
 
     private void InitializeChatGrid()
     {
-        ChatHistoryGrid.RowDefinitions = new RowDefinitionCollection()
-        {
-            new RowDefinition { Height = new GridLength(0.7, GridUnitType.Star) },
-            new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) }
-        };
+        var topRowSize = 0.7;
+        var bottomRowSize = 0.3;
 
-        ChatHistoryGrid.Add(ActionButton);
-        ChatHistoryGrid.Add(ChatHistoryScrollView);
+        ChatHistoryGrid = new Grid
+        {
+            RowDefinitions = new RowDefinitionCollection()
+            {
+                new RowDefinition { Height = new GridLength(topRowSize, GridUnitType.Star) },
+                new RowDefinition { Height = new GridLength(bottomRowSize, GridUnitType.Star) }
+            },
+            Children =
+            {
+                ActionButton,
+                ChatHistoryScrollView 
+            }
+        };
     }
 
     private void InitializeChatFrame()
     {
-        ChatHistoryFrame.Content = ChatHistoryGrid;
+        ChatHistoryFrame = new Frame
+        {
+            Content = ChatHistoryGrid
+        };
+
         ChatHistoryFrame.DynamicResource(View.StyleProperty, "ChatHistoryFrame");
     }
 }
