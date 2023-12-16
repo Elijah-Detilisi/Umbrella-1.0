@@ -5,10 +5,10 @@ namespace Umbrella.Maui.Email.Base.Controls;
 public class ChatDataTemplate : DataTemplate
 {
     //View components 
-    private static Label ChatTemplateText;
-    private static Image ChatTemplateIcon;
-    private static Frame ChatTemplateFrame;
-    private static Grid ChatTemplateGrid;
+    private static Label? ChatTemplateText;
+    private static Image? ChatTemplateIcon;
+    private static Frame? ChatTemplateFrame;
+    private static Grid? ChatTemplateGrid;
 
     //Construction
     public ChatDataTemplate() : base(CreateTemplateGrid)
