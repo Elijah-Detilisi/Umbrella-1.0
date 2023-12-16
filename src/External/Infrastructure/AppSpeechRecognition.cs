@@ -29,11 +29,13 @@ public class AppSpeechRecognition : IAppSpeechRecognition
         await speechToText.ListenAsync(CultureInfo.GetCultureInfo(defaultLanguage), recognitionResult, cancellationToken);
     }
 
+    //Stop method
     public Task StopListenAsync(CancellationToken cancellationToken = default)
     {
         return speechToText.StopListenAsync(cancellationToken);
     }
 
+    //Dispose method
     public ValueTask DisposeAsync()
     {
         return speechToText.DisposeAsync();
