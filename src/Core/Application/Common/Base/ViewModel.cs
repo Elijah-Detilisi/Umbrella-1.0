@@ -2,6 +2,6 @@
 
 namespace Application.Common.Base;
 
-public abstract class ViewModel : ObservableObject
+public abstract partial class ViewModel : ObservableObject
 {
 }
