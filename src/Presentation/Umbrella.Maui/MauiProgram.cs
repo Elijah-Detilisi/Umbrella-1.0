@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui;
+﻿using Application.Common.Services;
+using CommunityToolkit.Maui;
+using Infrastructure.Common.Service;
 using Microsoft.Extensions.Logging;
 using Umbrella.Maui.Email.EmailListing.Pages;
 
@@ -24,6 +26,10 @@ namespace Umbrella.Maui
     		builder.Logging.AddDebug();
 #endif
 
+            //Service
+            builder.Services.AddSingleton<IAppSpeechRecognition, AppSpeechRecognition>();
+
+            //ViewModel
             builder.Services.AddTransient<EmailListingPage, EmailListingViewModel>();
 
             return builder.Build();
