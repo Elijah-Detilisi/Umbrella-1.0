@@ -4,12 +4,6 @@ public class AppSpeechRecognition : IAppSpeechRecognition
 {
     //Fields
 
-
-    public ValueTask DisposeAsync()
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<string> ListenAsync(CultureInfo culture, IProgress<string> recognitionResult, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
@@ -21,6 +15,11 @@ public class AppSpeechRecognition : IAppSpeechRecognition
     }
 
     public Task StopListenAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask DisposeAsync()
     {
         throw new NotImplementedException();
     }
