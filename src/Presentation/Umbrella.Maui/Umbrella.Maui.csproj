@@ -73,6 +73,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\Application\Application.csproj" />
+	  <ProjectReference Include="..\..\External\Infrastructure\Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
