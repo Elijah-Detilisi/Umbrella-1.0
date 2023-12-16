@@ -1,11 +1,12 @@
 ﻿using Umbrella.Maui.Email.Base.Pages;
+using Umbrella.Maui.Email.Base.Views;
 using Umbrella.Maui.Email.EmailListing.Views;
 
 namespace Umbrella.Maui.Email.EmailListing.Pages;
 
 public class EmailListingPage : EmailPage<EmailListingViewModel>
 {
-    public EmailListingPage(EmailListingViewModel viewModel) : base("Email", viewModel)
+    public EmailListingPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView) : base("Email", viewModel, chatHistoryView)
     {
     }
 

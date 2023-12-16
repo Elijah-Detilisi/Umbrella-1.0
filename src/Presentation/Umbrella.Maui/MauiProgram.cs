@@ -1,7 +1,9 @@
-﻿using Application.Common.Services;
+﻿using Application.Chat.ViewModels;
+using Application.Common.Services;
 using CommunityToolkit.Maui;
 using Infrastructure.Common.Service;
 using Microsoft.Extensions.Logging;
+using Umbrella.Maui.Email.Base.Views;
 using Umbrella.Maui.Email.EmailListing.Pages;
 
 namespace Umbrella.Maui
@@ -25,6 +27,8 @@ namespace Umbrella.Maui
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            //Views
+            builder.Services.AddSingleton<ChatHistoryView, ChatViewModel>();
 
             //Service
             builder.Services.AddSingleton<IAppSpeechRecognition, AppSpeechRecognition>();

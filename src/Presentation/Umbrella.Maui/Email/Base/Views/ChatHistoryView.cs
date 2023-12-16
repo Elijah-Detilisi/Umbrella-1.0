@@ -1,4 +1,5 @@
-﻿using Umbrella.Maui.Email.Base.Controls;
+﻿using Application.Chat.ViewModels;
+using Umbrella.Maui.Email.Base.Controls;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
@@ -6,6 +7,9 @@ public class ChatHistoryView : ContentView
 {
     //Fields
     private enum Row { Top = 0, Bottom = 1 }
+
+    //ViewModel
+    private readonly ChatViewModel ViewModel;
 
     //View components
     private Grid? ChatHistoryGrid;
@@ -15,8 +19,10 @@ public class ChatHistoryView : ContentView
     private CollectionView? ChatHistoryCollection;
 
     //Conctruction
-    public ChatHistoryView()
+    public ChatHistoryView(ChatViewModel viewModel)
     {
+        ViewModel = viewModel;
+
         InitializeView();
     }
 
@@ -40,7 +46,8 @@ public class ChatHistoryView : ContentView
         {
             WidthRequest = 40,
             HeightRequest = 40,
-            Source = "umbrella_solid.svg"
+            Source = "umbrella_solid.svg",
+            Command = ViewModel.ListenCommand
         };
         ActionButton.Row(Row.Bottom);
     }

@@ -13,10 +13,10 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
     protected abstract ScrollView PageContent { get; }
 
     //Construction
-    protected EmailPage(string title, TViewModel viewModel) : base(viewModel)
+    protected EmailPage(string title, TViewModel viewModel, ChatHistoryView chatHistoryView) : base(viewModel)
     {
         Title = title;
-        ChatHistory = new ChatHistoryView();
+        ChatHistory = chatHistoryView;
 
         InitializeEmailPage();
     }
