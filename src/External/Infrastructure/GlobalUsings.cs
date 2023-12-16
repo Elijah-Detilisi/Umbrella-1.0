@@ -7,6 +7,7 @@ global using System.Globalization;
 global using Application.User.Models;
 global using Application.Email.Models;
 global using Application.Email.Services;
+global using Application.Common.Services;
 
 global using Domain.Email.ValueObjects;
 global using Domain.Common.ValueObjects;
