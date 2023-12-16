@@ -58,12 +58,7 @@ public class ChatHistoryView : ContentView
         {
             SelectionMode = SelectionMode.None,
             ItemTemplate = new ChatDataTemplate(),
-            ItemsSource = new List<ChatMessageModel>()
-            {
-                new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message 1."},
-                new(){  Sender = ChatSender.Human, Message = "Hello, this is a chat message 2."},
-                new(){  Sender = ChatSender.Bot, Message = "Hello, this is a chat message 3."}
-            }
+            ItemsSource = ViewModel.ChatMessageList
         };
     }
 
