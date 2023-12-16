@@ -1,6 +1,8 @@
-﻿using Application.Common.Services;
+﻿using Application.Chat.Models;
+using Application.Common.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace Application.Chat.ViewModels
@@ -14,6 +16,7 @@ namespace Application.Chat.ViewModels
         public ChatViewModel(IAppSpeechRecognition speechRecognition)
         {
             _speechRecognition = speechRecognition;
+            ChatMessageList = new ObservableCollection<ChatMessageModel>();
         }
 
         //Properties
@@ -25,6 +28,9 @@ namespace Application.Chat.ViewModels
 
         [ObservableProperty, NotifyCanExecuteChangedFor(nameof(StopListenCommand))]
         bool canStopListenExecute = false;
+
+        //Collections
+        public ObservableCollection<ChatMessageModel> ChatMessageList { get; set; }
 
         //Commands
         [RelayCommand(IncludeCancelCommand = true, CanExecute = nameof(CanListenExecute))]
@@ -51,6 +57,12 @@ namespace Application.Chat.ViewModels
                         }
 
                         RecognitionText += partialText + " ";
+                        ChatMessageList.Add(new ChatMessageModel()
+                        {
+                            Sender = Enums.ChatSender.Human,
+                            Message = RecognitionText
+                        });
+
                     }), cancellationToken);
             }
             catch(Exception ex)
