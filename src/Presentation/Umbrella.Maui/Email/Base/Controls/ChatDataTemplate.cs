@@ -17,7 +17,7 @@ public class ChatDataTemplate : DataTemplate
     }
 
     //Initialization
-    private static Grid CreateTemplateGrid()
+    private static Grid? CreateTemplateGrid()
     {
         InitializeChatText();
         InitializeChatIcon();
