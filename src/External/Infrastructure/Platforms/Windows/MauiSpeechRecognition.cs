@@ -15,7 +15,7 @@ public class MauiSpeechRecognition : IMauiSpeechRecognition
     private SpeechRecognitionEngine speechRecognitionEngine;
 
     //Initializations
-    public static Task<bool> RequestPermissions()
+    public Task<bool> RequestPermissions(CancellationToken cancellationToken)
     {
         return Task.FromResult(true);
     }
