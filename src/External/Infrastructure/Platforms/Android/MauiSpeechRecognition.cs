@@ -11,7 +11,7 @@ public class MauiSpeechRecognition : IMauiSpeechRecognition
     private AndroidSpeechRecognitionListener listener;
 
     //Initializations
-    public async Task<bool> RequestPermissions()
+    public async Task<bool> RequestPermissions(CancellationToken cancellationToken)
     {
         var status = await Permissions.RequestAsync<Permissions.Microphone>();
         var isAvailable = SpeechRecognizer.IsRecognitionAvailable(Android.App.Application.Context);
