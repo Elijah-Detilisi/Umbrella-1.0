@@ -14,7 +14,7 @@ public class MauiSpeechRecognition : IMauiSpeechRecognition
     private SFSpeechAudioBufferRecognitionRequest liveSpeechRequest;
 
     //Initializations
-    public static Task<bool> RequestPermissions()
+    public Task<bool> RequestPermissions(CancellationToken cancellationToken)
     {
         var taskResult = new TaskCompletionSource<bool>();
         SFSpeechRecognizer.RequestAuthorization(status =>
