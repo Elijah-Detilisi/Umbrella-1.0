@@ -6,11 +6,12 @@ namespace Umbrella.Maui.Email.EmailListing.Pages;
 
 public class EmailListingPage : EmailPage<EmailListingViewModel>
 {
-    public EmailListingPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView) : base("Email", viewModel, chatHistoryView)
+    public EmailListingPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView) 
+        : base("Email", viewModel, chatHistoryView)
     {
     }
 
-    protected override ScrollView PageContent => new ScrollView()
+    protected override ScrollView PageContent => new()
     {
         Content = new VerticalStackLayout()
         {
