@@ -19,18 +19,11 @@
 
 	<ItemGroup>
 	  <PackageReference Include="MailKit" Version="4.2.0" />
-	  <PackageReference Include="System.Speech" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\Application\Application.csproj" />
 	  <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Platforms\Android\MauiSpeechRecognition.cs">
-	    <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
-	  </Compile>
 	</ItemGroup>
 
 </Project>
