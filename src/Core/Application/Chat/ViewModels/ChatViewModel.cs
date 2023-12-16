@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
-using System.Globalization;
 
 namespace Application.Chat.ViewModels
 {
@@ -43,7 +42,7 @@ namespace Application.Chat.ViewModels
                 var beginSpeakingPrompt = "Begin speaking...";
                 RecognitionText = beginSpeakingPrompt;
 
-                RecognitionText = await _speechRecognition.ListenAsync(CultureInfo.GetCultureInfo("en-us"),
+                await _speechRecognition.ListenAsync(
                     new Progress<string>(partialText =>
                     {
                         if (RecognitionText == beginSpeakingPrompt)
@@ -65,10 +64,12 @@ namespace Application.Chat.ViewModels
         }
 
         [RelayCommand(CanExecute = nameof(CanStopListenExecute))]
-        public void StopListen(CancellationToken cancellationToken)
+        public async Task StopListen(CancellationToken cancellationToken)
         {
             CanListenExecute = true;
             CanStopListenExecute = false;
+
+            await _speechRecognition.StopListenAsync(cancellationToken);
         }
     }
 }
