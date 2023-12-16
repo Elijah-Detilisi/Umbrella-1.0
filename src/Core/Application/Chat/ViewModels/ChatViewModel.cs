@@ -9,10 +9,10 @@ namespace Application.Chat.ViewModels
     public partial class ChatViewModel : ViewModel
     {
         //Service
-        private readonly IMauiSpeechRecognition _speechRecognition;
+        private readonly IAppSpeechRecognition _speechRecognition;
 
         //Construction
-        public ChatViewModel(IMauiSpeechRecognition speechRecognition)
+        public ChatViewModel(IAppSpeechRecognition speechRecognition)
         {
             _speechRecognition = speechRecognition;
         }
@@ -43,7 +43,7 @@ namespace Application.Chat.ViewModels
                 var beginSpeakingPrompt = "Begin speaking...";
                 RecognitionText = beginSpeakingPrompt;
 
-                RecognitionText = await _speechRecognition.Listen(CultureInfo.GetCultureInfo("en-us"),
+                RecognitionText = await _speechRecognition.ListenAsync(CultureInfo.GetCultureInfo("en-us"),
                     new Progress<string>(partialText =>
                     {
                         if (RecognitionText == beginSpeakingPrompt)
