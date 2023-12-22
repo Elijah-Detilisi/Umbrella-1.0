@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".Common\.Base\Model.cs" />
+    <Compile Include=".Common\.Base\ViewModel.cs" />
+    <Compile Include=".Common\Repositories\IEntityRepository.cs" />
+    <Compile Include=".Common\Services\IAppSpeechRecognition.cs" />
+    <Compile Include=".Common\Services\IAppTextToSpeech.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
 
