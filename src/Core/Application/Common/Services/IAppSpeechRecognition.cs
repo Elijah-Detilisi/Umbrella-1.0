@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Application.Common.Services;
+﻿namespace Application.Common.Services;
 
 public interface IAppSpeechRecognition : IAsyncDisposable
 {
