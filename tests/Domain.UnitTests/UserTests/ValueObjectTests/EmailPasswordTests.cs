@@ -1,5 +1,4 @@
-﻿using Domain.Common.Exceptions;
-using Domain.User.Exceptions;
+﻿using Domain.User.Exceptions;
 
 namespace Domain.UnitTests.UserTests.ValueObjectTests;
 
@@ -36,7 +35,7 @@ public class EmailPasswordTests
     }
 
     [Test]
-    public void Equals_TwoEqualEmailPasswords_ShouldReturnTrue()
+    public void Equals_TwoEqual_EmailPasswords_ShouldReturnTrue()
     {
         // Arrange
         var emailPassword1 = EmailPassword.Create("ValidPassword123");
@@ -47,7 +46,7 @@ public class EmailPasswordTests
     }
 
     [Test]
-    public void Equals_TwoDifferentEmailPasswords_ShouldReturnFalse()
+    public void Equals_TwoDifferent_EmailPasswords_ShouldReturnFalse()
     {
         // Arrange
         var emailPassword1 = EmailPassword.Create("ValidPassword123");
