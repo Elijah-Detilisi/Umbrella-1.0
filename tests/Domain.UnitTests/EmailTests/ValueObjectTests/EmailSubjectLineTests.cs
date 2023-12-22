@@ -1,13 +1,10 @@
-﻿using Domain.Common.Exceptions;
-using Domain.Email.Exceptions;
-
-namespace Domain.UnitTests.EmailTests.ValueObjectTests;
+﻿namespace Domain.UnitTests.EmailTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailSubjectLineTests
 {
     [Test]
-    public void Create_ValidSubjectLine_ShouldSucceed()
+    public void Create_Valid_SubjectLine_ShouldSucceed()
     {
         // Arrange
         string validSubject = "Important Update";
@@ -22,14 +19,14 @@ public class EmailSubjectLineTests
 
     [TestCase(null)]
     [TestCase("")]
-    public void Create_EmptyOrNullOrWhiteSpaceSubjectLine_ShouldThrowEmptyValueException(string emptySubject)
+    public void Create_EmptyOrNullOrWhiteSpace_SubjectLine_ShouldThrow_EmptyValueException(string emptySubject)
     {
         // Act & Assert
         Assert.Throws<EmptyValueException>(() => EmailSubjectLine.Create(emptySubject));
     }
 
     [Test]
-    public void Create_SubjectLineExceedsMaxLength_ShouldThrowSubjectLineTooLongException()
+    public void Create_SubjectLine_ExceedsMaxLength_ShouldThrow_SubjectLineTooLongException()
     {
         // Arrange
         var longSubject = new string('X', 101);
@@ -39,7 +36,7 @@ public class EmailSubjectLineTests
     }
 
     [Test]
-    public void Create_SubjectLineWithNewlinesOrCarriageReturns_ShouldThrowInvalidSubjectException()
+    public void Create_SubjectLine_WithNewlinesOrCarriageReturns_ShouldThrow_InvalidSubjectException()
     {
         // Arrange
         string subjectWithNewlines = "Subject with\nnewline";
