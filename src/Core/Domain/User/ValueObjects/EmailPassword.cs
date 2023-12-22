@@ -4,7 +4,7 @@ namespace Domain.User.ValueObjects;
 
 public class EmailPassword : ValueObject<String>
 {
-    public const int MINIMUMPASSWORDLENGTH = 8;
+    public const int MINIMUMPASSWORDLENGTH = 8; // 8 ALPHA-NUMERIC CHARACTERS
 
     private EmailPassword(string value):base(value)
     {
