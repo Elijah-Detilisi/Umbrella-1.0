@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include=".Common\.Base\AggregateRoot.cs" />
+    <Compile Include=".Common\.Base\Entity.cs" />
+    <Compile Include=".Common\.Base\ValueObject.cs" />
+    <Compile Include=".Common\Enums\EntityStatus.cs" />
+    <Compile Include=".Common\Exceptions\EmptyValueException.cs" />
+    <Compile Include=".Common\Exceptions\InvalidEmailAddressException.cs" />
+    <Compile Include=".Common\ValueObjects\EmailAddress.cs" />
+  </ItemGroup>
+
 </Project>
