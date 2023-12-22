@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\src\Core\Application\Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ChatTests\ViewModelTests\" />
+  </ItemGroup>
+
 </Project>
