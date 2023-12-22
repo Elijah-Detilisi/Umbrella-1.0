@@ -6,7 +6,7 @@ namespace Domain.UnitTests.CommonTests.ValueObjectTests;
 public class EmailAddressTests
 {
     [Test]
-    public void Create_ValidEmailAddress_ShouldSucceed()
+    public void Create_Valid_EmailAddress_ShouldSucceed()
     {
         // Arrange
         string validEmail = "test@example.com";
@@ -20,7 +20,7 @@ public class EmailAddressTests
 
     [TestCase(null)]
     [TestCase("")]
-    public void Create_EmptyEmailAddress_ShouldThrowEmptyValueException(string invalidEmail)
+    public void Create_Empty_EmailAddress_ShouldThrowEmptyValueException(string invalidEmail)
     {
         // Act & Assert
         Assert.Throws<EmptyValueException>(() => EmailAddress.Create(invalidEmail));
@@ -29,14 +29,14 @@ public class EmailAddressTests
 
     [TestCase("invalid-email")]
     [TestCase("missing@dotcom")]
-    public void Create_InvalidEmailAddress_ShouldThrowInvalidEmailAddressException(string invalidEmail)
+    public void Create_Invalid_EmailAddress_ShouldThrowInvalidEmailAddressException(string invalidEmail)
     {
         // Act & Assert
         Assert.Throws<InvalidEmailAddressException>(() => EmailAddress.Create(invalidEmail));
     }
 
     [Test]
-    public void Equals_TwoEqualEmailAddresses_ShouldReturnTrue()
+    public void Equals_TwoEqual_EmailAddresses_ShouldReturnTrue()
     {
         // Arrange
         var emailAddress1 = EmailAddress.Create("test@example.com");
@@ -47,7 +47,7 @@ public class EmailAddressTests
     }
 
     [Test]
-    public void Equals_TwoDifferentEmailAddresses_ShouldReturnFalse()
+    public void Equals_TwoDifferent_EmailAddresses_ShouldReturnFalse()
     {
         // Arrange
         var emailAddress1 = EmailAddress.Create("test1@example.com");
