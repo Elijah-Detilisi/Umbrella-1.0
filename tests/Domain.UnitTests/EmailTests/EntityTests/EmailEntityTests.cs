@@ -4,7 +4,7 @@
 public class EmailEntityTests
 {
     [Test]
-    public void Create_EmailEntityWithValidParameters_ReturnsEmailEntityWithPropertiesSet()
+    public void Create_EmailEntity_WithValidParameters_Returns_EmailEntity_WithPropertiesSet()
     {
         // Arrange
         var recipients = new List<EmailAddress>
@@ -20,11 +20,17 @@ public class EmailEntityTests
         var emailEntity = EmailEntity.Create(recipients, subject, body);
 
         // Assert
-        Assert.IsNotNull(emailEntity);
-        Assert.That(emailEntity.Type, Is.EqualTo(EmailType.Email));
-        Assert.That(emailEntity.EmailStatus, Is.EqualTo(EmailStatus.UnRead));
+        Assert.Multiple(() =>
+        {
+            Assert.That(emailEntity, Is.Not.Null);
+            Assert.That(emailEntity.Id, Is.EqualTo(0));
+            Assert.That(emailEntity.Body, Is.EqualTo(body));
+            Assert.That(emailEntity.Subject, Is.EqualTo(subject));
+            Assert.That(emailEntity.Type, Is.EqualTo(EmailType.Email));
+            Assert.That(emailEntity.EmailStatus, Is.EqualTo(EmailStatus.UnRead));
+        });
+
         CollectionAssert.AreEqual(recipients, emailEntity.Recipients);
-        Assert.That(emailEntity.Subject, Is.EqualTo(subject));
-        Assert.That(emailEntity.Body, Is.EqualTo(body));
+       
     }
 }
