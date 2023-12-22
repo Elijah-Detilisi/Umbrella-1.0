@@ -1,6 +1,4 @@
-﻿using Domain.Common.Exceptions;
-
-namespace Domain.UnitTests.CommonTests.ValueObjectTests;
+﻿namespace Domain.UnitTests.CommonTests.ValueObjectTests;
 
 [TestFixture]
 public class EmailAddressTests
