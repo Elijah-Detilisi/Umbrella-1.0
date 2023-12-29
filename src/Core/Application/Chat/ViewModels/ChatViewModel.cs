@@ -46,7 +46,7 @@ namespace Application.Chat.ViewModels
                 IsListening = true;
                 
                 //Get permission
-                var isGranted = await _speechRecognition.RequestPermissions(cancellationToken);
+                var isGranted = await _speechRecognition.RequestPermissions(cancellationToken); //Move elsewhere
                 if (!isGranted)
                 {
                     await _textToSpeech.SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
@@ -80,7 +80,13 @@ namespace Application.Chat.ViewModels
         //Handler methods
         private void OnSpeechRecognized(string partailText)
         {
-            throw new NotImplementedException();
+            //Demo implemantion
+            CurrentCommand += partailText + " ";
+            ChatMessageList.Add(new ChatMessageModel()
+            {
+                Sender = Enums.ChatSender.Human,
+                Message = CurrentCommand
+            });
         }
     }
 }
