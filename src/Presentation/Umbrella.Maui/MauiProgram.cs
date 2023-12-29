@@ -31,6 +31,7 @@ namespace Umbrella.Maui
             builder.Services.AddSingleton<ChatHistoryView, ChatViewModel>();
 
             //Service
+            builder.Services.AddSingleton<IAppTextToSpeech, AppTextToSpeech>();
             builder.Services.AddSingleton<IAppSpeechRecognition, AppSpeechRecognition>();
 
             //ViewModel
