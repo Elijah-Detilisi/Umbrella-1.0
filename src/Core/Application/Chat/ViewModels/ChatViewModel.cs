@@ -3,85 +3,80 @@ using Application.Common.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace Application.Chat.ViewModels
 {
     public partial class ChatViewModel : ViewModel
     {
-        //Service
+        //Services
+        private readonly IAppTextToSpeech _textToSpeech;
         private readonly IAppSpeechRecognition _speechRecognition;
 
-        //Construction
-        public ChatViewModel(IAppSpeechRecognition speechRecognition)
-        {
-            _speechRecognition = speechRecognition;
-            ChatMessageList = new ObservableCollection<ChatMessageModel>();
-        }
-
         //Properties
-        [ObservableProperty]
-        public string recognitionText = string.Empty;
-
-        [ObservableProperty, NotifyCanExecuteChangedFor(nameof(ListenCommand))]
-        public bool canListenExecute = true;
-
-        [ObservableProperty, NotifyCanExecuteChangedFor(nameof(StopListenCommand))]
-        bool canStopListenExecute = false;
+        public string CurrentPrompt { get; set; } = string.Empty; // Msg from VM to User
+        public string CurrentCommand { get; set; } = string.Empty; // Msg from User to VM
 
         //Collections
         public ObservableCollection<ChatMessageModel> ChatMessageList { get; set; }
 
-        //Commands
-        [RelayCommand(IncludeCancelCommand = true, CanExecute = nameof(CanListenExecute))]
-        public async Task Listen(CancellationToken cancellationToken)
+        //Construction
+        public ChatViewModel
+        (
+            IAppTextToSpeech textToSpeech,
+            IAppSpeechRecognition speechRecognition
+        )
         {
+            _textToSpeech = textToSpeech;
+            _speechRecognition = speechRecognition;
+            ChatMessageList = new ObservableCollection<ChatMessageModel>();
+        }
+
+        //MVVM Properties
+        [ObservableProperty]
+        public bool isListening = true;
+
+        //Commands
+        [RelayCommand]
+        public async Task StartListening(CancellationToken cancellationToken)
+        {
+            if (IsListening) return;
+
             try
             {
-                CanStopListenExecute = true;
+                IsListening = true;
+                
+                //Get permission
                 var isGranted = await _speechRecognition.RequestPermissions(cancellationToken);
                 if (!isGranted)
                 {
-                    Debug.WriteLine("Permission not granted");
+                    await _textToSpeech.SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
                     return;
                 }
-                var beginSpeakingPrompt = "Begin speaking...";
-                RecognitionText = beginSpeakingPrompt;
 
-                await _speechRecognition.ListenAsync(
-                    new Progress<string>(partialText =>
-                    {
-                        if (RecognitionText == beginSpeakingPrompt)
-                        {
-                            RecognitionText = string.Empty;
-                        }
+                //Initiate Listen
+                await _speechRecognition.ListenAsync(new Progress<string>(OnSpeechRecognized), cancellationToken);
 
-                        RecognitionText += partialText + " ";
-                        ChatMessageList.Add(new ChatMessageModel()
-                        {
-                            Sender = Enums.ChatSender.Human,
-                            Message = RecognitionText
-                        });
-
-                    }), cancellationToken);
             }
-            catch(Exception ex)
+            catch
             {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                Debug.WriteLine("You said: " + RecognitionText);
+                await _textToSpeech.SpeakAsync("An error has occured.", cancellationToken); //Todo: Create application expection
+                throw;
             }
         }
 
-        [RelayCommand(CanExecute = nameof(CanStopListenExecute))]
-        public async Task StopListen(CancellationToken cancellationToken)
+        [RelayCommand]
+        public async Task StopListening(CancellationToken cancellationToken)
         {
-            CanListenExecute = true;
-            CanStopListenExecute = false;
-
+            if (!IsListening) return;
+            
+            IsListening = false;
             await _speechRecognition.StopListenAsync(cancellationToken);
+        }
+
+        //Handler methods
+        private void OnSpeechRecognized(string partailText)
+        {
+            throw new NotImplementedException();
         }
     }
 }
