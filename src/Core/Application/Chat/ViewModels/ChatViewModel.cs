@@ -33,7 +33,7 @@ namespace Application.Chat.ViewModels
 
         //MVVM Properties
         [ObservableProperty]
-        public bool isListening = true;
+        public bool isListening = false;
 
         //Commands
         [RelayCommand]
@@ -61,6 +61,10 @@ namespace Application.Chat.ViewModels
             {
                 await _textToSpeech.SpeakAsync("An error has occured.", cancellationToken); //Todo: Create application expection
                 throw;
+            }
+            finally 
+            { 
+                IsListening = false; 
             }
         }
 
