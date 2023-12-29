@@ -47,7 +47,7 @@ public class ChatHistoryView : ContentView
             WidthRequest = 40,
             HeightRequest = 40,
             Source = "umbrella_solid.svg",
-            Command = ViewModel.ListenCommand
+            Command = ViewModel.StartListeningCommand
         };
         ActionButton.Row(Row.Bottom);
     }
