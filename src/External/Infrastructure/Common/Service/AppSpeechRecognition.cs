@@ -3,36 +3,36 @@
 public class AppSpeechRecognition : IAppSpeechRecognition
 {
     //Fields
-    private readonly ISpeechToText speechToText;
-    private const string defaultLanguage = "en-US";
+    private readonly ISpeechToText _speechToText;
+    private const string _defaultLanguage = "en-US";
 
     //Construction
     public AppSpeechRecognition()
     {
-        speechToText = SpeechToText.Default;
+        _speechToText = SpeechToText.Default;
     }
 
     //Permision method
     public Task<bool> RequestPermissions(CancellationToken cancellationToken = default)
     {
-        return speechToText.RequestPermissions(cancellationToken);
+        return _speechToText.RequestPermissions(cancellationToken);
     }
 
     //Listen method
     public async Task ListenAsync(IProgress<string>? recognitionResult, CancellationToken cancellationToken = default)
     {
-        await speechToText.ListenAsync(CultureInfo.GetCultureInfo(defaultLanguage), recognitionResult, cancellationToken);
+        await _speechToText.ListenAsync(CultureInfo.GetCultureInfo(_defaultLanguage), recognitionResult, cancellationToken);
     }
 
     //Stop method
     public Task StopListenAsync(CancellationToken cancellationToken = default)
     {
-        return speechToText.StopListenAsync(cancellationToken);
+        return _speechToText.StopListenAsync(cancellationToken);
     }
 
     //Dispose method
     public ValueTask DisposeAsync()
     {
-        return speechToText.DisposeAsync();
+        return _speechToText.DisposeAsync();
     }
 }

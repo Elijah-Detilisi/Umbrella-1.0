@@ -3,8 +3,9 @@
 public class AppTextToSpeech : IAppTextToSpeech
 {
     //Fields
-    private readonly ITextToSpeech textToSpeech;
-
+    private readonly ITextToSpeech _textToSpeech;
+    private readonly SpeechOptions _speechOptions;
+    
     //Properties
     public float Pitch { get; private set; }
     public float Volume { get; private set; }
@@ -12,25 +13,24 @@ public class AppTextToSpeech : IAppTextToSpeech
     //Construction
     public AppTextToSpeech()
     {
-        textToSpeech = TextToSpeech.Default;
+        _textToSpeech = TextToSpeech.Default;
+        _speechOptions = new SpeechOptions()
+        {
+            Pitch = 1.0f,
+            Volume = 1.0f,
+        };
     }
 
     //Options method
     public void SetSpeechOptions(float pitch, float volume)
     {
-        Pitch = pitch;
-        Volume = volume;
+        _speechOptions.Volume = Pitch = pitch;
+        _speechOptions.Volume = Volume = volume;
     }
 
     //Speak method
     public async Task SpeakAsync(string text, CancellationToken cancelToken = default)
     {
-        var options = new SpeechOptions()
-        {
-            Pitch = this.Pitch,
-            Volume = this.Volume,
-        };
-
-        await textToSpeech.SpeakAsync(text, options, cancelToken);
+        await _textToSpeech.SpeakAsync(text, _speechOptions, cancelToken);
     }
 }
