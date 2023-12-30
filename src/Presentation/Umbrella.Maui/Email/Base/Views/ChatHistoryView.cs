@@ -9,7 +9,7 @@ public class ChatHistoryView : ContentView
     private enum Row { Top = 0, Bottom = 1 }
 
     //ViewModel
-    private readonly ChatViewModel ViewModel;
+    public readonly ChatViewModel ViewModel;
 
     //View components
     private Grid? ChatHistoryGrid;
