@@ -89,11 +89,11 @@ namespace Application.Chat.ViewModels
         private void OnSpeechRecognized(string partailText)
         {
             //Demo implemantion
-            CurrentCommand += partailText + " ";
+            CurrentCommand = partailText;
             ChatMessageList.Add(new ChatMessageModel()
             {
                 Sender = Enums.ChatSender.Human,
-                Message = partailText
+                Message = CurrentCommand
             });
         }
     }
