@@ -8,6 +8,9 @@ namespace Application.Chat.ViewModels
 {
     public partial class ChatViewModel : ViewModel
     {
+        //Fieilds
+        private bool microphoneUsable = false;
+
         //Services
         private readonly IAppTextToSpeech _textToSpeech;
         private readonly IAppSpeechRecognition _speechRecognition;
@@ -37,7 +40,13 @@ namespace Application.Chat.ViewModels
 
         //Commands
         [RelayCommand]
-        public async Task StartListening(CancellationToken cancellationToken)
+        public async Task AuthorizeMicrophoneUsage(CancellationToken cancellationToken = default)
+        {
+            microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
+        }
+
+        [RelayCommand]
+        public async Task StartListening(CancellationToken cancellationToken = default)
         {
             if (IsListening) return;
 
@@ -46,8 +55,7 @@ namespace Application.Chat.ViewModels
                 IsListening = true;
                 
                 //Get permission
-                var isGranted = await _speechRecognition.RequestPermissions(cancellationToken); //Move elsewhere
-                if (!isGranted)
+                if (!microphoneUsable)
                 {
                     await _textToSpeech.SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
                     return;
@@ -69,7 +77,7 @@ namespace Application.Chat.ViewModels
         }
 
         [RelayCommand]
-        public async Task StopListening(CancellationToken cancellationToken)
+        public async Task StopListening(CancellationToken cancellationToken = default)
         {
             if (!IsListening) return;
             
@@ -85,7 +93,7 @@ namespace Application.Chat.ViewModels
             ChatMessageList.Add(new ChatMessageModel()
             {
                 Sender = Enums.ChatSender.Human,
-                Message = CurrentCommand
+                Message = partailText
             });
         }
     }
