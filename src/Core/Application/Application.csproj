@@ -12,6 +12,7 @@
     <Compile Include=".Common\Repositories\IEntityRepository.cs" />
     <Compile Include=".Common\Services\IAppSpeechRecognition.cs" />
     <Compile Include=".Common\Services\IAppTextToSpeech.cs" />
+    <Compile Include="Email\.Base\EmailViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
