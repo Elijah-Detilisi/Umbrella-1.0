@@ -15,6 +15,23 @@ public abstract class BasePage<TViewModel> : BasePage where TViewModel : ViewMod
 
     //Properties
     public new TViewModel BindingContext => (TViewModel)base.BindingContext;
+
+    //Life-cylce
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        BindingContext.OnViewModelStarting();
+        Debug.WriteLine($"OnAppearing: {Title}");
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        BindingContext.OnViewModelClosing();
+        Debug.WriteLine($"OnDisappearing: {Title}");
+    }
 }
 
 /// <summary>
@@ -32,20 +49,5 @@ public abstract class BasePage : ContentPage
         {
             Title = GetType().Name;
         }
-    }
-
-    //Life-cylce
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        Debug.WriteLine($"OnAppearing: {Title}");
-    }
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-
-        Debug.WriteLine($"OnDisappearing: {Title}");
     }
 }
