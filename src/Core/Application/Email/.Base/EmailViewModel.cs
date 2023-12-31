@@ -12,4 +12,12 @@ public partial class EmailViewModel : ViewModel
     {
         ChildViewModel = chatViewModel;
     }
+
+    //ViewModel lifecylce
+    public override void OnViewModelStarting(CancellationToken cancellationToken = default)
+    {
+        base.OnViewModelStarting(cancellationToken);
+
+        ChildViewModel.AuthorizeMicrophoneUsageCommand.Execute(cancellationToken);
+    }
 }
