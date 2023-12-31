@@ -1,5 +1,11 @@
-﻿namespace Application.Email.ViewModels;
+﻿using Application.Chat.ViewModels;
+using Application.Email.Base;
 
-public class EmailListingViewModel : ViewModel
+namespace Application.Email.ViewModels;
+
+public class EmailListingViewModel : EmailViewModel
 {
+    public EmailListingViewModel(ChatViewModel chatViewModel) : base(chatViewModel)
+    {
+    }
 }
