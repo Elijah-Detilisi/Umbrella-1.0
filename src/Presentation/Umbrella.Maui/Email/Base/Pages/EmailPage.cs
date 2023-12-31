@@ -30,13 +30,6 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
         Content = MainGridLayout;
     }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-        await ChatHistory.ViewModel.AuthorizeMicrophoneUsage();
-    }
-
     //View component initialization
     private void InitializeMainGridLayout()
     {
