@@ -1,8 +1,9 @@
-﻿using Umbrella.Maui.Email.Base.Views;
+﻿using Application.Email.Base;
+using Umbrella.Maui.Email.Base.Views;
 
 namespace Umbrella.Maui.Email.Base.Pages;
 
-public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : ViewModel
+public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewModel : EmailViewModel 
 {
     //Fields
     private enum Row { Content = 0, ChatBox = 1 }
