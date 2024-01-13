@@ -43,7 +43,7 @@ namespace Application.Chat.ViewModels
         public bool isListening = false;
 
         //Authorization methods
-        public async Task AuthorizeMicrophoneUsage(CancellationToken cancellationToken = default)
+        public async Task AuthorizeMicrophoneUsageAsync(CancellationToken cancellationToken = default)
         {
             microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
         }
