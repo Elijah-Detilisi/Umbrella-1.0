@@ -1,4 +1,5 @@
-﻿using Application.Chat.Models;
+﻿using Application.Chat.Errors;
+using Application.Chat.Models;
 using Application.Common.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
@@ -7,9 +8,9 @@ namespace Application.Chat.ViewModels
 {
     /// <summary>
     /// Responsible for:
-    /// - providing a verbal-user-interface (VUI)
-    /// - record/log user-system interaction.
+    /// - facilitating and logging user-system verbal interaction.
     /// Provides: 
+    /// - verbal-user-interface (VUI)
     /// - method to get user verbal-input.
     /// - method to verbally-anounce system prompt.
     /// </summary>
@@ -41,19 +42,13 @@ namespace Application.Chat.ViewModels
         [ObservableProperty]
         public bool isListening = false;
 
-        //Methods
+        //Authorization
         public async Task AuthorizeMicrophoneUsage(CancellationToken cancellationToken = default)
         {
             microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
         }
-        public async Task StopListenAsync(CancellationToken cancellationToken = default)
-        {
-            if (!IsListening) return;
 
-            IsListening = false;
-            await _speechRecognition.StopListenAsync(cancellationToken);
-        }
-
+        //Text to speech
         public async Task SpeakAsync(string messageText, CancellationToken cancellationToken = default)
         {
             if (IsListening || string.IsNullOrEmpty(messageText)) return;
@@ -62,6 +57,14 @@ namespace Application.Chat.ViewModels
             await _textToSpeech.SpeakAsync(messageText, cancellationToken);
         }
 
+        //Speech to text
+        public async Task StopListenAsync(CancellationToken cancellationToken = default)
+        {
+            if (!IsListening) return;
+
+            IsListening = false;
+            await _speechRecognition.StopListenAsync(cancellationToken);
+        }
         public async Task ListenAsync(CancellationToken cancellationToken = default)
         {
             if (IsListening) return;
@@ -72,11 +75,10 @@ namespace Application.Chat.ViewModels
                 
                 if (!microphoneUsable)
                 {
-                    await SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
+                    await SpeakAsync(ChatError.PermissionError.Description, cancellationToken);
                     return;
                 }
 
-                //Initiate Listen
                 var recognizedText = await _speechRecognition.ListenAsync(cancellationToken);
                 if(string.IsNullOrWhiteSpace(recognizedText))
                 {
@@ -86,7 +88,7 @@ namespace Application.Chat.ViewModels
             }
             catch
             {
-                await SpeakAsync("An error has occured.", cancellationToken); //Todo: Create application expection
+                await SpeakAsync(ChatError.RecognitionFailedError.Description, cancellationToken);
                 throw;
             }
             finally 
@@ -95,7 +97,7 @@ namespace Application.Chat.ViewModels
             }
         }
   
-        //Handler methods
+        //Helper methods
         private void OnSpeechRecognized(string text)
         {
             //Show user speech
