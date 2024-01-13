@@ -20,4 +20,11 @@ public partial class EmailViewModel : ViewModel
 
         await ChildViewModel.AuthorizeMicrophoneUsageAsync(cancellationToken);
     }
+
+    public override void OnViewModelClosing(CancellationToken cancellationToken = default)
+    {
+        base.OnViewModelClosing(cancellationToken);
+
+        ChildViewModel.OnViewModelClosing(cancellationToken);
+    }
 }
