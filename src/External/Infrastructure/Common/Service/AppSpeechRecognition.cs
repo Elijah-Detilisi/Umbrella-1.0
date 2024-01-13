@@ -19,9 +19,18 @@ public class AppSpeechRecognition : IAppSpeechRecognition
     }
 
     //Listen method
-    public async Task ListenAsync(IProgress<string>? recognitionResult, CancellationToken cancellationToken = default)
+    public async Task<string> ListenAsync(CancellationToken cancellationToken = default)
     {
-        await _speechToText.ListenAsync(CultureInfo.GetCultureInfo(_defaultLanguage), recognitionResult, cancellationToken);
+        var recognitionResult = await _speechToText.ListenAsync(
+            CultureInfo.GetCultureInfo(_defaultLanguage), new Progress<string>(), cancellationToken
+        );
+
+        if (recognitionResult.IsSuccessful)
+        {
+            return recognitionResult.Text;
+        }
+
+        return "[INFO]: Failed to recognized";
     }
 
     //Stop method

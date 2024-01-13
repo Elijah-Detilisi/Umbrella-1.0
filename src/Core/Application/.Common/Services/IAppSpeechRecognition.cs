@@ -2,7 +2,7 @@
 
 public interface IAppSpeechRecognition : IAsyncDisposable
 {
-    Task<bool> RequestPermissions(CancellationToken cancellationToken = default);
     Task StopListenAsync(CancellationToken cancellationToken = default);
-    Task ListenAsync(IProgress<string>? recognitionResult, CancellationToken cancellationToken = default);
+    Task<string> ListenAsync(CancellationToken cancellationToken = default);
+    Task<bool> RequestPermissions(CancellationToken cancellationToken = default);
 }
