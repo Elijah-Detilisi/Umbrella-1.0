@@ -1,11 +1,18 @@
 ﻿using Application.Chat.Models;
 using Application.Common.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace Application.Chat.ViewModels
 {
+    /// <summary>
+    /// Responsible for:
+    /// - providing a verbal-user-interface (VUI)
+    /// - record/log user-system interaction.
+    /// Provides: 
+    /// - method to get user verbal-input.
+    /// - method to verbally-anounce system prompt.
+    /// </summary>
     public partial class ChatViewModel : ViewModel
     {
         //Fieilds
@@ -14,10 +21,6 @@ namespace Application.Chat.ViewModels
         //Services
         private readonly IAppTextToSpeech _textToSpeech;
         private readonly IAppSpeechRecognition _speechRecognition;
-
-        //Properties
-        public string CurrentPrompt { get; set; } = string.Empty; // Msg from VM to User
-        public string CurrentCommand { get; set; } = string.Empty; // Msg from User to VM
 
         //Collections
         public ObservableCollection<ChatMessageModel> ChatMessageList { get; set; }
@@ -38,15 +41,28 @@ namespace Application.Chat.ViewModels
         [ObservableProperty]
         public bool isListening = false;
 
-        //Commands
-        [RelayCommand]
+        //Methods
         public async Task AuthorizeMicrophoneUsage(CancellationToken cancellationToken = default)
         {
             microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
         }
+        public async Task StopListenAsync(CancellationToken cancellationToken = default)
+        {
+            if (!IsListening) return;
 
-        [RelayCommand]
-        public async Task StartListening(CancellationToken cancellationToken = default)
+            IsListening = false;
+            await _speechRecognition.StopListenAsync(cancellationToken);
+        }
+
+        public async Task SpeakAsync(string messageText, CancellationToken cancellationToken = default)
+        {
+            if (IsListening || string.IsNullOrEmpty(messageText)) return;
+            
+            OnTextAnnouced(messageText);
+            await _textToSpeech.SpeakAsync(messageText, cancellationToken);
+        }
+
+        public async Task ListenAsync(CancellationToken cancellationToken = default)
         {
             if (IsListening) return;
 
@@ -54,20 +70,23 @@ namespace Application.Chat.ViewModels
             {
                 IsListening = true;
                 
-                //Get permission
                 if (!microphoneUsable)
                 {
-                    await _textToSpeech.SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
+                    await SpeakAsync("Permission not granted.", cancellationToken); //Todo: Create application expection
                     return;
                 }
 
                 //Initiate Listen
-                await _speechRecognition.ListenAsync(new Progress<string>(OnSpeechRecognized), cancellationToken);
+                var recognizedText = await _speechRecognition.ListenAsync(cancellationToken);
+                if(string.IsNullOrWhiteSpace(recognizedText))
+                {
+                    OnSpeechRecognized(recognizedText);
+                }
 
             }
             catch
             {
-                await _textToSpeech.SpeakAsync("An error has occured.", cancellationToken); //Todo: Create application expection
+                await SpeakAsync("An error has occured.", cancellationToken); //Todo: Create application expection
                 throw;
             }
             finally 
@@ -75,25 +94,24 @@ namespace Application.Chat.ViewModels
                 IsListening = false; 
             }
         }
-
-        [RelayCommand]
-        public async Task StopListening(CancellationToken cancellationToken = default)
-        {
-            if (!IsListening) return;
-            
-            IsListening = false;
-            await _speechRecognition.StopListenAsync(cancellationToken);
-        }
-
+  
         //Handler methods
-        private void OnSpeechRecognized(string partailText)
+        private void OnSpeechRecognized(string text)
         {
-            //Demo implemantion
-            CurrentCommand = partailText;
+            //Show user speech
             ChatMessageList.Add(new ChatMessageModel()
             {
                 Sender = Enums.ChatSender.Human,
-                Message = CurrentCommand
+                Message = text
+            });
+        }
+        private void OnTextAnnouced(string text)
+        {
+            //Show system prompt
+            ChatMessageList.Add(new ChatMessageModel()
+            {
+                Sender = Enums.ChatSender.Bot,
+                Message = text
             });
         }
     }
