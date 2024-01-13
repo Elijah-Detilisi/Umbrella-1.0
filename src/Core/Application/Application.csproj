@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".Common\.Base\AppError.cs" />
     <Compile Include=".Common\.Base\Model.cs" />
     <Compile Include=".Common\.Base\ViewModel.cs" />
     <Compile Include=".Common\Repositories\IEntityRepository.cs" />
