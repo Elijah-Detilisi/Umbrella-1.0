@@ -42,6 +42,15 @@ namespace Application.Chat.ViewModels
         [ObservableProperty]
         public bool isListening = false;
 
+        //ViewModel lifecylce
+        public override async void OnViewModelClosing(CancellationToken cancellationToken = default)
+        {
+            base.OnViewModelClosing(cancellationToken);
+
+            await _speechRecognition.StopListenAsync(cancellationToken);
+            await _speechRecognition.DisposeAsync();
+        }
+
         //Authorization methods
         public async Task AuthorizeMicrophoneUsageAsync(CancellationToken cancellationToken = default)
         {
