@@ -11,8 +11,8 @@ namespace Application.Chat.ViewModels
     /// - facilitating and logging user-system verbal interaction.
     /// Provides: 
     /// - verbal-user-interface (VUI)
-    /// - method to get user verbal-input.
-    /// - method to verbally-anounce system prompt.
+    /// - method to get user verbal-input. (ListenAsync)
+    /// - method to verbally-anounce system prompt. (SpeakAsync)
     /// </summary>
     public partial class ChatViewModel : ViewModel
     {
