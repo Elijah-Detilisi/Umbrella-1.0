@@ -42,13 +42,13 @@ namespace Application.Chat.ViewModels
         [ObservableProperty]
         public bool isListening = false;
 
-        //Authorization
+        //Authorization methods
         public async Task AuthorizeMicrophoneUsage(CancellationToken cancellationToken = default)
         {
             microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
         }
 
-        //Text to speech
+        //Text-to-speech methods
         public async Task SpeakAsync(string messageText, CancellationToken cancellationToken = default)
         {
             if (IsListening || string.IsNullOrEmpty(messageText)) return;
@@ -57,7 +57,7 @@ namespace Application.Chat.ViewModels
             await _textToSpeech.SpeakAsync(messageText, cancellationToken);
         }
 
-        //Speech to text
+        //Speech-to-text methods
         public async Task StopListenAsync(CancellationToken cancellationToken = default)
         {
             if (!IsListening) return;
@@ -72,7 +72,6 @@ namespace Application.Chat.ViewModels
             try
             {
                 IsListening = true;
-                
                 if (!microphoneUsable)
                 {
                     await SpeakAsync(ChatError.PermissionError.Description, cancellationToken);
@@ -84,7 +83,6 @@ namespace Application.Chat.ViewModels
                 {
                     OnSpeechRecognized(recognizedText);
                 }
-
             }
             catch
             {
