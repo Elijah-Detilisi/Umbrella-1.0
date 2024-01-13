@@ -14,10 +14,10 @@ public partial class EmailViewModel : ViewModel
     }
 
     //ViewModel lifecylce
-    public override void OnViewModelStarting(CancellationToken cancellationToken = default)
+    public override async void OnViewModelStarting(CancellationToken cancellationToken = default)
     {
         base.OnViewModelStarting(cancellationToken);
 
-        ChildViewModel.AuthorizeMicrophoneUsageCommand.Execute(cancellationToken);
+        await ChildViewModel.AuthorizeMicrophoneUsageAsync(cancellationToken);
     }
 }
