@@ -33,17 +33,20 @@ namespace Application.Chat.ViewModels
             IAppSpeechRecognition speechRecognition
         )
         {
+            ChatMessageList = new();
             _textToSpeech = textToSpeech;
             _speechRecognition = speechRecognition;
-            ChatMessageList = new ObservableCollection<ChatMessageModel>();
         }
 
         //MVVM Properties
         [ObservableProperty]
         public bool isListening = false;
 
-        //ViewModel lifecylce
-        public override async void OnViewModelClosing(CancellationToken cancellationToken = default)
+        //ViewModel life-cycle
+        public override async void OnViewModelClosing
+        (
+            CancellationToken cancellationToken = default
+        )
         {
             base.OnViewModelClosing(cancellationToken);
 
@@ -52,29 +55,42 @@ namespace Application.Chat.ViewModels
         }
 
         //Authorization methods
-        public async Task AuthorizeMicrophoneUsageAsync(CancellationToken cancellationToken = default)
+        public async Task AuthorizeMicrophoneUsageAsync
+        (
+            CancellationToken cancellationToken = default
+        )
         {
             microphoneUsable = await _speechRecognition.RequestPermissions(cancellationToken);
         }
 
         //Text-to-speech methods
-        public async Task SpeakAsync(string messageText, CancellationToken cancellationToken = default)
+        public async Task SpeakAsync
+        (
+            string messageText, 
+            CancellationToken cancellationToken = default
+        )
         {
             if (IsListening || string.IsNullOrEmpty(messageText)) return;
             
-            OnTextAnnouced(messageText);
+            AddBotChat(messageText);
             await _textToSpeech.SpeakAsync(messageText, cancellationToken);
         }
 
         //Speech-to-text methods
-        public async Task StopListenAsync(CancellationToken cancellationToken = default)
+        public async Task StopListenAsync
+        (
+            CancellationToken cancellationToken = default
+        )
         {
             if (!IsListening) return;
 
             IsListening = false;
             await _speechRecognition.StopListenAsync(cancellationToken);
         }
-        public async Task ListenAsync(CancellationToken cancellationToken = default)
+        public async Task ListenAsync
+        (
+            CancellationToken cancellationToken = default
+        )
         {
             if (IsListening) return;
 
@@ -90,7 +106,7 @@ namespace Application.Chat.ViewModels
                 var recognizedText = await _speechRecognition.ListenAsync(cancellationToken);
                 if(string.IsNullOrWhiteSpace(recognizedText))
                 {
-                    OnSpeechRecognized(recognizedText);
+                    AddUserChat(recognizedText);
                 }
             }
             catch
@@ -105,7 +121,7 @@ namespace Application.Chat.ViewModels
         }
   
         //Helper methods
-        private void OnSpeechRecognized(string text)
+        private void AddUserChat(string text)
         {
             //Show user speech
             ChatMessageList.Add(new ChatMessageModel()
@@ -114,7 +130,7 @@ namespace Application.Chat.ViewModels
                 Message = text
             });
         }
-        private void OnTextAnnouced(string text)
+        private void AddBotChat(string text)
         {
             //Show system prompt
             ChatMessageList.Add(new ChatMessageModel()
