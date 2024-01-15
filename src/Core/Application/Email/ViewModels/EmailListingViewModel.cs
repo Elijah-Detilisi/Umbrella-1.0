@@ -1,13 +1,55 @@
 ﻿using Application.Chat.ViewModels;
 using Application.Email.Base;
+using Application.Email.Models;
+using Application.Email.Services;
+using System.Collections.ObjectModel;
 
 namespace Application.Email.ViewModels;
 
 public class EmailListingViewModel : EmailViewModel
 {
-    public EmailListingViewModel(ChatViewModel chatViewModel) : base(chatViewModel)
+    //Services
+    private readonly IEmailFetcher _emailFetcher;
+
+    //Collection
+    public ObservableCollection<EmailModel> EmailList { get; set; }
+
+    //Construction
+    public EmailListingViewModel
+    (
+        IEmailFetcher emailFetcher,
+        ChatViewModel chatViewModel
+    ) 
+    : base(chatViewModel)
     {
+        EmailList = new();
+        _emailFetcher = emailFetcher;
     }
+
+    //ViewModel life-cycle
+    public override async void OnViewModelStarting
+    (
+        CancellationToken cancellationToken = default
+    )
+    {
+        base.OnViewModelStarting(cancellationToken);
+
+        await LoadEmailsAsync(cancellationToken);
+    }
+
+    //Load methods
+    private async Task LoadEmailsAsync
+    (
+        CancellationToken cancellationToken = default
+    )
+    {
+        var allEmails = await _emailFetcher.GetEmailsAsync(cancellationToken);
+        if (allEmails is null) return;
+
+        EmailList = new(allEmails);
+    }
+
+    //Commands
 
     //Keep list of emails in inbox.
     //Populate list with lastest emails.
