@@ -19,6 +19,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include=".Common\Service\AppSpeechRecognition.cs" />
+	  <Compile Include=".Common\Service\AppTextToSpeech.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
