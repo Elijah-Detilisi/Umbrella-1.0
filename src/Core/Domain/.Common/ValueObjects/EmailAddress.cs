@@ -22,6 +22,18 @@ public class EmailAddress : ValueObject<string>
         return new EmailAddress(emailAddress);
     }
 
+    public string GetEmailDomain()
+    {
+        // Extract domain from email address
+        int atIndex = Value.IndexOf('@');
+        if (atIndex != -1)
+        {
+            return Value.Substring(atIndex + 1);
+        }
+
+        throw new InvalidEmailAddressException();
+    }
+
     public override string ToString()
     {
         return Value;
