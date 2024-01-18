@@ -4,6 +4,7 @@ using Application.User.Models;
 using Domain.Common.ValueObjects;
 using Domain.Email.Entities.Enums;
 using Domain.Email.ValueObjects;
+using Infrastructure.Email.Settings;
 using MimeKit;
 
 namespace Infrastructure.Email.Services;
@@ -45,6 +46,7 @@ public class EmailFetcher : IEmailFetcher
     }
 
     //Helper methods
+
     private static EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
         var messageModel = new EmailModel()
@@ -60,5 +62,16 @@ public class EmailFetcher : IEmailFetcher
         };
 
         return messageModel;
+    }
+
+    public static Pop3ServerSettings GetPop3ServerSettings(string emailDomain)
+    {
+        return emailDomain.ToLower() switch
+        {
+            "gmail.com" => Pop3ServerSettings.Gmail,
+            "yahoo.com" => Pop3ServerSettings.Yahoo,
+            "outlook.com" or "office365.com" => Pop3ServerSettings.Outlook,
+            _ => throw new NotSupportedException($"Email provider for domain '{emailDomain}' is not supported."),
+        };
     }
 }
