@@ -1,49 +1,63 @@
-﻿namespace Infrastructure.Email.Services;
+﻿using MailKit;
 
-public class EmailFetcher : IEmailFetcher
+namespace Infrastructure.Email.Services;
+
+public class EmailFetcher : IEmailFetcher, IDisposable
 {
     //Fields
     private readonly UserModel _userModel;
+    private readonly Pop3Client _pop3Client;
 
     //Construction
     public EmailFetcher(UserModel userModel)
     {
         _userModel = userModel;
+        _pop3Client = new Pop3Client();
     }
 
     //Methods
-    public async Task<List<EmailModel>> GetEmailsAsync(CancellationToken cancellationToken = default)
+    public async Task ConnectAsync(CancellationToken cancellationToken = default)
     {
-        var allMessages = new List<EmailModel>();
+        if (_pop3Client.IsConnected && _pop3Client.IsAuthenticated) return;
+
         var pop3ServerSettings = GetPop3ServerSettings(_userModel.EmailAddress.GetEmailDomain());
 
-        using (var client = new Pop3Client())
-        {
-            await client.ConnectAsync
+        //Connect to server
+        await _pop3Client.ConnectAsync
             (
-                pop3ServerSettings.Server, 
-                pop3ServerSettings.Port, 
+                pop3ServerSettings.Server,
+                pop3ServerSettings.Port,
                 pop3ServerSettings.UseSsl, cancellationToken
             );
 
-            await client.AuthenticateAsync
-            (
-                _userModel.EmailAddress.Value, 
-                _userModel.EmailPassword.Value, cancellationToken
-            );
+        //Authenticate user
+        await _pop3Client.AuthenticateAsync
+        (
+            _userModel.EmailAddress.Value,
+            _userModel.EmailPassword.Value, cancellationToken
+        );
+    }
+    public List<EmailModel> GetEmailsAsync(CancellationToken cancellationToken = default)
+    {
+        //Verify connection
+        if (!_pop3Client.IsConnected && !_pop3Client.IsAuthenticated)
+        {
+            throw new ServiceNotConnectedException();
+        }
 
-            for (int i = 0; i < client.Count; i++)
-            {
-                var mimeMessage = client.GetMessage(i);
-                allMessages.Add(ConvertToEmailModel(mimeMessage));
-            }
+        //Retrieve messages
+        var allMessages = new List<EmailModel>();
+
+        for (int i = 0; i < _pop3Client.Count; i++)
+        {
+            var mimeMessage = _pop3Client.GetMessage(i);
+            allMessages.Add(ConvertToEmailModel(mimeMessage));
         }
 
         return allMessages;
     }
 
     //Helper methods
-
     private static EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
         var messageModel = new EmailModel()
@@ -70,5 +84,12 @@ public class EmailFetcher : IEmailFetcher
             "outlook.com" or "office365.com" => Pop3ServerSettings.Outlook,
             _ => throw new NotSupportedException($"Email provider for domain '{emailDomain}' is not supported."),
         };
+    }
+
+    //Disposal
+    public void Dispose()
+    {
+        _pop3Client.Disconnect(true);
+        _pop3Client.Dispose();
     }
 }
