@@ -21,10 +21,12 @@
 	<ItemGroup>
 	  <Compile Include=".Common\Service\AppSpeechRecognition.cs" />
 	  <Compile Include=".Common\Service\AppTextToSpeech.cs" />
+	  <Compile Include="Email\.Base\ServerSettings.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="7.0.1" />
+		<PackageReference Include="MailKit" Version="4.3.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 	</ItemGroup>
