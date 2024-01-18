@@ -1,13 +1,4 @@
-﻿using Application.Email.Models;
-using Application.Email.Services;
-using Application.User.Models;
-using Domain.Common.ValueObjects;
-using Domain.Email.Entities.Enums;
-using Domain.Email.ValueObjects;
-using Infrastructure.Email.Settings;
-using MimeKit;
-
-namespace Infrastructure.Email.Services;
+﻿namespace Infrastructure.Email.Services;
 
 public class EmailFetcher : IEmailFetcher
 {
@@ -24,11 +15,17 @@ public class EmailFetcher : IEmailFetcher
     public async Task<List<EmailModel>> GetEmailsAsync(CancellationToken cancellationToken = default)
     {
         var allMessages = new List<EmailModel>();
+        var pop3ServerSettings = GetPop3ServerSettings(_userModel.EmailAddress.GetEmailDomain());
 
         using (var client = new Pop3Client())
         {
-            var portNumber = 1;
-            await client.ConnectAsync("serverName", portNumber, true, cancellationToken);
+            await client.ConnectAsync
+            (
+                pop3ServerSettings.Server, 
+                pop3ServerSettings.Port, 
+                pop3ServerSettings.UseSsl, cancellationToken
+            );
+
             await client.AuthenticateAsync
             (
                 _userModel.EmailAddress.Value, 
@@ -64,7 +61,7 @@ public class EmailFetcher : IEmailFetcher
         return messageModel;
     }
 
-    public static Pop3ServerSettings GetPop3ServerSettings(string emailDomain)
+    private static Pop3ServerSettings GetPop3ServerSettings(string emailDomain)
     {
         return emailDomain.ToLower() switch
         {
