@@ -64,16 +64,17 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     //Helper methods
     private static EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
+        var senderAddress = mimeMessage.From.Select(x => x.Name).SingleOrDefault();
+        var recipientAddresse = mimeMessage.To.Select(x => x.Name).SingleOrDefault();
+        
         var messageModel = new EmailModel()
         {
             Type = EmailType.Email,
             EmailStatus = EmailStatus.UnRead,
             Subject = EmailSubjectLine.Create(mimeMessage.Subject),
             Body = EmailBodyText.Create(mimeMessage.Body.ToString()),
-            Sender = EmailAddress.Create(mimeMessage.From.FirstOrDefault().Name),
-            Recipients = [
-                EmailAddress.Create(mimeMessage.To.FirstOrDefault().Name)
-            ]
+            Sender = EmailAddress.Create(senderAddress),
+            Recipients = [ EmailAddress.Create(recipientAddresse) ]
         };
 
         return messageModel;
