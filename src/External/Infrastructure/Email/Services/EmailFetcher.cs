@@ -1,30 +1,48 @@
-﻿using MailKit;
-
-namespace Infrastructure.Email.Services;
+﻿namespace Infrastructure.Email.Services;
 
 public class EmailFetcher : IEmailFetcher, IDisposable
 {
     //Fields
-    private readonly UserModel _userModel;
     private readonly Pop3Client _pop3Client;
 
     //Construction
-    public EmailFetcher(UserModel userModel)
+    public EmailFetcher()
     {
-        _userModel = userModel;
-        _pop3Client = new Pop3Client();
+        _pop3Client = new();
     }
 
     //Properties
     public bool IsConnected => 
         _pop3Client.IsConnected && _pop3Client.IsAuthenticated;
 
+    public List<EmailModel> AllEmails { 
+        get 
+        {
+            //Verify connection
+            if (!IsConnected)
+            {
+                throw new ServiceNotConnectedException();
+            }
+
+            //Retrieve messages
+            var allMessages = new List<EmailModel>();
+
+            for (int i = 0; i < _pop3Client.Count; i++)
+            {
+                var mimeMessage = _pop3Client.GetMessage(i);
+                allMessages.Add(ConvertToEmailModel(mimeMessage));
+            }
+
+            return allMessages;
+        } 
+    }
+
     //Methods
-    public async Task ConnectAsync(CancellationToken cancellationToken = default)
+    public async Task ConnectAsync(UserModel userModel, CancellationToken cancellationToken = default)
     {
         if (IsConnected) return;
 
-        var pop3ServerSettings = GetPop3ServerSettings(_userModel.EmailAddress.GetEmailDomain());
+        var pop3ServerSettings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
         await _pop3Client.ConnectAsync
@@ -37,28 +55,9 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         //Authenticate user
         await _pop3Client.AuthenticateAsync
         (
-            _userModel.EmailAddress.Value,
-            _userModel.EmailPassword.Value, cancellationToken
+            userModel.EmailAddress.Value,
+            userModel.EmailPassword.Value, cancellationToken
         );
-    }
-    public List<EmailModel> GetAllEmails()
-    {
-        //Verify connection
-        if (!IsConnected)
-        {
-            throw new ServiceNotConnectedException();
-        }
-
-        //Retrieve messages
-        var allMessages = new List<EmailModel>();
-
-        for (int i = 0; i < _pop3Client.Count; i++)
-        {
-            var mimeMessage = _pop3Client.GetMessage(i);
-            allMessages.Add(ConvertToEmailModel(mimeMessage));
-        }
-
-        return allMessages;
     }
 
     //Helper methods

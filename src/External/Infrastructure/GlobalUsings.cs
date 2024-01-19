@@ -8,6 +8,7 @@ global using Application.User.Models;
 global using Application.Common.Services;
 
 global using MimeKit;
+global using MailKit;
 global using MailKit.Net.Smtp;
 global using MailKit.Net.Pop3;
 

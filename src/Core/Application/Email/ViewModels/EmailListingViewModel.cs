@@ -2,6 +2,7 @@
 using Application.Email.Base;
 using Application.Email.Models;
 using Application.Email.Services;
+using Application.User.Models;
 using System.Collections.ObjectModel;
 
 namespace Application.Email.ViewModels;
@@ -43,7 +44,11 @@ public class EmailListingViewModel : EmailViewModel
         CancellationToken cancellationToken = default
     )
     {
-        var allEmails = await _emailFetcher.GetEmailsAsync(cancellationToken);
+        //Establish connection
+        await _emailFetcher.ConnectAsync(new UserModel(),cancellationToken);
+
+        //Retrieve email message
+        var allEmails = _emailFetcher.AllEmails;
         if (allEmails is null) return;
 
         EmailList = new(allEmails);
