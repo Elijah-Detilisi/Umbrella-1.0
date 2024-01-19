@@ -6,5 +6,5 @@ public interface IEmailFetcher : IDisposable
 {
     bool IsConnected { get; }
     Task ConnectAsync(CancellationToken cancellationToken);
-    List<EmailModel> GetEmailsAsync(CancellationToken cancellationToken);
+    List<EmailModel> GetAllEmails();
 }
