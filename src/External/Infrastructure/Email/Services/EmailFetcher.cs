@@ -15,10 +15,14 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         _pop3Client = new Pop3Client();
     }
 
+    //Properties
+    public bool IsConnected => 
+        _pop3Client.IsConnected && _pop3Client.IsAuthenticated;
+
     //Methods
     public async Task ConnectAsync(CancellationToken cancellationToken = default)
     {
-        if (_pop3Client.IsConnected && _pop3Client.IsAuthenticated) return;
+        if (IsConnected) return;
 
         var pop3ServerSettings = GetPop3ServerSettings(_userModel.EmailAddress.GetEmailDomain());
 
@@ -40,7 +44,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     public List<EmailModel> GetEmailsAsync(CancellationToken cancellationToken = default)
     {
         //Verify connection
-        if (!_pop3Client.IsConnected && !_pop3Client.IsAuthenticated)
+        if (!IsConnected)
         {
             throw new ServiceNotConnectedException();
         }
