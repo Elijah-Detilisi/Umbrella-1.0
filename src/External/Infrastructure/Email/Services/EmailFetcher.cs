@@ -41,7 +41,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             _userModel.EmailPassword.Value, cancellationToken
         );
     }
-    public List<EmailModel> GetEmailsAsync(CancellationToken cancellationToken = default)
+    public List<EmailModel> GetAllEmails()
     {
         //Verify connection
         if (!IsConnected)
