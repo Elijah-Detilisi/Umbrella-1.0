@@ -45,11 +45,12 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         var settings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
+        _pop3Client.CheckCertificateRevocation = false;
         await _pop3Client.ConnectAsync
         (
             settings.Server,
             settings.Port,
-            settings.UseSsl, 
+            settings.UseSsl,
             cancellationToken
         );
 
@@ -72,7 +73,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             Type = EmailType.Email,
             EmailStatus = EmailStatus.UnRead,
             Subject = EmailSubjectLine.Create(mimeMessage.Subject),
-            Body = EmailBodyText.Create(mimeMessage.Body.ToString()),
+            Body = EmailBodyText.Create(mimeMessage.TextBody),
             Sender = EmailAddress.Create(senderAddress),
             Recipients = [ EmailAddress.Create(recipientAddresse) ]
         };
