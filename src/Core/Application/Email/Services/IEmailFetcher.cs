@@ -7,8 +7,8 @@ public interface IEmailFetcher : IDisposable
 {
     //Properties
     bool IsConnected { get; }
-    List<EmailModel> AllEmails { get; }
-
+    
     //Methods
-    Task ConnectAsync(UserModel userModel, CancellationToken cancellationToken);
+    Task<List<EmailModel>> LoadEmailsAsync(CancellationToken cancellationToken = default);
+    Task ConnectAsync(UserModel userModel, CancellationToken cancellationToken = default);
 }
