@@ -2,7 +2,7 @@
 
 public class EmailBodyText : ValueObject<String>
 {
-    public const int MAXBODYLENGTH = 1000;
+    public const int MAXBODYLENGTH = 10000;
    
     private EmailBodyText(string value): base(value)
     {
