@@ -13,33 +13,14 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     {
         _pop3Client = new();
         _currentUser = new();
+
+        //Set up pop3Client
+        _pop3Client.CheckCertificateRevocation = false;
     }
 
     //Properties
     public bool IsConnected => 
         _pop3Client.IsConnected && _pop3Client.IsAuthenticated;
-
-    public List<EmailModel> AllEmails { 
-        get 
-        {
-            //Verify connection
-            if (!IsConnected)
-            {
-                throw new ServiceNotConnectedException();
-            }
-
-            //Retrieve messages
-            var allMessages = new List<EmailModel>();
-
-            for (int i = 0; i < _pop3Client.Count; i++)
-            {
-                var mimeMessage = _pop3Client.GetMessage(i);
-                allMessages.Add(ConvertToEmailModel(mimeMessage));
-            }
-
-            return allMessages;
-        } 
-    }
 
     //Methods
     public async Task ConnectAsync(UserModel userModel, CancellationToken cancellationToken = default)
@@ -50,22 +31,30 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         var settings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
-        _pop3Client.CheckCertificateRevocation = false;
-        await _pop3Client.ConnectAsync
-        (
-            settings.Server,
-            settings.Port,
-            settings.UseSsl,
-            cancellationToken
-        );
+        await _pop3Client.ConnectAsync(settings.Server, settings.Port, settings.UseSsl, cancellationToken);
 
         //Authenticate user
-        await _pop3Client.AuthenticateAsync
-        (
-            userModel.EmailAddress.Value,
-            userModel.EmailPassword.Value, 
-            cancellationToken
-        );
+        await _pop3Client.AuthenticateAsync(userModel.EmailAddress.Value, userModel.EmailPassword.Value, cancellationToken);
+    }
+
+    public async Task<List<EmailModel>> LoadEmailsAsync(CancellationToken cancellationToken = default)
+    {
+        //Verify connection
+        if (!IsConnected)
+        {
+            throw new ServiceNotConnectedException();
+        }
+
+        //Retrieve messages
+        var allMessages = new List<EmailModel>();
+
+        for (int i = 0; i < _pop3Client.Count; i++)
+        {
+            var mimeMessage = await _pop3Client.GetMessageAsync(i);
+            allMessages.Add(ConvertToEmailModel(mimeMessage));
+        }
+
+        return allMessages;
     }
 
     //Helper methods
