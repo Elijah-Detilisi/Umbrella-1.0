@@ -3,6 +3,7 @@ using Application.Email.Base;
 using Application.Email.Models;
 using Application.Email.Services;
 using Application.User.Models;
+using Domain.User.ValueObjects;
 using System.Collections.ObjectModel;
 
 namespace Application.Email.ViewModels;
@@ -45,7 +46,13 @@ public class EmailListingViewModel : EmailViewModel
     )
     {
         //Establish connection
-        await _emailFetcher.ConnectAsync(new UserModel(),cancellationToken);
+        var currentUser =  new UserModel()
+        {
+            EmailAddress = EmailAddress.Create(""),
+            EmailPassword = EmailPassword.Create(""),
+        };
+
+        await _emailFetcher.ConnectAsync(currentUser, cancellationToken);
 
         //Retrieve email message
         var allEmails = _emailFetcher.AllEmails;
