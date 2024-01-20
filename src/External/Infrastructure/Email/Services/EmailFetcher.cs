@@ -42,15 +42,16 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     {
         if (IsConnected) return;
 
-        var pop3ServerSettings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
+        var settings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
         await _pop3Client.ConnectAsync
-            (
-                pop3ServerSettings.Server,
-                pop3ServerSettings.Port,
-                pop3ServerSettings.UseSsl, cancellationToken
-            );
+        (
+            settings.Server,
+            settings.Port,
+            settings.UseSsl, 
+            cancellationToken
+        );
 
         //Authenticate user
         await _pop3Client.AuthenticateAsync
