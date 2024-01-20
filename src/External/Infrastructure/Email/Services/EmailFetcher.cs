@@ -48,7 +48,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         //Retrieve messages
         var allMessages = new List<EmailModel>();
 
-        for (int i = 0; i < _pop3Client.Count; i++)
+        for (int i = 0; i < _pop3Client.GetMessageCount(); i++)
         {
             var mimeMessage = await _pop3Client.GetMessageAsync(i);
             allMessages.Add(ConvertToEmailModel(mimeMessage));
