@@ -70,9 +70,9 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     }
     private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
-        var senderAddress = mimeMessage.Sender.Address;
         var processedText = ShortenUrls(mimeMessage.TextBody);
-
+        var senderAddress = mimeMessage.Sender?.Address ?? "no-reply@email.com";
+        
         var messageModel = new EmailModel()
         {
             Type = EmailType.Email,
