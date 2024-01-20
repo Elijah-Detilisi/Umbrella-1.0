@@ -1,14 +1,18 @@
-﻿namespace Infrastructure.Email.Services;
+﻿using System.Text.RegularExpressions;
+
+namespace Infrastructure.Email.Services;
 
 public class EmailFetcher : IEmailFetcher, IDisposable
 {
     //Fields
+    private UserModel _currentUser;
     private readonly Pop3Client _pop3Client;
 
     //Construction
     public EmailFetcher()
     {
         _pop3Client = new();
+        _currentUser = new();
     }
 
     //Properties
@@ -42,6 +46,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     {
         if (IsConnected) return;
 
+        _currentUser = userModel;
         var settings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
@@ -58,29 +63,12 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         await _pop3Client.AuthenticateAsync
         (
             userModel.EmailAddress.Value,
-            userModel.EmailPassword.Value, cancellationToken
+            userModel.EmailPassword.Value, 
+            cancellationToken
         );
     }
 
     //Helper methods
-    private static EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
-    {
-        var senderAddress = mimeMessage.From.Select(x => x.Name).FirstOrDefault();
-        var recipientAddresse = mimeMessage.To.Select(x => x.Name).FirstOrDefault();
-        
-        var messageModel = new EmailModel()
-        {
-            Type = EmailType.Email,
-            EmailStatus = EmailStatus.UnRead,
-            Subject = EmailSubjectLine.Create(mimeMessage.Subject),
-            Body = EmailBodyText.Create(mimeMessage.TextBody),
-            Sender = EmailAddress.Create(senderAddress),
-            Recipients = [ EmailAddress.Create(recipientAddresse) ]
-        };
-
-        return messageModel;
-    }
-
     private static Pop3ServerSettings GetPop3ServerSettings(string emailDomain)
     {
         return emailDomain.ToLower() switch
@@ -90,6 +78,41 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             "outlook.com" or "office365.com" => Pop3ServerSettings.Outlook,
             _ => throw new NotSupportedException($"Email provider for domain '{emailDomain}' is not supported."),
         };
+    }
+    private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
+    {
+        var senderAddress = mimeMessage.Sender.Address;
+        var processedText = ShortenUrls(mimeMessage.TextBody);
+
+        var messageModel = new EmailModel()
+        {
+            Type = EmailType.Email,
+            EmailStatus = EmailStatus.UnRead,
+            Recipients = [_currentUser.EmailAddress],
+            Sender = EmailAddress.Create(senderAddress),
+            Body = EmailBodyText.Create(processedText),
+            Subject = EmailSubjectLine.Create(mimeMessage.Subject),
+        };
+
+        return messageModel;
+    }
+    private static string ShortenUrls(string input)
+    {
+        // Define a regular expression pattern to match URLs
+        string urlPattern = @"(https?://\S+)";
+
+        // Use regex to find all matches
+        MatchCollection matches = Regex.Matches(input, urlPattern);
+
+        // Iterate through matches and shorten URLs
+        foreach (Match match in matches.Cast<Match>())
+        {
+            string originalUrl = match.Groups[1].Value;
+            string shortenedUrl = originalUrl.Length > 30 ? originalUrl.Substring(0, 30) + "..." : originalUrl;
+            input = input.Replace(originalUrl, shortenedUrl);
+        }
+
+        return input;
     }
 
     //Disposal
