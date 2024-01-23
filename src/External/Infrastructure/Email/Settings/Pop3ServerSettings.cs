@@ -13,4 +13,16 @@ public class Pop3ServerSettings : ServerSettings
     public static readonly Pop3ServerSettings Gmail = new("Gmail", "pop.gmail.com", 995, true);
     public static readonly Pop3ServerSettings Yahoo = new("Yahoo", "pop.mail.yahoo.com", 995, true);
     public static readonly Pop3ServerSettings Outlook = new("Outlook", "outlook.office365.com", 995, true);
+
+    //Helper methods
+    public static Pop3ServerSettings FindPop3ServerSettings(string emailDomain)
+    {
+        return emailDomain.ToLower() switch
+        {
+            "gmail.com" => Pop3ServerSettings.Gmail,
+            "yahoo.com" => Pop3ServerSettings.Yahoo,
+            "outlook.com" or "office365.com" => Pop3ServerSettings.Outlook,
+            _ => throw new NotSupportedException($"Email provider for domain '{emailDomain}' is not supported."),
+        };
+    }
 }
