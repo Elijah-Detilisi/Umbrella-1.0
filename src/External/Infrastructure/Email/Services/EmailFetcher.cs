@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Infrastructure.Email.Extensions;
+using System.Text.RegularExpressions;
 
 namespace Infrastructure.Email.Services;
 
@@ -60,7 +61,6 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     //Helper methods
     private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
-        var processedText = ShortenUrls(mimeMessage.TextBody);
         var senderAddress = mimeMessage.Sender?.Address ?? "no-reply@email.com";
         
         var messageModel = new EmailModel()
@@ -69,31 +69,13 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             EmailStatus = EmailStatus.UnRead,
             Recipients = [_currentUser.EmailAddress],
             Sender = EmailAddress.Create(senderAddress),
-            Body = EmailBodyText.Create(processedText),
-            Subject = EmailSubjectLine.Create(mimeMessage.Subject),
+            Body = EmailBodyText.Create(mimeMessage.TextBody.ShortText()),
+            Subject = EmailSubjectLine.Create(mimeMessage.Subject.ShortText()),
         };
 
         return messageModel;
     }
-    private static string ShortenUrls(string input)
-    {
-        // Define a regular expression pattern to match URLs
-        string urlPattern = @"(https?://\S+)";
-
-        // Use regex to find all matches
-        MatchCollection matches = Regex.Matches(input, urlPattern);
-
-        // Iterate through matches and shorten URLs
-        foreach (Match match in matches.Cast<Match>())
-        {
-            string originalUrl = match.Groups[1].Value;
-            string shortenedUrl = originalUrl.Length > 30 ? originalUrl.Substring(0, 30) + "..." : originalUrl;
-            input = input.Replace(originalUrl, shortenedUrl);
-        }
-
-        return input;
-    }
-
+    
     //Disposal
     public void Dispose()
     {
