@@ -1,8 +1,6 @@
 ﻿using Infrastructure.Email.Extensions;
 using MailKit.Net.Imap;
 using MailKit.Search;
-using MimeKit;
-using ThreadNetwork;
 
 namespace Infrastructure.Email.Services;
 
@@ -18,7 +16,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         _imapClient = new();
         _currentUser = new();
 
-        //Set up pop3Client
+        //Set up client
         _imapClient.CheckCertificateRevocation = false;
     }
 
@@ -32,7 +30,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         if (IsConnected) return;
 
         _currentUser = userModel;
-        var settings = Pop3ServerSettings.FindPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
+        var settings = ImapServerSettings.FindServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
         await _imapClient.ConnectAsync(settings.Server, settings.Port, settings.UseSsl, token);
@@ -64,12 +62,6 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             var mimeMessage = await _imapClient.Inbox.GetMessageAsync(uid, token);
             allMessages.Add(ConvertToEmailModel(mimeMessage));
         }
-
-        /*for (int i = 0; i < _imapClient.GetMessageCount(); i++)
-        {
-            var mimeMessage = await _imapClient.GetMessageAsync(i);
-            allMessages.Add(ConvertToEmailModel(mimeMessage));
-        }*/
 
         return allMessages;
     }
