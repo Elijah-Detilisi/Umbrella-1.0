@@ -28,7 +28,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         if (IsConnected) return;
 
         _currentUser = userModel;
-        var settings = GetPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
+        var settings = Pop3ServerSettings.FindPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
         await _pop3Client.ConnectAsync(settings.Server, settings.Port, settings.UseSsl, cancellationToken);
@@ -58,16 +58,6 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     }
 
     //Helper methods
-    private static Pop3ServerSettings GetPop3ServerSettings(string emailDomain)
-    {
-        return emailDomain.ToLower() switch
-        {
-            "gmail.com" => Pop3ServerSettings.Gmail,
-            "yahoo.com" => Pop3ServerSettings.Yahoo,
-            "outlook.com" or "office365.com" => Pop3ServerSettings.Outlook,
-            _ => throw new NotSupportedException($"Email provider for domain '{emailDomain}' is not supported."),
-        };
-    }
     private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
         var processedText = ShortenUrls(mimeMessage.TextBody);
