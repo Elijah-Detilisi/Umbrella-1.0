@@ -1,5 +1,8 @@
 ﻿using Infrastructure.Email.Extensions;
-using System.Text.RegularExpressions;
+using MailKit.Net.Imap;
+using MailKit.Search;
+using MimeKit;
+using ThreadNetwork;
 
 namespace Infrastructure.Email.Services;
 
@@ -7,24 +10,24 @@ public class EmailFetcher : IEmailFetcher, IDisposable
 {
     //Fields
     private UserModel _currentUser;
-    private readonly Pop3Client _pop3Client;
+    private readonly ImapClient _imapClient;
 
     //Construction
     public EmailFetcher()
     {
-        _pop3Client = new();
+        _imapClient = new();
         _currentUser = new();
 
         //Set up pop3Client
-        _pop3Client.CheckCertificateRevocation = false;
+        _imapClient.CheckCertificateRevocation = false;
     }
 
     //Properties
     public bool IsConnected => 
-        _pop3Client.IsConnected && _pop3Client.IsAuthenticated;
+        _imapClient.IsConnected && _imapClient.IsAuthenticated;
 
     //Methods
-    public async Task ConnectAsync(UserModel userModel, CancellationToken cancellationToken = default)
+    public async Task ConnectAsync(UserModel userModel, CancellationToken token = default)
     {
         if (IsConnected) return;
 
@@ -32,13 +35,13 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         var settings = Pop3ServerSettings.FindPop3ServerSettings(userModel.EmailAddress.GetEmailDomain());
 
         //Connect to server
-        await _pop3Client.ConnectAsync(settings.Server, settings.Port, settings.UseSsl, cancellationToken);
+        await _imapClient.ConnectAsync(settings.Server, settings.Port, settings.UseSsl, token);
 
         //Authenticate user
-        await _pop3Client.AuthenticateAsync(userModel.EmailAddress.Value, userModel.EmailPassword.Value, cancellationToken);
+        await _imapClient.AuthenticateAsync(userModel.EmailAddress.Value, userModel.EmailPassword.Value, token);
     }
 
-    public async Task<List<EmailModel>> LoadEmailsAsync(CancellationToken cancellationToken = default)
+    public async Task<List<EmailModel>> LoadEmailsAsync(CancellationToken token = default)
     {
         //Verify connection
         if (!IsConnected)
@@ -49,11 +52,24 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         //Retrieve messages
         var allMessages = new List<EmailModel>();
 
-        for (int i = 0; i < _pop3Client.GetMessageCount(); i++)
+        // Select the Inbox folder
+        await _imapClient.Inbox.OpenAsync(FolderAccess.ReadOnly, token);
+
+        // Search for all messages in the Inbox
+        var uids = await _imapClient.Inbox.SearchAsync(SearchQuery.NotSeen, token);
+
+        // Fetch the messages
+        foreach (var uid in uids)
         {
-            var mimeMessage = await _pop3Client.GetMessageAsync(i);
+            var mimeMessage = await _imapClient.Inbox.GetMessageAsync(uid, token);
             allMessages.Add(ConvertToEmailModel(mimeMessage));
         }
+
+        /*for (int i = 0; i < _imapClient.GetMessageCount(); i++)
+        {
+            var mimeMessage = await _imapClient.GetMessageAsync(i);
+            allMessages.Add(ConvertToEmailModel(mimeMessage));
+        }*/
 
         return allMessages;
     }
@@ -79,7 +95,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     //Disposal
     public void Dispose()
     {
-        _pop3Client.Disconnect(true);
-        _pop3Client.Dispose();
+        _imapClient.Disconnect(true);
+        _imapClient.Dispose();
     }
 }
