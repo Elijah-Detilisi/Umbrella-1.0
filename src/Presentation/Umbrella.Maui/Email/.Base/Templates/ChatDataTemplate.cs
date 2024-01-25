@@ -1,6 +1,6 @@
 ﻿using Umbrella.Maui.Email.Base.Triggers;
 
-namespace Umbrella.Maui.Email.Base.Controls;
+namespace Umbrella.Maui.Email.Base.Templates;
 
 public class ChatDataTemplate : DataTemplate
 {

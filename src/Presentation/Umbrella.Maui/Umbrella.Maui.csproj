@@ -65,7 +65,7 @@
 
 	<ItemGroup>
 	  <Compile Include="Common\.Base\BasePage.cs" />
-	  <Compile Include="Email\.Base\Controls\ChatDataTemplate.cs" />
+	  <Compile Include="Email\.Base\Templates\ChatDataTemplate.cs" />
 	  <Compile Include="Email\.Base\Enum\ChatTemplateColumn.cs" />
 	  <Compile Include="Email\.Base\Pages\EmailPage.cs" />
 	  <Compile Include="Email\.Base\Triggers\ChatTemplateFrameTriggers.cs" />
@@ -100,6 +100,10 @@
 	  <MauiXaml Update="Resources\Styles\AppColors.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Email\EmailListing\Templates\" />
 	</ItemGroup>
 
 </Project>

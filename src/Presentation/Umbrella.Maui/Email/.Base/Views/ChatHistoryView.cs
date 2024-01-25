@@ -1,5 +1,5 @@
 ﻿using Application.Chat.ViewModels;
-using Umbrella.Maui.Email.Base.Controls;
+using Umbrella.Maui.Email.Base.Templates;
 
 namespace Umbrella.Maui.Email.Base.Views;
 
