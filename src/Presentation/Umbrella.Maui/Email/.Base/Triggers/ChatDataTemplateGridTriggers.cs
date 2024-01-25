@@ -1,6 +1,6 @@
 ﻿namespace Umbrella.Maui.Email.Base.Triggers;
 
-public static class ChatTemplateGridTriggers
+public static class ChatDataTemplateGridTriggers
 {
     //Constants
     private const double BigColumn = 0.8;

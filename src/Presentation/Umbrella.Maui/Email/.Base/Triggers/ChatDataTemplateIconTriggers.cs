@@ -2,7 +2,7 @@
 
 namespace Umbrella.Maui.Email.Base.Triggers;
 
-public static class ChatTemplateIconTriggers
+public static class ChatDataTemplateIconTriggers
 {
     //Data triggers
     public static DataTrigger HumanSenderTrigger => new(typeof(Image))

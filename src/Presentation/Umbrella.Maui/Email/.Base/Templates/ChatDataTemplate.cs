@@ -50,8 +50,8 @@ public class ChatDataTemplate : DataTemplate
             Source = "user_solid.svg",
             Triggers =
             {
-                ChatTemplateIconTriggers.HumanSenderTrigger, 
-                ChatTemplateIconTriggers.BotSenderTrigger
+                ChatDataTemplateIconTriggers.HumanSenderTrigger, 
+                ChatDataTemplateIconTriggers.BotSenderTrigger
             }
         };
     }
@@ -63,8 +63,8 @@ public class ChatDataTemplate : DataTemplate
             Content = TextLabel,
             Triggers =
             {
-                ChatTemplateFrameTriggers.HumanSenderTrigger, 
-                ChatTemplateFrameTriggers.BotSenderTrigger
+                ChatDataTemplateFrameTriggers.HumanSenderTrigger, 
+                ChatDataTemplateFrameTriggers.BotSenderTrigger
             }
         };
 
@@ -79,8 +79,8 @@ public class ChatDataTemplate : DataTemplate
             Children = { ImageIcon, ContentFrame },
             Triggers =
             {
-                ChatTemplateGridTriggers.BotSenderTrigger,
-                ChatTemplateGridTriggers.HumanSenderTrigger
+                ChatDataTemplateGridTriggers.BotSenderTrigger,
+                ChatDataTemplateGridTriggers.HumanSenderTrigger
             }
         };
     }
