@@ -22,7 +22,7 @@ public class ChatDataTemplate : DataTemplate
         InitializeTextLabel();
         InitializeImageIcon();
         InitializeContentFrame();
-        InitializeChatGrid(); //Should be last to initialize
+        InitializeMainGrid(); //Should be last to initialize
         
         return MainGrid;
     }
@@ -71,7 +71,7 @@ public class ChatDataTemplate : DataTemplate
         ContentFrame.DynamicResource(View.StyleProperty, "ChatDataTemplateContentFrame");
     }
 
-    private static void InitializeChatGrid()
+    private static void InitializeMainGrid()
     {
         MainGrid = new Grid()
         {
