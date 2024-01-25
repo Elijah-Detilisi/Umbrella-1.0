@@ -64,6 +64,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="Common\.Base\BasePage.cs" />
+	  <Compile Include="Email\.Base\Controls\ChatDataTemplate.cs" />
+	  <Compile Include="Email\.Base\Enum\ChatTemplateColumn.cs" />
+	  <Compile Include="Email\.Base\Pages\EmailPage.cs" />
+	  <Compile Include="Email\.Base\Triggers\ChatTemplateFrameTriggers.cs" />
+	  <Compile Include="Email\.Base\Triggers\ChatTemplateGridTriggers.cs" />
+	  <Compile Include="Email\.Base\Triggers\ChatTemplateIconTriggers.cs" />
+	  <Compile Include="Email\.Base\Views\ChatHistoryView.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="4.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
@@ -89,10 +100,6 @@
 	  <MauiXaml Update="Resources\Styles\AppColors.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Email\Base\Views\" />
 	</ItemGroup>
 
 </Project>
