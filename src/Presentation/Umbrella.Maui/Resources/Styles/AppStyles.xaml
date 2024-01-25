@@ -26,7 +26,7 @@
 
     
     <!--ChatDataTemplate styles-->
-    <Style x:Key="ChatTemplateFrame" TargetType="Frame">
+    <Style x:Key="ChatDataTemplateContentFrame" TargetType="Frame">
         <Setter Property="Padding" Value="10" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Margin" Value="10,0,10,0" />
