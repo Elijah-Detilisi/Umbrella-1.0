@@ -5,11 +5,11 @@ namespace Umbrella.Maui.Email.Base.Templates;
 public class ChatDataTemplate : DataTemplate
 {
     //View components 
-    private static Label? ChatTemplateText;
-    private static Image? ChatTemplateIcon;
-    private static Frame? ChatTemplateFrame;
-    private static Grid? ChatTemplateGrid;
-
+    private static Grid? MainGrid;
+    private static Label? TextLabel;
+    private static Image? ImageIcon;
+    private static Frame? ContentFrame;
+    
     //Construction
     public ChatDataTemplate() : base(CreateTemplateGrid)
     {
@@ -19,31 +19,31 @@ public class ChatDataTemplate : DataTemplate
     //Initialization
     private static Grid? CreateTemplateGrid()
     {
-        InitializeChatText();
-        InitializeChatIcon();
-        InitializeChatFrame();
+        InitializeTextLabel();
+        InitializeImageIcon();
+        InitializeContentFrame();
         InitializeChatGrid(); //Should be last to initialize
         
-        return ChatTemplateGrid;
+        return MainGrid;
     }
 
     //View component Initialization 
-    private static void InitializeChatText()
+    private static void InitializeTextLabel()
     {
-        ChatTemplateText = new()
+        TextLabel = new()
         {
             MaxLines = 1,
             LineBreakMode = LineBreakMode.TailTruncation
         };
 
-        ChatTemplateText.Bind(Label.TextProperty, 
+        TextLabel.Bind(Label.TextProperty, 
             static (ChatMessageModel chat) => chat.Message, mode: BindingMode.OneTime
         );
     }
 
-    private static void InitializeChatIcon()
+    private static void InitializeImageIcon()
     {
-        ChatTemplateIcon = new()
+        ImageIcon = new()
         {
             WidthRequest = 30,
             HeightRequest = 30,
@@ -56,11 +56,11 @@ public class ChatDataTemplate : DataTemplate
         };
     }
 
-    private static void InitializeChatFrame()
+    private static void InitializeContentFrame()
     {
-        ChatTemplateFrame = new() 
+        ContentFrame = new() 
         { 
-            Content = ChatTemplateText,
+            Content = TextLabel,
             Triggers =
             {
                 ChatTemplateFrameTriggers.HumanSenderTrigger, 
@@ -68,15 +68,15 @@ public class ChatDataTemplate : DataTemplate
             }
         };
 
-        ChatTemplateFrame.DynamicResource(View.StyleProperty, "ChatTemplateFrame");
+        ContentFrame.DynamicResource(View.StyleProperty, "ChatDataTemplateContentFrame");
     }
 
     private static void InitializeChatGrid()
     {
-        ChatTemplateGrid = new Grid()
+        MainGrid = new Grid()
         {
             Padding = new Thickness(15),
-            Children = { ChatTemplateIcon, ChatTemplateFrame },
+            Children = { ImageIcon, ContentFrame },
             Triggers =
             {
                 ChatTemplateGridTriggers.BotSenderTrigger,
