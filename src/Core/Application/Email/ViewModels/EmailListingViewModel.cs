@@ -55,7 +55,7 @@ public class EmailListingViewModel : EmailViewModel
         await _emailFetcher.ConnectAsync(currentUser, cancellationToken);
 
         //Retrieve email message
-        var allEmails = _emailFetcher.AllEmails;
+        var allEmails = await _emailFetcher.LoadEmailsAsync(cancellationToken);
         if (allEmails is null) return;
 
         EmailList = new(allEmails);
