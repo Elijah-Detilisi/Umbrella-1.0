@@ -12,26 +12,29 @@ public class EmailDataTemplate : DataTemplate
     private static Label? EmailTimeLabel;
     private static Label? EmailSenderLabel;
     private static Label? EmailSubjectLabel;
+    private static BoxView? SeparaterBoxView;
+    private static VerticalStackLayout? MainLayout;
     private static VerticalStackLayout? EmailTimeLayout;
     private static VerticalStackLayout? EmailDetailsLayout;
-
     
     //Construction
-    public EmailDataTemplate() : base(CreateTemplateGrid)
+    public EmailDataTemplate() : base(CreateTemplate)
     {
 
     }
 
     //Initialization
-    private static Grid? CreateTemplateGrid()
+    private static VerticalStackLayout? CreateTemplate()
     {
         InitializeImageIcon();
+        InitializeSeparaterBoxView();
         InitializeEmailLabels();
         InitializeEmailDetailsLayout();
         InitializeEmailTimeLayout();
-        InitializeMainGrid(); // NB: Must be last to initialize
+        InitializeMainGrid();
+        InitializeMainLayout();// NB: Must be last to initialize
 
-        return MainGrid;
+        return MainLayout;
     }
 
     //View component Initialization 
@@ -44,7 +47,17 @@ public class EmailDataTemplate : DataTemplate
             Source = "envelope_solid.svg"
         };
     }
+    private static void InitializeSeparaterBoxView()
+    {
+        SeparaterBoxView = new()
+        {
+            HeightRequest = 2,
+            Margin = new Thickness(0, 15, 0, 0),
+            HorizontalOptions = LayoutOptions.Fill
+        };
 
+        SeparaterBoxView.DynamicResource(View.BackgroundColorProperty, "AppActionColor");
+    }
     private static void InitializeEmailLabels()
     {
         //Setup
@@ -142,6 +155,19 @@ public class EmailDataTemplate : DataTemplate
             {
                 ImageIcon?.Column(Column.Left),
                 ContentGrid?.Column(Column.Right)
+            }
+        };
+    }
+
+    private static void InitializeMainLayout()
+    {
+        MainLayout = new()
+        {
+            Padding = new Thickness(10),
+            Children =
+            {
+                MainGrid,
+                SeparaterBoxView
             }
         };
     }
