@@ -1,6 +1,6 @@
 ﻿using Umbrella.Maui.Email.Base.Pages;
 using Umbrella.Maui.Email.Base.Views;
-using Umbrella.Maui.Email.EmailListing.Views;
+using Umbrella.Maui.Email.EmailListing.Templates;
 
 namespace Umbrella.Maui.Email.EmailListing.Pages;
 
@@ -13,12 +13,11 @@ public class EmailListingPage : EmailPage<EmailListingViewModel>
 
     protected override ScrollView PageContent => new()
     {
-        Content = new VerticalStackLayout()
+        Content = new CollectionView
         {
-            new EmailListItemView(),
-            new EmailListItemView(),
-            new EmailListItemView(),
-            new EmailListItemView(),
+            SelectionMode = SelectionMode.None,
+            ItemTemplate = new EmailDataTemplate(),
+            ItemsSource = BindingContext.EmailList
         }
     };
 }
