@@ -55,15 +55,9 @@ public class EmailDataTemplate : DataTemplate
     }
     private static void InitializeSeparaterBoxView()
     {
-        SeparaterBoxView = new()
-        {
-            HeightRequest = 2,
-            Margin = new Thickness(0, 15, 0, 0),
-            HorizontalOptions = LayoutOptions.Fill
-        };
-
+        SeparaterBoxView = new();
         DockLayout.SetDockPosition(SeparaterBoxView, DockPosition.Bottom);
-        SeparaterBoxView.DynamicResource(View.BackgroundColorProperty, "AppActionColor");
+        SeparaterBoxView.DynamicResource(View.StyleProperty, "EmailDataTemplateSeparator");
     }
     private static void InitializeEmailLabels()
     {
