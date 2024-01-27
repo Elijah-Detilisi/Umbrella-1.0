@@ -17,14 +17,19 @@ public abstract class BasePage<TViewModel> : BasePage where TViewModel : ViewMod
     public new TViewModel BindingContext => (TViewModel)base.BindingContext;
 
     //Life-cylce
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+
+        BindingContext.OnViewModelStarting();
+        Debug.WriteLine($"OnBindingContextChanged: {Title}");
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        BindingContext.OnViewModelStarting();
         Debug.WriteLine($"OnAppearing: {Title}");
     }
-
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
