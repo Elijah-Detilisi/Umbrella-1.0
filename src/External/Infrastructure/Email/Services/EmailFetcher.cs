@@ -54,7 +54,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
         await _imapClient.Inbox.OpenAsync(FolderAccess.ReadOnly, token);
 
         // Search for all messages in the Inbox
-        var uids = await _imapClient.Inbox.SearchAsync(SearchQuery.NotSeen, token);
+        var uids = await _imapClient.Inbox.SearchAsync(SearchQuery.All, token);
 
         // Fetch the messages
         foreach (var uid in uids)
