@@ -68,10 +68,7 @@ public class EmailDataTemplate : DataTemplate
     private static void InitializeEmailLabels()
     {
         //Setup
-        EmailTimeLabel = new()
-        {
-            FontSize = 14
-        };
+        EmailTimeLabel = new();
 
         EmailSubjectLabel = new()
         {
