@@ -14,7 +14,7 @@ public class EmailDataTemplate : DataTemplate
     private static Label? EmailTimeLabel;
     private static Label? EmailSenderLabel;
     private static Label? EmailSubjectLabel;
-    private static BoxView? SeparaterBoxView;
+    private static BoxView? SeparatorBoxView;
     private static VerticalStackLayout? EmailDetailsLayout;
 
     //Construction
@@ -38,7 +38,7 @@ public class EmailDataTemplate : DataTemplate
             Children =
             {
                 ContentGrid,
-                SeparaterBoxView
+                SeparatorBoxView
             }
         };
     }
@@ -55,9 +55,9 @@ public class EmailDataTemplate : DataTemplate
     }
     private static void InitializeSeparaterBoxView()
     {
-        SeparaterBoxView = new();
-        DockLayout.SetDockPosition(SeparaterBoxView, DockPosition.Bottom);
-        SeparaterBoxView.DynamicResource(View.StyleProperty, "EmailDataTemplateSeparator");
+        SeparatorBoxView = new();
+        DockLayout.SetDockPosition(SeparatorBoxView, DockPosition.Bottom);
+        SeparatorBoxView.DynamicResource(View.StyleProperty, "EmailDataTemplateSeparator");
     }
     private static void InitializeEmailLabels()
     {
