@@ -27,7 +27,7 @@ public class EmailDataTemplate : DataTemplate
     private static DockLayout? CreateTemplate()
     {
         InitializeImageIcon();
-        InitializeSeparaterBoxView();
+        InitializeSeparatorBoxView();
         InitializeEmailLabels();
         InitializeEmailDetailsLayout();
         InitializeContentGrid();
@@ -53,7 +53,7 @@ public class EmailDataTemplate : DataTemplate
             Source = "envelope_solid.svg"
         };
     }
-    private static void InitializeSeparaterBoxView()
+    private static void InitializeSeparatorBoxView()
     {
         SeparatorBoxView = new();
         DockLayout.SetDockPosition(SeparatorBoxView, DockPosition.Bottom);
