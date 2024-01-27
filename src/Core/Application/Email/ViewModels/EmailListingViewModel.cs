@@ -48,8 +48,8 @@ public class EmailListingViewModel : EmailViewModel
         //Establish connection
         var currentUser =  new UserModel()
         {
-            EmailAddress = EmailAddress.Create(""),
-            EmailPassword = EmailPassword.Create(""),
+            EmailAddress = EmailAddress.Create("xxxxxxxx@xxxx.com"),
+            EmailPassword = EmailPassword.Create("xxxxxxxx"),
         };
 
         await _emailFetcher.ConnectAsync(currentUser, cancellationToken);
@@ -58,7 +58,10 @@ public class EmailListingViewModel : EmailViewModel
         var allEmails = await _emailFetcher.LoadEmailsAsync(cancellationToken);
         if (allEmails is null) return;
 
-        EmailList = new(allEmails);
+        foreach (var item in allEmails)
+        {
+            EmailList.Add(item);
+        }
     }
 
     //Commands
