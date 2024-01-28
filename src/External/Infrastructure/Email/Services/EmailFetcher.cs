@@ -63,6 +63,8 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             allMessages.Add(ConvertToEmailModel(mimeMessage));
         }
 
+        allMessages.Reverse();
+
         return allMessages;
     }
 
