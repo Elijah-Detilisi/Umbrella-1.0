@@ -81,16 +81,16 @@ public class EmailDataTemplate : DataTemplate
 
         //Databings
         EmailTimeLabel.Bind(Label.TextProperty,
-            static (EmailModel email) => email.CreatedAt, mode: BindingMode.OneTime,
+            static (EmailModel email) => email.CreatedAt, mode: BindingMode.OneWay,
             stringFormat: "{0:h:mm tt}"
         );
 
         EmailSubjectLabel.Bind(Label.TextProperty,
-            static (EmailModel email) => email.Subject.Value, mode: BindingMode.OneTime
+            static (EmailModel email) => email.Subject.Value, mode: BindingMode.OneWay
         );
 
         EmailSenderLabel.Bind(Label.TextProperty,
-            static (EmailModel email) => email.Sender.Value, mode: BindingMode.OneTime
+            static (EmailModel email) => email.SenderName, mode: BindingMode.OneWay
         );
     }
     private static void InitializeEmailDetailsLayout()
