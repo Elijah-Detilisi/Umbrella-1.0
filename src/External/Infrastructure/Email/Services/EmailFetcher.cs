@@ -69,6 +69,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
     //Helper methods
     private EmailModel ConvertToEmailModel(MimeMessage mimeMessage)
     {
+        var senderName = mimeMessage.From.Mailboxes.Select(x => x.Name).FirstOrDefault();
         var senderAddress = mimeMessage.From.Mailboxes.Select(x=>x.Address).FirstOrDefault();
         
         var messageModel = new EmailModel()
@@ -77,6 +78,7 @@ public class EmailFetcher : IEmailFetcher, IDisposable
             EmailStatus = EmailStatus.UnRead,
             Recipients = [_currentUser.EmailAddress],
             CreatedAt = mimeMessage.Date.DateTime,
+            SenderName = senderAddress ?? "no-reply@email.com",
             Sender = EmailAddress.Create(senderAddress ?? "no-reply@email.com"),
             Subject = EmailSubjectLine.Create(mimeMessage.Subject.ShortText() ?? "No subject"),
             Body = EmailBodyText.Create(mimeMessage.TextBody.ShortText()?? "No message text."),
