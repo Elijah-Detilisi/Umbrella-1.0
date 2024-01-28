@@ -7,5 +7,6 @@ public class EmailModel : Model
     public EmailBodyText Body { get; set; }
     public EmailSubjectLine Subject { get; set; }
     public EmailAddress Sender { get; set; }
+    public string SenderName { get; set; }
     public List<EmailAddress> Recipients { get; set; }
 }
