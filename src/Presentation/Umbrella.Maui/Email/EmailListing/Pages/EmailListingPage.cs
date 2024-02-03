@@ -9,15 +9,23 @@ public class EmailListingPage : EmailPage<EmailListingViewModel>
     public EmailListingPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView) 
         : base("Email", viewModel, chatHistoryView)
     {
+        
     }
 
     protected override ScrollView PageContent => new()
     {
         Content = new CollectionView
         {
-            SelectionMode = SelectionMode.None,
+            SelectionMode = SelectionMode.Single,
             ItemTemplate = new EmailDataTemplate(),
-            ItemsSource = BindingContext.EmailList
+            ItemsSource = BindingContext.EmailList,
+
         }
+        .Invoke(collectionView => collectionView.SelectionChanged += HandleSelectionChanged)
     };
+
+    private void HandleSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        var current = e.CurrentSelection;
+    }
 }

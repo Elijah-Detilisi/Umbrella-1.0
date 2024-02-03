@@ -6,6 +6,7 @@ using Infrastructure.Common.Service;
 using Infrastructure.Email.Services;
 using Microsoft.Extensions.Logging;
 using Umbrella.Maui.Email.Base.Views;
+using Umbrella.Maui.Email.EmailDetail.Pages;
 using Umbrella.Maui.Email.EmailListing.Pages;
 
 namespace Umbrella.Maui
@@ -40,6 +41,7 @@ namespace Umbrella.Maui
 
             //ViewModel
             builder.Services.AddTransient<EmailListingPage, EmailListingViewModel>();
+            builder.Services.AddTransient<EmailDetailPage, EmailListingViewModel>();
 
             return builder.Build();
         }

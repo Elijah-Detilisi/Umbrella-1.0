@@ -2,7 +2,7 @@
 
 public class EmailSubjectLine : ValueObject<string>
 {
-    public const int MAXSUBJECTLINELENGTH = 100; 
+    public const int MAXSUBJECTLINELENGTH = 150; 
 
     private EmailSubjectLine(string value) : base(value)
     {

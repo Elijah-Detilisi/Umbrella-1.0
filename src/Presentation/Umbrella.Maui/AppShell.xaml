@@ -5,12 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Umbrella.Maui"
     xmlns:emailListingPage="clr-namespace:Umbrella.Maui.Email.EmailListing.Pages"
+    xmlns:emailDetailPage="clr-namespace:Umbrella.Maui.Email.EmailDetail.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="Umbrella.Maui">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate emailListingPage:EmailListingPage}"
+        ContentTemplate="{DataTemplate emailDetailPage:EmailDetailPage}"
         Route="MainPage" />
 
 </Shell>
