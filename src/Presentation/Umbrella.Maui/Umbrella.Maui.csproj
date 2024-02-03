@@ -58,7 +58,11 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\RobotoFlex-Regular.ttf" />
+	  <None Remove="Resources\Images\back_solid.svg" />
+	  <None Remove="Resources\Images\delete_solid.svg" />
 	  <None Remove="Resources\Images\envelope_solid.svg" />
+	  <None Remove="Resources\Images\share_solid.svg" />
+	  <None Remove="Resources\Images\star_solid.svg" />
 	  <None Remove="Resources\Images\umbrella_solid.svg" />
 	  <None Remove="Resources\Images\user_solid.svg" />
 	</ItemGroup>

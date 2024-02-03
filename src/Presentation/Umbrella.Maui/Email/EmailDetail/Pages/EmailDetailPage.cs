@@ -13,19 +13,36 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
     private void InitializeShell()
     {
-        Shell.SetBackgroundColor(this, Colors.White);
+        /*Shell.SetBackgroundColor(this, Colors.White);
+        Shell.SetTitleView(this, new HorizontalStackLayout()
+        {
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.Fill,
+            BackgroundColor = Colors.Yellow,
+        });*/
+
+
+        ToolbarItems.Add(new ToolbarItem()
+        {
+            IconImageSource = "star_solid.png"
+        });
+        ToolbarItems.Add(new ToolbarItem()
+        {
+            IconImageSource = "delete_solid.png"
+        });
+        ToolbarItems.Add(new ToolbarItem()
+        {
+            IconImageSource = "share_solid.png"
+        });
     }
 
     protected override ScrollView PageContent => new()
     {
         Content = new VerticalStackLayout()
         {
-            //NavBar
             //Subject line
             //Sender details and control
             //Email body text
-
-
         }
     };
 }
