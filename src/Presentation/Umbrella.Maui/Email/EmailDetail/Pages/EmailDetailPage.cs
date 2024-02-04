@@ -5,22 +5,36 @@ namespace Umbrella.Maui.Email.EmailDetail.Pages;
 
 public class EmailDetailPage : EmailPage<EmailListingViewModel>
 {
+    //View components
+    private static Label? SubjectLabel;
+    
+    //Construction
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
     {
         InitializeShell();
     }
 
+    //Initialization
+    protected override ScrollView PageContent {
+        get 
+        {
+            InitializeTextLabel();
+
+            return new()
+            {
+                Content = new VerticalStackLayout()
+                {
+                    SubjectLabel
+                }
+            };
+        }
+    }
+
+    //View component Initialization
     private void InitializeShell()
     {
-        /*Shell.SetBackgroundColor(this, Colors.White);
-        Shell.SetTitleView(this, new HorizontalStackLayout()
-        {
-            HorizontalOptions = LayoutOptions.Fill,
-            VerticalOptions = LayoutOptions.Fill,
-            BackgroundColor = Colors.Yellow,
-        });*/
-
+        Shell.SetBackgroundColor(this, Colors.Transparent);
 
         ToolbarItems.Add(new ToolbarItem()
         {
@@ -35,14 +49,15 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
             IconImageSource = "share_solid.png"
         });
     }
-
-    protected override ScrollView PageContent => new()
+     
+    private static void InitializeTextLabel()
     {
-        Content = new VerticalStackLayout()
+        SubjectLabel = new()
         {
-            //Subject line
-            //Sender details and control
-            //Email body text
-        }
-    };
+            Text = "Subject: Catching Up Soon"
+        };
+
+        SubjectLabel.DynamicResource(View.StyleProperty, "EmailDetailPageSubjectLabel");
+    }
+
 }
