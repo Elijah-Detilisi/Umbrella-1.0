@@ -19,7 +19,7 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     protected override ScrollView PageContent {
         get 
         {
-            InitializeTextLabel();
+            InitializeSubjectLabel();
 
             return new()
             {
@@ -50,7 +50,7 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
         });
     }
      
-    private static void InitializeTextLabel()
+    private static void InitializeSubjectLabel()
     {
         SubjectLabel = new()
         {
