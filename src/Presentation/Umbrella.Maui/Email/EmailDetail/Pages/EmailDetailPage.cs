@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Layouts;
-using Umbrella.Maui.Email.Base.Pages;
+﻿using Umbrella.Maui.Email.Base.Pages;
 using Umbrella.Maui.Email.Base.Views;
 using Umbrella.Maui.Email.EmailDetail.Views;
 
@@ -10,9 +8,10 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 {
     //View components
     private static Label? SubjectLabel;
-    private EmailControlView EmailControls;
+    private static Label? BodyTextLabel;
+    private EmailControlView? EmailControls;
     private static BoxView? SeparatorBoxView;
-
+    
     //Construction
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
@@ -20,9 +19,9 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
     }
 
-    //Initialization
-    protected override ScrollView PageContent {
-        get 
+    protected override ScrollView PageContent
+    {
+        get
         {
             return new()
             {
@@ -31,12 +30,14 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
                 {
                     SubjectLabel,
                     EmailControls,
-                    SeparatorBoxView
+                    SeparatorBoxView,
+                    BodyTextLabel
                 }
             };
         }
     }
 
+    //View component Initialization
     protected override void InitializeEmailPage()
     {
         EmailControls = new(new EmailModel())
@@ -46,12 +47,12 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
         InitializeShell();
         InitializeSubjectLabel();
+        InitializeBodyTextLabel();
         InitializeSeparatorBoxView();
 
         base.InitializeEmailPage();
     }
 
-    //View component Initialization
     private void InitializeShell()
     {
         Shell.SetBackgroundColor(this, Colors.Transparent);
@@ -79,6 +80,16 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
         SubjectLabel.DynamicResource(View.StyleProperty, "EmailDetailPageSubjectLabel");
     }
+    private static void InitializeBodyTextLabel()
+    {
+        BodyTextLabel = new()
+        {
+            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis nulla eu felis fringilla vulputate. Nullam porta eleifend lacinia. Donec at iaculis tellus."
+        };
+
+        BodyTextLabel.DynamicResource(View.StyleProperty, "EmailDetailPageBodyTextLabel");
+    }
+
     private static void InitializeSeparatorBoxView()
     {
         SeparatorBoxView = new()
