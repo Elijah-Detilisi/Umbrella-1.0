@@ -41,7 +41,7 @@ namespace Umbrella.Maui
 
             //ViewModel
             builder.Services.AddTransient<EmailListingPage, EmailListingViewModel>();
-            builder.Services.AddTransient<EmailDetailPage, EmailListingViewModel>();
+            builder.Services.AddTransient<EmailDetailPage, EmailDetailViewModel>();
 
             return builder.Build();
         }
