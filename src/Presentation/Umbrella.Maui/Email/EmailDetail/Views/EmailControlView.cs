@@ -68,7 +68,7 @@ public class EmailControlView : ContentView
         {
             MaxLines = 1,
             FontSize = 14,
-            Text = "May 19",
+            Text = EmailMessage.ModifiedAt.ToString("M"),
             FontAttributes = FontAttributes.Bold
         };
 
@@ -76,7 +76,7 @@ public class EmailControlView : ContentView
         {
             MaxLines = 1,
             FontSize = 16,
-            Text = "Brutus Planner",
+            Text = EmailMessage.SenderName,
             FontAttributes = FontAttributes.Bold,
             LineBreakMode = LineBreakMode.TailTruncation,
         };
