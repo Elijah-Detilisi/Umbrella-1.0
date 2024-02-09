@@ -14,17 +14,13 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
     {
-        InitializeShell();
-        
+
     }
 
     //Initialization
     protected override ScrollView PageContent {
         get 
         {
-            InitializeSubjectLabel();
-            EmailControlView = new(new EmailModel());
-
             return new()
             {
                 Content = new VerticalStackLayout()
@@ -34,6 +30,16 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
                 }
             };
         }
+    }
+
+    protected override void InitializeEmailPage()
+    {
+        EmailControlView = new(new EmailModel());
+
+        InitializeShell();
+        InitializeSubjectLabel();
+        
+        base.InitializeEmailPage();
     }
 
     //View component Initialization
