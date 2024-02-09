@@ -4,8 +4,11 @@ using Umbrella.Maui.Email.EmailDetail.Views;
 
 namespace Umbrella.Maui.Email.EmailDetail.Pages;
 
-public class EmailDetailPage : EmailPage<EmailListingViewModel>
+public class EmailDetailPage : EmailPage<EmailDetailViewModel>
 {
+    //Fields
+    private readonly EmailDetailViewModel _viewModel;
+
     //View components
     private static Label? SubjectLabel;
     private static Label? BodyTextLabel;
@@ -13,10 +16,10 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     private static BoxView? SeparatorBoxView;
     
     //Construction
-    public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
+    public EmailDetailPage(EmailDetailViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
     {
-
+        _viewModel = viewModel;
     }
 
     protected override ScrollView PageContent
@@ -40,7 +43,7 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     //View component Initialization
     protected override void InitializeEmailPage()
     {
-        EmailControls = new(new EmailModel())
+        EmailControls = new(_viewModel?.Email)
         {
             Margin = new Thickness(0, 20, 0, 20)
         };
@@ -71,20 +74,20 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
         });
     }
      
-    private static void InitializeSubjectLabel()
+    private void InitializeSubjectLabel()
     {
         SubjectLabel = new()
         {
-            Text = "Subject: Catching Up Soon"
+            Text = _viewModel?.Email?.Subject.Value
         };
 
         SubjectLabel.DynamicResource(View.StyleProperty, "EmailDetailPageSubjectLabel");
     }
-    private static void InitializeBodyTextLabel()
+    private void InitializeBodyTextLabel()
     {
         BodyTextLabel = new()
         {
-            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis nulla eu felis fringilla vulputate. Nullam porta eleifend lacinia. Donec at iaculis tellus."
+            Text = _viewModel?.Email?.Body.Value
         };
 
         BodyTextLabel.DynamicResource(View.StyleProperty, "EmailDetailPageBodyTextLabel");
