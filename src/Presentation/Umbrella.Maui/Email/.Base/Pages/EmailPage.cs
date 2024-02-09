@@ -1,4 +1,5 @@
 ﻿using Application.Email.Base;
+using System.Diagnostics;
 using Umbrella.Maui.Email.Base.Views;
 
 namespace Umbrella.Maui.Email.Base.Pages;
@@ -19,10 +20,17 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
         Title = title;
         ChatHistory = chatHistoryView;
 
-        InitializeEmailPage();
+        
     }
 
     //Initialization
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+
+        InitializeEmailPage();
+    }
+
     protected virtual void InitializeEmailPage()
     {
         InitializeMainGridLayout();
