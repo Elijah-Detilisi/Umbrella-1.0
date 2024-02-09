@@ -21,9 +21,9 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
     }
 
     //Initialization
-    protected override void OnBindingContextChanged()
+    protected override void OnAppearing()
     {
-        base.OnBindingContextChanged();
+        base.OnAppearing();
 
         InitializeEmailPage();
     }
