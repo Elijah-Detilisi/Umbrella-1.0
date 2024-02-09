@@ -1,5 +1,6 @@
 ﻿using Umbrella.Maui.Email.Base.Pages;
 using Umbrella.Maui.Email.Base.Views;
+using Umbrella.Maui.Email.EmailDetail.Views;
 
 namespace Umbrella.Maui.Email.EmailDetail.Pages;
 
@@ -7,12 +8,14 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 {
     //View components
     private static Label? SubjectLabel;
+    private EmailControlView EmailControlView;
     
     //Construction
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
     {
         InitializeShell();
+        
     }
 
     //Initialization
@@ -20,12 +23,14 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
         get 
         {
             InitializeSubjectLabel();
+            EmailControlView = new(new EmailModel());
 
             return new()
             {
                 Content = new VerticalStackLayout()
                 {
-                    SubjectLabel
+                    SubjectLabel,
+                    EmailControlView
                 }
             };
         }
