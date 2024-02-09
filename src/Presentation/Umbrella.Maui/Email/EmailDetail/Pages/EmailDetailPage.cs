@@ -8,7 +8,7 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 {
     //View components
     private static Label? SubjectLabel;
-    private EmailControlView EmailControlView;
+    private EmailControlView EmailControls;
     
     //Construction
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
@@ -26,7 +26,7 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
                 Content = new VerticalStackLayout()
                 {
                     SubjectLabel,
-                    EmailControlView
+                    EmailControls
                 }
             };
         }
@@ -34,7 +34,10 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
     protected override void InitializeEmailPage()
     {
-        EmailControlView = new(new EmailModel());
+        EmailControls = new(new EmailModel())
+        {
+            Margin = new Thickness(0, 20, 0, 10)
+        };
 
         InitializeShell();
         InitializeSubjectLabel();

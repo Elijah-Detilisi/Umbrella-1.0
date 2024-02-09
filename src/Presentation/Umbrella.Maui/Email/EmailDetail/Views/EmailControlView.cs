@@ -46,21 +46,21 @@ public class EmailControlView : ContentView
         {
             WidthRequest = 50,
             HeightRequest = 50,
-            Source = "user_solid.svg"
+            Source = "circle_user_solid.svg"
         };
 
         ListenImageButton = new()
         {
-            WidthRequest = 40,
-            HeightRequest = 40,
-            Source = "user_solid.svg"
+            WidthRequest = 30,
+            HeightRequest = 30,
+            Source = "headphones_solid.svg"
         };
 
         RepeatImageButton = new()
         {
-            WidthRequest = 40,
-            HeightRequest = 40,
-            Source = "user_solid.svg"
+            WidthRequest = 30,
+            HeightRequest = 30,
+            Source = "repeat_solid.svg"
         };
     }
     private void InitializeLabels()
@@ -98,7 +98,7 @@ public class EmailControlView : ContentView
     {
         EmailControlsLayout = new()
         {
-            Spacing = 5,
+            Spacing = 10,
             Children =
             {
                 ListenImageButton,
@@ -114,7 +114,6 @@ public class EmailControlView : ContentView
 
         ContentGrid = new()
         {
-            BackgroundColor = Colors.SteelBlue,
             Padding = 5,
             ColumnSpacing = 5,
             ColumnDefinitions =
