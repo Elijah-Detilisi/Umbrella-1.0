@@ -1,4 +1,6 @@
-﻿using Umbrella.Maui.Email.Base.Pages;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Layouts;
+using Umbrella.Maui.Email.Base.Pages;
 using Umbrella.Maui.Email.Base.Views;
 using Umbrella.Maui.Email.EmailDetail.Views;
 
@@ -9,7 +11,8 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     //View components
     private static Label? SubjectLabel;
     private EmailControlView EmailControls;
-    
+    private static BoxView? SeparatorBoxView;
+
     //Construction
     public EmailDetailPage(EmailListingViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
@@ -23,10 +26,12 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
         {
             return new()
             {
+                Padding = 10,
                 Content = new VerticalStackLayout()
                 {
                     SubjectLabel,
-                    EmailControls
+                    EmailControls,
+                    SeparatorBoxView
                 }
             };
         }
@@ -36,12 +41,13 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
     {
         EmailControls = new(new EmailModel())
         {
-            Margin = new Thickness(0, 20, 0, 10)
+            Margin = new Thickness(0, 20, 0, 20)
         };
 
         InitializeShell();
         InitializeSubjectLabel();
-        
+        InitializeSeparatorBoxView();
+
         base.InitializeEmailPage();
     }
 
@@ -73,5 +79,12 @@ public class EmailDetailPage : EmailPage<EmailListingViewModel>
 
         SubjectLabel.DynamicResource(View.StyleProperty, "EmailDetailPageSubjectLabel");
     }
-
+    private static void InitializeSeparatorBoxView()
+    {
+        SeparatorBoxView = new()
+        {
+            Margin = new Thickness(10, 0, 10, 0)
+        };
+        SeparatorBoxView.DynamicResource(View.StyleProperty, "EmailDataTemplateSeparator");
+    }
 }
