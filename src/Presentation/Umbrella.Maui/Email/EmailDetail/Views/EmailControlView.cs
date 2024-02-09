@@ -35,7 +35,6 @@ public class EmailControlView : ContentView
         InitializeEmailControlsLayout();
 
         InitializeContentGrid();
-
         Content = ContentGrid;
     }
 
@@ -114,7 +113,6 @@ public class EmailControlView : ContentView
 
         ContentGrid = new()
         {
-            Padding = 5,
             ColumnSpacing = 5,
             ColumnDefinitions =
             [
