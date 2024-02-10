@@ -1,5 +1,6 @@
 ﻿using Umbrella.Maui.Email.Base.Pages;
 using Umbrella.Maui.Email.Base.Views;
+using Umbrella.Maui.Email.EmailDetail.Pages;
 using Umbrella.Maui.Email.EmailListing.Templates;
 
 namespace Umbrella.Maui.Email.EmailListing.Pages;
@@ -24,8 +25,9 @@ public class EmailListingPage : EmailPage<EmailListingViewModel>
         .Invoke(collectionView => collectionView.SelectionChanged += HandleSelectionChanged)
     };
 
-    private void HandleSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    private async void HandleSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         var current = e.CurrentSelection;
+        await Shell.Current.GoToAsync(nameof(EmailDetailPage));
     }
 }
