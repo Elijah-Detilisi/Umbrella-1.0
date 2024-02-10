@@ -23,9 +23,9 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
     //Initialization
     protected override void OnAppearing()
     {
-        base.OnAppearing();
-
         InitializeEmailPage();
+
+        base.OnAppearing();
     }
 
     protected virtual void InitializeEmailPage()
@@ -44,11 +44,11 @@ public abstract class EmailPage<TViewModel> : BasePage<TViewModel> where TViewMo
 
         MainGridLayout = new Grid
         {
-            RowDefinitions = new RowDefinitionCollection
-            {
+            RowDefinitions =
+            [
                 new RowDefinition { Height = new GridLength(contentRowSize, GridUnitType.Star) },
                 new RowDefinition { Height = new GridLength(chatBoxRowSize, GridUnitType.Star) }
-            },
+            ],
             Children =
             {
                 PageContent.Row(Row.Content), 
