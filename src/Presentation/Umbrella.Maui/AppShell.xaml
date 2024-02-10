@@ -11,7 +11,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate emailDetailPage:EmailDetailPage}"
+        ContentTemplate="{DataTemplate emailListingPage:EmailListingPage}"
         Route="MainPage" />
 
 </Shell>
