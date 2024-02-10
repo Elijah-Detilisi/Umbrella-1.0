@@ -14,7 +14,7 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
     
     //Construction
     public EmailDetailPage(EmailDetailViewModel viewModel, ChatHistoryView chatHistoryView)
-        : base("EmailDetail", viewModel, chatHistoryView)
+        : base("", viewModel, chatHistoryView)
     {
     }
 
@@ -54,7 +54,9 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
 
     private void InitializeShell()
     {
-        Shell.SetBackgroundColor(this, Colors.Transparent);
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior() {
+            IconOverride = "back_solid.png"
+        });
 
         ToolbarItems.Add(new ToolbarItem()
         {
