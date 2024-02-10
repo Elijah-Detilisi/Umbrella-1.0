@@ -15,7 +15,16 @@
                 Value="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource AppBackgroundDarkColor}}" />
     </Style>
 
-    
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor" 
+                Value="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource AppBackgroundDarkColor}}" />
+        <Setter Property="Shell.TitleColor" 
+                Value="{AppThemeBinding Light={StaticResource AppActionColor}, Dark={StaticResource AppActionDarkColor}}"/>
+        <Setter Property="Shell.TabBarTitleColor" 
+                Value="{AppThemeBinding Light={StaticResource AppActionColor}, Dark={StaticResource AppActionDarkColor}}"/>
+    </Style>
+
+
     <!--ChatHistoryView styles-->
     <Style x:Key="ChatHistoryFrame" TargetType="Frame">
         <Setter Property="CornerRadius" Value="40" />
