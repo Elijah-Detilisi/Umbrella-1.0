@@ -26,8 +26,8 @@ public class EmailDetailViewModel : EmailViewModel
             Subject = EmailSubjectLine.Create("Subject: Catching Up Soon"),
             Body = EmailBodyText.Create(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis nulla eu felis fringilla vulputate.\n" +
-                "Nullam porta eleifend lacinia. Donec at iaculis tellus.\n" + "Nullam porta eleifend lacinia. Donec at iaculis tellus."
-                + "Nullam porta eleifend lacinia. Donec at iaculis tellus.\n" + "Nullam porta eleifend lacinia. Donec at iaculis tellus."
+                "Nullam porta eleifend lacinia. Donec at iaculis tellus. " + "Nullam porta eleifend lacinia. Donec at iaculis tellus."
+                + "Nullam porta eleifend lacinia. Donec at iaculis tellus. " + "Nullam porta eleifend lacinia. Donec at iaculis tellus."
             ),
             CreatedAt = DateTime.Now,
         };
