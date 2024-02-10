@@ -6,9 +6,6 @@ namespace Umbrella.Maui.Email.EmailDetail.Pages;
 
 public class EmailDetailPage : EmailPage<EmailDetailViewModel>
 {
-    //Fields
-    private readonly EmailDetailViewModel _viewModel;
-
     //View components
     private static Label? SubjectLabel;
     private static Label? BodyTextLabel;
@@ -19,7 +16,6 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
     public EmailDetailPage(EmailDetailViewModel viewModel, ChatHistoryView chatHistoryView)
         : base("EmailDetail", viewModel, chatHistoryView)
     {
-        _viewModel = viewModel;
     }
 
     protected override ScrollView PageContent
@@ -43,7 +39,7 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
     //View component Initialization
     protected override void InitializeEmailPage()
     {
-        EmailControls = new(_viewModel?.Email)
+        EmailControls = new(BindingContext?.Email)
         {
             Margin = new Thickness(0, 20, 0, 20)
         };
@@ -78,7 +74,7 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
     {
         SubjectLabel = new()
         {
-            Text = _viewModel?.Email?.Subject.Value
+            Text = BindingContext?.Email?.Subject.Value
         };
 
         SubjectLabel.DynamicResource(View.StyleProperty, "EmailDetailPageSubjectLabel");
@@ -87,7 +83,7 @@ public class EmailDetailPage : EmailPage<EmailDetailViewModel>
     {
         BodyTextLabel = new()
         {
-            Text = _viewModel?.Email?.Body.Value
+            Text = BindingContext?.Email?.Body.Value
         };
 
         BodyTextLabel.DynamicResource(View.StyleProperty, "EmailDetailPageBodyTextLabel");
