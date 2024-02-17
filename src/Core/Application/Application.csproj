@@ -11,6 +11,7 @@
     <Compile Include=".Common\.Base\Model.cs" />
     <Compile Include=".Common\.Base\ViewModel.cs" />
     <Compile Include=".Common\Repositories\IEntityRepository.cs" />
+    <Compile Include=".Common\Services\IAppFileService.cs" />
     <Compile Include=".Common\Services\IAppSpeechRecognition.cs" />
     <Compile Include=".Common\Services\IAppTextToSpeech.cs" />
     <Compile Include="Email\.Base\EmailViewModel.cs" />
