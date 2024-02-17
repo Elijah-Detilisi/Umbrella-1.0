@@ -19,6 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include=".Common\Service\AppFileService.cs" />
 	  <Compile Include=".Common\Service\AppSpeechRecognition.cs" />
 	  <Compile Include=".Common\Service\AppTextToSpeech.cs" />
 	  <Compile Include="Email\.Base\ServerSettings.cs" />
